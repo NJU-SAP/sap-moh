@@ -15,16 +15,14 @@
     "babel-cli": "^6.11.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-preset-es2015": "^6.11.3",
-    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-preset-ui5": "^6.1.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "leaflet": "^0.7.7",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "renderjson": "^1.2.0",
-    "rimraf": "^2.5.3",
     "style-loader": "^0.13.1",
     "ui5-loader": "^1.0.5",
     "webpack": "^1.13.1",
@@ -33,9 +31,7 @@
   "dependencies": {
     "config": "^1.24.0",
     "express": "^4.14.0",
-    "geolib": "^2.0.22",
-    "hdb": "^0.9.0",
-    "socket.io": "^1.4.8"
+    "geolib": "^2.0.22"
   },
   "license": "ISC",
   "bugs": {
