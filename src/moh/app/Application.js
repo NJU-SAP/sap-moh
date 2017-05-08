@@ -56,15 +56,15 @@ export default class Application extends SuperApplication {
       }),
       new MenuItem({
         id: 'settingsMenuItem',
-        text: 'Settings'
+        icon: 'mf mf-setting'
       }),
       new MenuItem({
         id: 'kaabaMenuItem',
-        text: 'Kaaba'
+        icon: 'mf mf-kaaba'
       }),
       new MenuItem({
         id: 'mapMenuItem',
-        text: 'Map'
+        icon: 'mf mf-map'
       }),
       new MenuItem({
         id: 'menuItem1',
