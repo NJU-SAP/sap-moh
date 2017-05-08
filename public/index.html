@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SAP Management of Hajj</title>
+    <script src="vendor/open-ui5/resources/sap-ui-core.js" charset="utf-8" data-sap-ui-resourceroots='{ "bd": "assets/bd", "moh": "assets/moh" }'></script>
+    <script src="vendor/jquery-transit/jquery.transit.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <script src="assets/moh/index.js" charset="utf-8"></script>
+    <script>
+      sap.ui.define(["moh/app/Application"], function () {
+        var app = new moh.app.Application({
+          runningMode: "debug",
+          viewOptions: {
+            id: "moh-app"
+          }
+        });
+        app.placeAt(document.body);
+        setTimeout(() => {
+          app.run();
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,39 +1,37 @@
-"use strict";
-
-const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    context: path.resolve("./src"),
-    entry: {
-        "vendor": [ "leaflet" ],
-        "moh": [ "./moh/index.js", "./moh/resource/index.less" ]
-    },
-    output: {
-        path: path.resolve("./public/assets"),
-        publicPath: "/assets/",
-        filename: "[name]/index.js"
-    },
-    devServer: {
-        contentBase: path.resolve("./public")
-    },
-    module: {
+  context: path.resolve('./src'),
+  entry: {
+    vendor: ['leaflet'],
+    moh: ['./moh/app/Application.js', './moh/res/index.less']
+  },
+  output: {
+    path: path.resolve('./public/assets'),
+    publicPath: '/assets/',
+    filename: '[name]/index.js'
+  },
+  devServer: {
+    contentBase: path.resolve('./public')
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
         loaders: [
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                loaders: [
-                    "ui5-loader?sourceRoot=./src",
-                    "babel-loader?sourceRoot=./src&presets=ui5"
-                ]
-            },
-            {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
-            }
+          'ui5-loader?sourceRoot=./src',
+          'babel-loader?sourceRoot=./src&presets=ui5'
         ]
-    },
-    plugins: [
-        new ExtractTextPlugin("./[name]/resource/index.css")
+      },
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
+      }
     ]
+  },
+  plugins: [
+    new ExtractTextPlugin('./[name]/resource/index.css')
+  ]
 };
