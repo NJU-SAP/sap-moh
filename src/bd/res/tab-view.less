@@ -1,0 +1,80 @@
+@border-size: 2px * 0.68;
+@media(min-width: 1280px)
+{
+    @border-size: 2px * 0.68;
+}
+@media(min-width: 1440px)
+{
+    @border-size: 2px * 0.68;
+}
+@media(min-width: 1600px)
+{
+    @border-size: 3px * 0.68;
+}
+@media(min-width: 1920px)
+{
+    @border-size: 3px * 0.68;
+}
+
+@border: @border-size solid rgba(255, 255, 255, 0.5);
+
+.tab-view
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    
+    &::selection { 
+        background:none;
+    }
+    
+    > ul
+    {
+        height: 1.5em;
+        line-height: 1.5em;
+        list-style: none;
+        text-align: center;
+        margin-top: .8em;
+        margin-bottom: .8em;
+        
+        > li
+        {
+            display: inline-block;
+            width: 6em;
+            border: @border;
+            border-right: none;
+            cursor: pointer;
+            
+            &.active
+            {
+                background: @bd-active-bg-color;
+                cursor: default;
+            }
+        }
+        
+        > li:last-child
+        {
+            border-right: @border;
+        }
+    }
+    
+    > main
+    {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.5em;
+        top: 3em;
+        
+        > .tab-page-view
+        {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+    }
+}

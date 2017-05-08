@@ -1,0 +1,38 @@
+.bd-map-view 
+{    
+    -webkit-perspective: 1000;
+    transform-style: preserve-3d;
+    
+    > #shadow
+    {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 5em;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%,rgba(9,24,66,0) 100%);
+        z-index: 10000;
+        border-radius: 0 0 10% 10%;
+    }
+    
+    > #leaflet-map.leaflet-container
+    {
+        background: #05102f;
+        transform-origin: center center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+        
+    .leaflet-control-attribution
+    {
+        background: black;
+        
+        &, a
+        {
+            color: gray;
+        }
+    }
+}

@@ -1,0 +1,159 @@
+@import "variables.less";
+
+html, body
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+*
+{
+    box-sizing: border-box;
+    color: white;
+    font-family: Arial, "Microsoft YaHei";
+    font-weight: normal;
+    
+    &::selection 
+    { 
+        background:none;
+    }
+}
+
+body
+{
+    background: #091842;
+    cursor: default;
+}
+
+input[type='text'], input[type='password'], input[type='email'], input[type='number'], input[type='search'], area 
+{
+    cursor: text;
+    
+    &::selection 
+    { 
+        background:blue;
+    }
+}
+
+
+
+
+body, .normal
+{
+    font-size: 12px;
+    @media(min-width: 1280px)
+    {
+        font-size: 16px;
+    }
+    @media(min-width: 1440px)
+    {
+        font-size: 18px;
+    }
+    @media(min-width: 1600px)
+    {
+        font-size: 20px;
+    }
+    @media(min-width: 1920px)
+    {
+        font-size: 24px;
+    }
+    @media(min-width: 2560px)
+    {
+        font-size: 32px;
+    }
+    @media(min-width: 3840px)
+    {
+        font-size: 48px;
+    }
+    line-height: 1em;
+}
+
+h1, .h1
+{
+    font-size: 3.33em;
+    line-height: 1em;
+}
+
+h2, .h2
+{
+    font-size: 2em;
+    line-height: 1em;
+}
+
+h3, .h3
+{
+    font-size: 1.5em;
+    line-height: 1em;
+}
+
+
+
+
+
+
+
+
+small, .small
+{
+    font-size: 0.583em;
+    line-height: 0.583em;
+}
+
+medium-small, .medium-small
+{
+    font-size: 0.7em;
+    line-height: 0.7em;
+}
+
+button, .button
+{
+    font-size: 1em;
+    border: 1px solid white;
+    background: @bd-bg-color;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+button.active, .button.active
+{
+    background: @bd-active-bg-color;
+}
+
+
+
+
+
+
+.bd-app
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.bd-text-shadow
+{
+    text-shadow: @bd-text-shadow;
+}
+
+@import "grid-system.less";
+@import "loading.less";
+@import "data-clock-view.less";
+@import "search-view.less";
+@import "map-view.less";
+@import "main-menu.less";
+@import "today-view.less";
+@import "hexagon.less";
+@import "tile.less";
+@import "chart.less";
+@import "octagon.less";
+@import "panel-container.less";
+@import "checkbox.less";
+@import "check-list-view.less";
+@import "tab-view.less";
+@import "segment-control.less";

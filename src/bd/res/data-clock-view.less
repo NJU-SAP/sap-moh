@@ -1,0 +1,91 @@
+@import "variables.less";
+.bd-data-clock-view
+{
+	@border-size: 2px * 0.68;
+	@media(min-width: 1280px)
+    {
+        @border-size: 2px * 0.68;
+    }
+    @media(min-width: 1440px)
+    {
+        @border-size: 2px * 0.68;
+    }
+    @media(min-width: 1600px)
+    {
+        @border-size: 3px * 0.68;
+    }
+    @media(min-width: 1920px)
+    {
+        @border-size: 3px * 0.68;
+    }
+	
+	@data-clock-border: @border-size solid rgba(255, 255, 255, 0.5);
+	
+    > .container
+    {
+        width: 80%;
+        background: @bd-bg-color;
+        margin: auto;
+        border: @data-clock-border;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        transition: background-color 0.5s;
+        
+        &.historical
+        {
+            background: @bd-active-bg-color;
+        }
+    }
+    > .container > .title
+    {
+        display: block;
+        text-align: center;
+        padding-top: 0.2em;
+    }
+    > .container > section
+    {
+        padding: 0.2em;
+        text-align: center;
+        position: relative;
+        
+        @keyframes colonPulse
+        {
+            0%
+            {
+                opacity: 1;
+            }
+            50%
+            {
+                opacity: 0;
+            }
+            100%
+            {
+                opacity: 1;
+            }
+        }
+        
+        > .colon
+        {
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            
+            &.active
+            {
+                animation: colonPulse 1s infinite;
+            }
+        }
+    }
+    > .container > section >.start
+    {
+        
+    }
+    > .container > section > .end
+    {
+        
+    }
+}

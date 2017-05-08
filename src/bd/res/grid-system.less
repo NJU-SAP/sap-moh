@@ -1,0 +1,69 @@
+.bd-layer
+{
+    > .row-full
+    {
+        height: 100%;
+    }
+    
+    > .col-full
+    {
+        width: 100%;
+    }
+    
+    @columns: 16;    
+    @rows: 12;
+    
+    .generate-columns(@n, @i: 1) when (@i =< @n) {
+        > .col-@{i} {
+            width: (80em * (@i / @n));
+        }
+        .generate-columns(@n, (@i + 1));
+    }
+    .generate-columns(@columns);
+    
+    .generate-rows(@n, @i: 1) when (@i =< @n) {
+        > .row-@{i} {
+            height: (@i * 45em / @n);
+        }
+        .generate-rows(@n, (@i + 1));
+    }
+    .generate-rows(@rows);
+    
+    
+    
+    .generate-lefts(@n, @i: 1) when (@i =< @n) {
+        > .left-@{i} {
+            position: absolute;
+            left: ((@i - 1) * 80em / @n);
+        }
+        .generate-lefts(@n, (@i + 1));
+    }
+    .generate-lefts(@columns);
+    
+    .generate-rights(@n, @i: 1) when (@i =< @n) {
+        > .right-@{i} {
+            position: absolute;
+            right: ((@i - 1) * 80em / @n);
+        }
+        .generate-rights(@n, (@i + 1));
+    }
+    .generate-rights(@columns);
+    
+    .generate-tops(@n, @i: 1) when (@i =< @n) {
+        > .top-@{i} {
+            position: absolute;
+            top: ((@i - 1) * 45em / @n);
+        }
+        .generate-tops(@n, (@i + 1));
+    }
+    .generate-tops(@rows);
+    
+    .generate-bottoms(@n, @i: 1) when (@i =< @n) {
+        > .bottom-@{i} {
+            position: absolute;
+            bottom: ((@i - 1) * 45em / @n);
+        }
+        .generate-bottoms(@n, (@i + 1));
+    }
+    .generate-bottoms(@rows);
+}

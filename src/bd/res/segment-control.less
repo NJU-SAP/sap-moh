@@ -1,0 +1,29 @@
+.segment-control
+{
+    margin: 0.3em 0;
+    text-align: center;
+    font-size: 0.8em;
+    
+    > li
+    {
+        display: inline-block;
+        border: @border;
+        border-right: none;
+        padding: 0.1em 0.6em;
+        transition: background 0.3s, opacity 0.3s;
+        cursor: pointer;
+        background: @bd-bg-color;
+        min-width: 6.5em;
+        
+        &:last-child
+        {
+            border-right: @border;
+        }
+        
+        &.active
+        {
+            background: @bd-active-bg-color;
+            cursor: default;
+        }
+    }
+}

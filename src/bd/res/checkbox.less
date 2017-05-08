@@ -1,0 +1,76 @@
+@checkbox-size: 0.185;
+.checkbox
+{
+	
+	cursor: pointer;
+	
+	.hexagon-small
+	{
+		.hexagon(@checkbox-size);
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		transition: background .3s;
+		
+		> main
+		{
+			transition: background .3s;
+		}
+		
+		> aside
+		{
+			transition: background .3s;
+			
+			> span
+			{
+				transition: background .3s;
+			}
+		}
+	}
+	
+	.diamond
+	{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		height: @bd-diamond-size * @checkbox-size;
+		width: @bd-diamond-size * @checkbox-size;
+		right: -@bd-diamond-size * @checkbox-size/2;
+		z-index: 10;
+		
+		> span
+		{
+			display: block;
+			position: relative;
+			height: 100%;
+			width: 100%;
+			background: #fff;
+			transform: rotate(45deg);
+		}
+	}
+	
+	&.checked
+	{
+		.hexagon-small
+		{
+			background: green;
+			> main
+			{
+				background: green;
+			}
+			
+			> aside
+			{
+				> span
+				{
+					background: green;
+				}
+			}
+		}
+	}
+}
+
