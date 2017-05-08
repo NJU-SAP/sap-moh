@@ -14,7 +14,7 @@ export default class DataClockView extends View {
   init() {
     super.init();
     this._timeFormat = DateFormat.getTimeInstance({ pattern: 'HH  mm' });
-    this._dateFormat = DateFormat.getDateInstance({ pattern: 'YYYY-MM-dd' });
+    this._dateFormat = DateFormat.getDateInstance({ pattern: 'EEEE, MMMM d' }, this.getLocale());
 
     this.addStyleClass('bd-data-clock-view');
     this.addStyleClass('col-4 row-1');
