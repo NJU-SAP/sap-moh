@@ -1,0 +1,42 @@
+@font-face {
+	font-family: "moh-font";
+	src: url('moh-font.eot');
+	src: url('moh-font.eot?#iefix') format('eot'),
+		url('moh-font.woff2') format('woff2'),
+		url('moh-font.woff') format('woff'),
+		url('moh-font.ttf') format('truetype'),
+		url('moh-font.svg#moh-font') format('svg');
+}
+
+.mf:before {
+	font-family: "moh-font";
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	/* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
+	text-decoration: none;
+	text-transform: none;
+}
+
+
+.mf-bus:before {
+	content: "\E001";
+}
+
+.mf-kaaba:before {
+	content: "\E002";
+}
+
+.mf-map:before {
+	content: "\E003";
+}
+
+.mf-setting:before {
+	content: "\E004";
+}
+
+.mf-index.html:before {
+	content: "\E005";
+}
