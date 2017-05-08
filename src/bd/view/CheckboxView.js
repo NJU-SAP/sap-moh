@@ -24,7 +24,7 @@ export default class CheckboxView extends View {
   }
 
   _initChekcbox() {
-    this.$element = $('<div class=checkbox-container><div class="checkbox checked"/></div>');
+    this.$element = $('<li><div class="checkbox checked"/></li>');
 
     this._initHexagon();
     this._initDiamond();
