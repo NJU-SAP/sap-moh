@@ -1,5 +1,7 @@
 import SuperApplication from 'nju/app/Application';
 
+import DataClockView from '../view/DataClockView';
+
 export default class Application extends SuperApplication {
   init() {
     super.init();
@@ -23,9 +25,9 @@ export default class Application extends SuperApplication {
   }
 
   _initDataClockView() {
-    // const dataClockView = new DataClockView('dataClockView');
-    // dataClockView.addStyleClass('top-1 left-7');
-    // this.addSubview(dataClockView, 'control');
+    const dataClockView = new DataClockView('dataClockView');
+    dataClockView.addStyleClass('top-1 left-7');
+    this.addSubview(dataClockView, 'control');
   }
 
   _initMainMenu() {
