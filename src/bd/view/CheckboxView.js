@@ -4,7 +4,7 @@ export default class CheckboxView extends View {
   metadata = {
     properties: {
       text: { type: 'string' },
-      status: { type: 'boolean', defaultValue: true }                  // true: checked, false: unchecked
+      status: { type: 'boolean', defaultValue: true }                 // true: checked, false: unchecked
     },
 
     events: {
@@ -24,7 +24,7 @@ export default class CheckboxView extends View {
   }
 
   _initChekcbox() {
-    this.$element = $('<li><div class=checkbox/></li>');
+    this.$element = $('<div class=checkbox-container><div class="checkbox checked"/></div>');
 
     this._initHexagon();
     this._initDiamond();
