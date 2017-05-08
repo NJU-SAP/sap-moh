@@ -35,7 +35,7 @@ export default class FloatingPanelContainer extends PanelContainer {
   }
 
   _initDock() {
-    const $dock = $("<div class=dock><span class='fa fa-thumb-tack normal'/></div>");
+    const $dock = $("<div class=dock><span class='mf mf-setting normal'/></div>");
     this.$container.append($dock);
     $dock.on('click', 'span', (e) => {
       if (this.animating) {
