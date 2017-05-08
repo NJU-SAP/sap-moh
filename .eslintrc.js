@@ -36,8 +36,10 @@ module.exports = {
   },
   "globals": {
     "$": true,
+    "bd": true,
     "L": true,
     "moh": true,
+    "nju": true,
     "sap": true
   }
 };
