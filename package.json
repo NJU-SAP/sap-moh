@@ -33,9 +33,12 @@
     "webpack-dev-middleware": "^1.6.1"
   },
   "dependencies": {
+    "babyparse": "^0.4.6",
     "config": "^1.24.0",
     "express": "^4.14.0",
-    "geolib": "^2.0.22"
+    "geolib": "^2.0.22",
+    "lodash": "^4.17.4",
+    "mathjs": "^3.12.3"
   },
   "license": "ISC"
 }
