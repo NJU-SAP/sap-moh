@@ -2,6 +2,7 @@ import SuperApplication from 'bd/app/Application';
 
 import CounterTile from '../tile/CounterTile';
 import MapView from '../map/MapView';
+import MenuItem from 'bd/menu/MenuItem';
 import SpeedTile from '../tile/SpeedTile';
 
 export default class Application extends SuperApplication {
@@ -11,6 +12,30 @@ export default class Application extends SuperApplication {
 
     this._initMapView();
     this._initTiles();
+  }
+
+  _initMainMenu() {
+    super._initMainMenu();
+    const mainMenu = this.getSubview('mainMenu');
+    [
+      new MenuItem({
+        id: 'nowMenuItem',
+        text: 'Now',
+        active: true
+      }),
+      new MenuItem({
+        id: 'historyMenuItem',
+        text: 'History',
+        active: true
+      }),
+      new MenuItem({
+        id: 'futureMenuItem',
+        text: 'Future',
+        active: true
+      })
+    ].forEach((item) => {
+      mainMenu.addSubview(item);
+    });
   }
 
   _initMapView() {
