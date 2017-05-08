@@ -3,7 +3,9 @@ import DataClockView from 'bd/view/DataClockView';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
+import BusPanel from '../panel/BusPanel';
 import CounterTile from '../tile/CounterTile';
+import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import MapView from '../map/MapView';
 import SpeedTile from '../tile/SpeedTile';
 import StateBus from '../state/StateBus';
@@ -19,6 +21,7 @@ export default class Application extends SuperApplication {
     this._initMapView();
     this._initTiles();
     this._initMapLayerCheckbox();
+    this._initFloatingPanelContainer();
   }
 
   _initStateBus() {
@@ -111,5 +114,38 @@ export default class Application extends SuperApplication {
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
+  }
+
+  _initFloatingPanelContainer() {
+    const panelContainer = new FloatingPanelContainer('floating-panel-container');
+    // panelContainer.$element.css({
+    //   opacity: 0
+    // });
+    this.addSubview(panelContainer, 'floatingPanel');
+
+    const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
+    panelContainer.addPanel(busPanel);
+    //const corridorListView = new CorridorListView('corridor-list-view');
+    //corridorListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
+    //corridorPanel.setListView(corridorListView);
+    // corridorListView.attachCorridorSelected((e) => {
+    //   const corridor = e.getParameter('corridor');
+    //   this._selectCorridor.apply(this, [corridor]);
+    // });
+
+    // const favPanel = new FavPanel('fav-panel', { icon: 'fa fa-star h3' });
+    // panelContainer.addPanel(favPanel);
+    // const favListView = new FavListView('fav-list-view');
+    // favListView.setModel(sap.ui.getCore().getModel('fav'), 'fav');
+    // favListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
+    // favPanel.setListView(favListView);
+    // favListView.attachFavSelected((e) => {
+    //   const target = e.getParameter('target');
+    //   if (target.roadId) {
+    //     this._selectRoad.apply(this, [target]);
+    //   } else if (target.corridorId) {
+    //     this._selectCorridor.apply(this, [target]);
+    //   }
+    // });
   }
 }
