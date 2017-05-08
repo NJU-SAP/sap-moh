@@ -1,6 +1,5 @@
 import SuperApplication from 'nju/app/Application';
 
-import DataClockView from '../view/DataClockView';
 import MainMenu from '../menu/MainMenu';
 
 
@@ -10,7 +9,6 @@ export default class Application extends SuperApplication {
     this.addStyleClass('bd-app');
 
     this._initLayers();
-    this._initDataClockView();
     this._initMainMenu();
     this._initOverlay();
     this._initBrand();
@@ -24,12 +22,6 @@ export default class Application extends SuperApplication {
     this.addLayer('mainMenu');
     this.addLayer('floatingPanel');
     this.addLayer('popup');
-  }
-
-  _initDataClockView() {
-    const dataClockView = new DataClockView('dataClockView');
-    dataClockView.addStyleClass('top-1 left-7');
-    this.addSubview(dataClockView, 'control');
   }
 
   _initMainMenu() {

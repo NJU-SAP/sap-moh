@@ -1,18 +1,41 @@
+import CheckboxView from 'bd/view/CheckboxView';
+import DataClockView from 'bd/view/DataClockView';
+import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
-import CongestionCheckboxView from '../view/CongestionCheckboxView';
 import CounterTile from '../tile/CounterTile';
 import MapView from '../map/MapView';
-import MenuItem from 'bd/menu/MenuItem';
 import SpeedTile from '../tile/SpeedTile';
+import StateBus from '../state/StateBus';
 
 export default class Application extends SuperApplication {
   init() {
     super.init();
     this.addStyleClass('moh-app');
 
+    this._initStateBus();
+    this._initModels();
+    this._initDataClockView();
     this._initMapView();
     this._initTiles();
+    this._initMapLayerCheckbox();
+  }
+
+  _initStateBus() {
+    const stateBus = new StateBus();
+    this.setModel(sap.ui.getCore().getModel('state'), 'state');
+  }
+
+  _initModels() {
+
+  }
+
+  _initDataClockView() {
+    const dataClockView = new DataClockView('dataClockView', {
+      time: '{state>/timestamp}'
+    });
+    dataClockView.addStyleClass('top-1 left-7');
+    this.addSubview(dataClockView, 'control');
   }
 
   _initMainMenu() {
@@ -64,15 +87,14 @@ export default class Application extends SuperApplication {
   }
 
   _initTiles() {
-    this._initCheckboxTile();
     this._initCounterTile();
     this._initSpeedTile();
   }
 
-  _initCheckboxTile() {
-    const tile = new CongestionCheckboxView('congestionCheckboxTile');
-    tile.addStyleClass('right-3 top-2');
-    this.addSubview(tile, 'tile');
+  _initMapLayerCheckbox() {
+    const checkbox = new CheckboxView('congestionCheckboxTile');
+    checkbox.addStyleClass('right-3 top-2');
+    this.addSubview(checkbox, 'tile');
   }
 
   _initCounterTile() {
