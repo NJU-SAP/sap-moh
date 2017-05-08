@@ -1,17 +1,41 @@
+import CheckboxView from 'bd/view/CheckboxView';
+import DataClockView from 'bd/view/DataClockView';
+import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
 import CounterTile from '../tile/CounterTile';
 import MapView from '../map/MapView';
-import MenuItem from 'bd/menu/MenuItem';
 import SpeedTile from '../tile/SpeedTile';
+import StateBus from '../state/StateBus';
 
 export default class Application extends SuperApplication {
   init() {
     super.init();
     this.addStyleClass('moh-app');
 
+    this._initStateBus();
+    this._initModels();
+    this._initDataClockView();
     this._initMapView();
     this._initTiles();
+    this._initMapLayerCheckbox();
+  }
+
+  _initStateBus() {
+    const stateBus = new StateBus();
+    this.setModel(sap.ui.getCore().getModel('state'), 'state');
+  }
+
+  _initModels() {
+
+  }
+
+  _initDataClockView() {
+    const dataClockView = new DataClockView('dataClockView', {
+      time: '{state>/timestamp}'
+    });
+    dataClockView.addStyleClass('top-1 left-7');
+    this.addSubview(dataClockView, 'control');
   }
 
   _initMainMenu() {
@@ -20,18 +44,35 @@ export default class Application extends SuperApplication {
     [
       new MenuItem({
         id: 'nowMenuItem',
-        text: 'Now',
-        active: true
+        text: 'Now'
       }),
       new MenuItem({
         id: 'historyMenuItem',
-        text: 'History',
-        active: true
+        text: 'History'
       }),
       new MenuItem({
         id: 'futureMenuItem',
-        text: 'Future',
-        active: true
+        text: 'Future'
+      }),
+      new MenuItem({
+        id: 'settingsMenuItem',
+        text: 'Settings'
+      }),
+      new MenuItem({
+        id: 'kaabaMenuItem',
+        text: 'Kaaba'
+      }),
+      new MenuItem({
+        id: 'mapMenuItem',
+        text: 'Map'
+      }),
+      new MenuItem({
+        id: 'menuItem1',
+        text: ''
+      }),
+      new MenuItem({
+        id: 'menuItem2',
+        text: ''
       })
     ].forEach((item) => {
       mainMenu.addSubview(item);
@@ -48,6 +89,12 @@ export default class Application extends SuperApplication {
   _initTiles() {
     this._initCounterTile();
     this._initSpeedTile();
+  }
+
+  _initMapLayerCheckbox() {
+    const checkbox = new CheckboxView('congestionCheckboxTile');
+    checkbox.addStyleClass('right-3 top-2');
+    this.addSubview(checkbox, 'tile');
   }
 
   _initCounterTile() {

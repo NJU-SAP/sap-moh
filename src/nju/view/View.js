@@ -1,5 +1,6 @@
 import ManagedObject from 'sap/ui/base/ManagedObject';
 
+const DEFAULT_LOCALE = new sap.ui.core.Locale('en-us');
 
 export default class View extends ManagedObject {
   metadata = {
@@ -58,6 +59,10 @@ export default class View extends ManagedObject {
       return this.$element;
     }
     return this.$element.find(selector);
+  }
+
+  getLocale() {
+    return DEFAULT_LOCALE;
   }
 
   getSubview(index) {

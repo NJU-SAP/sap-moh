@@ -1,5 +1,31 @@
 @checkbox-size: .185;
 
+.checkbox-container {
+  position: relative;
+  height: 68px;
+  width: 50px;
+
+  > .checkbox {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    transform: translateX(-5em * sqrt(2) * @checkbox-size/2);
+  }
+
+  > .left {
+    position: absolute;
+    bottom: 22px;
+    left: -116px;
+  }
+  > .right {
+    position: absolute;
+    bottom: 22px;
+    right: -50px;
+  }
+}
+
 .checkbox {
 
   cursor: pointer;
