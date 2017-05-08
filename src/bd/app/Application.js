@@ -1,6 +1,8 @@
 import SuperApplication from 'nju/app/Application';
 
 import DataClockView from '../view/DataClockView';
+import MainMenu from '../menu/MainMenu';
+
 
 export default class Application extends SuperApplication {
   init() {
@@ -31,8 +33,8 @@ export default class Application extends SuperApplication {
   }
 
   _initMainMenu() {
-    // const mainMenu = new MainMenu('mainMenu');
-    // this.addSubview(mainMenu, 'mainMenu');
+    const mainMenu = new MainMenu('mainMenu');
+    this.addSubview(mainMenu, 'mainMenu');
   }
 
   _initOverlay() {
