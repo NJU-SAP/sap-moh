@@ -32,6 +32,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('./[name]/resource/index.css')
+    new ExtractTextPlugin('./[name]/res/index.css')
   ]
 };
