@@ -1,5 +1,6 @@
 import SuperApplication from 'bd/app/Application';
 
+import CongestionCheckboxView from '../view/CongestionCheckboxView';
 import CounterTile from '../tile/CounterTile';
 import MapView from '../map/MapView';
 import MenuItem from 'bd/menu/MenuItem';
@@ -46,8 +47,15 @@ export default class Application extends SuperApplication {
   }
 
   _initTiles() {
+    this._initCheckboxTile();
     this._initCounterTile();
     this._initSpeedTile();
+  }
+
+  _initCheckboxTile() {
+    const tile = new CongestionCheckboxView('congestionCheckboxTile');
+    tile.addStyleClass('right-3 top-2');
+    this.addSubview(tile, 'tile');
   }
 
   _initCounterTile() {
