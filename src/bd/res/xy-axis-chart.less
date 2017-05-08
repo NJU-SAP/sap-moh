@@ -1,47 +1,35 @@
-.bd-axis-chart
-{
-    .content
-    {
-        #axis-layer
-        {
-            .axis
-            {               
-                .domain
-                {
-                    stroke: white;
-                    fill: transparent;
-                }
-            }
-            
-            #axis-y
-            {
-                .tick
-                {
-                    line
-                    {
-                        stroke: rgba(255, 255, 255, 0.3);
-                        fill: transparent;
-                    }
-                }
-            }
-            
+.bd-axis-chart {
+  .content {
+    #axis-layer {
+      .axis {
+        .domain {
+          stroke: white;
+          fill: transparent;
         }
-        
-        .bd-series
-        {
-            .area
-            {
-                fill: @bd-active-bg-color;
-                stroke: none;
-            }
+      }
+
+      #axis-y {
+        .tick {
+          line {
+            stroke: rgba(255, 255, 255, 0.3);
+            fill: transparent;
+          }
         }
-        
-        .bd-peak-range-series
-        {
-            rect
-            {
-                fill: rgba(255, 255, 255, 0.24);
-            }
-        }
+      }
+
     }
+
+    .bd-series {
+      .area {
+        fill: @bd-active-bg-color;
+        stroke: none;
+      }
+    }
+
+    .bd-peak-range-series {
+      rect {
+        fill: rgba(255, 255, 255, 0.24);
+      }
+    }
+  }
 }

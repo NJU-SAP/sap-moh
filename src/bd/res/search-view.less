@@ -1,113 +1,98 @@
-#bd-overlay
-{
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 450;
+#bd-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 450;
 }
 
-#bd-search-scene
-{
-    overflow: visible;
+#bd-search-scene {
+  overflow: visible;
 }
 
-#search-scene
-{
-	outline: none;
+#search-scene {
+  outline: none;
 }
 
-.search-view
-{
-    .hexagon-1x
-    {
+.search-view {
+  .hexagon-1x {
+    position: relative;
+
+    > main {
+      > .container {
+        @search-bar-height: @bd-diamond-size * 0.65 * sqrt(2) / 2;
         position: relative;
-        > main
-        {
-            > .container
-            {
-                @search-bar-height: @bd-diamond-size * 0.65 * sqrt(2) / 2;    
-                position: relative;
-                width: 100%;
-                height: 100%;
-                
-                > input.searchBar
-                {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    padding-left: 0.5em;
-                    padding-right: 1em;
-                    background: transparent;
-                    outline: none;
-                }
-                
-                > span.icon
-                {
-                    display: inline-block;
-                    position: absolute;
-                    right: 0;
-                    width: 1em;
-                    height: @search-bar-height;
-                    text-align: center;
-                    line-height: @search-bar-height;
-                    font-size: 2em;
-                    
-                    &:hover
-                    {
-                        cursor: pointer;
-                    }
-                }  
-                
-                > ul
-                {
-                    position: absolute;
-                    top: @search-bar-height * 2;
-                    width: 100%;
-                    background: @bd-bg-color;
-                    border: 1px solid white;
-                    border-top: none;
-                                            
-                    >li
-                    {
-                        position: relative;
-                        padding-left: 0.5em;
-                        padding-right: 0.5em;                            
-                        height: @search-bar-height;
-                        line-height: @search-bar-height;
-                        cursor: pointer;
-                        
-                        > .title
-                        {
-                            max-width: 80%;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            position: absolute;
-                            font-size: 1.5em;
-                        }
-                        
-                        > .description
-                        {
-                            position: absolute;
-                            right: 0.5em;
-                            height: 100%;
-                        }
-                        
-                        &.active
-                        {
-                            background: rgba(255, 255, 255, 0.5);
-                            color: @bd-bg-color;
-                        }
-                        
-                        &.no-matches-found
-                        {
-                            opacity: 0.5;
-                        }
-                    }
-                }
-            }
+        width: 100%;
+        height: 100%;
+
+        > input.searchBar {
+          width: 100%;
+          height: 100%;
+          border: none;
+          padding-left: .5em;
+          padding-right: 1em;
+          background: transparent;
+          outline: none;
         }
+
+        > span.icon {
+          display: inline-block;
+          position: absolute;
+          right: 0;
+          width: 1em;
+          height: @search-bar-height;
+          text-align: center;
+          line-height: @search-bar-height;
+          font-size: 2em;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        > ul {
+          position: absolute;
+          top: @search-bar-height * 2;
+          width: 100%;
+          background: @bd-bg-color;
+          border: 1px solid white;
+          border-top: none;
+
+          > li {
+            position: relative;
+            padding-left: .5em;
+            padding-right: .5em;
+            height: @search-bar-height;
+            line-height: @search-bar-height;
+            cursor: pointer;
+
+            > .title {
+              max-width: 80%;
+              white-space: nowrap;
+              overflow: hidden;
+              position: absolute;
+              font-size: 1.5em;
+            }
+
+            > .description {
+              position: absolute;
+              right: .5em;
+              height: 100%;
+            }
+
+            &.active {
+              background: rgba(255, 255, 255, 0.5);
+              color: @bd-bg-color;
+            }
+
+            &.no-matches-found {
+              opacity: .5;
+            }
+          }
+        }
+      }
     }
+  }
 }

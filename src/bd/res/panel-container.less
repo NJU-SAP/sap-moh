@@ -1,157 +1,131 @@
-.bd-panel-container
-{
-	@radius-size: 10px;
-	
-	@border-size: 2px * 0.68;
-	@media(min-width: 1280px)
-    {
-        @border-size: 2px * 0.68;
+.bd-panel-container {
+  @radius-size: 10px;
+  @border-size: 2px * .68;
+  @media(min-width: 1280px) {
+     @border-size: 2px * .68;
+  }
+  @media(min-width: 1440px) {
+     @border-size: 2px * .68;
+  }
+  @media(min-width: 1600px) {
+     @border-size: 3px * .68;
+  }
+  @media(min-width: 1920px) {
+     @border-size: 3px * .68;
+  }
+  @panel-border: @border-size solid rgba(255, 255, 255, 0.5);
+
+  border-top: @panel-border;
+  border-radius: 0 @radius-size;
+  @li-size: 3em;
+
+  > ul.panel-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: @li-size;
+    display: flex;
+    flex-flow: column;
+
+    > li {
+      position: relative;
+      height: @li-size;
+      width: @li-size;
+      text-align: center;
+      border-bottom: @panel-border;
+      border-right: @panel-border;
+      border-left: @panel-border;
+      border-radius: 0 @radius-size @radius-size 0;
+      background: @bd-bg-color;
+      cursor: pointer;
+
+      > span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        line-height: 2em;
+        opacity: .3;
+        transition: opacity .15s;
+      }
+
+      &:hover {
+        > span {
+          opacity: 1;
+        }
+      }
+
+      &.spring {
+        position: relative;
+        width: 0;
+        border: none;
+        border-left: @panel-border;
+        flex: auto;
+      }
+
+      &.active {
+        border-left: none;
+        cursor: default;
+
+        &:hover {
+          > span {
+            opacity: 1;
+          }
+        }
+
+        > span {
+          opacity: .8;
+        }
+      }
     }
-    @media(min-width: 1440px)
-    {
-        @border-size: 2px * 0.68;
+  }
+
+  > main {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: @li-size;
+    background: @bd-bg-color;
+    border-bottom: @panel-border;
+
+    > .dock {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: @li-size;
+      width: @li-size;
+      line-height: @li-size;
+      text-align: center;
+      z-index: 10;
+      cursor: pointer;
+
+      &:hover {
+        > span {
+          opacity: 1;
+        }
+      }
+
+      > span {
+        transform: rotate(-45deg);
+        opacity: .3;
+        transition: opacity .15s, transform .3s;
+
+        &.docked {
+          transform: rotate(0);
+          opacity: .8;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
     }
-    @media(min-width: 1600px)
-    {
-        @border-size: 3px * 0.68;
-    }
-    @media(min-width: 1920px)
-    {
-        @border-size: 3px * 0.68;
-    }
-	@panel-border: @border-size solid rgba(255, 255, 255, 0.5);
-	
-	border-top: @panel-border;
-	border-radius: 0 @radius-size;
-	
-	@li-size: 3em;
-	
-	> ul.panel-icon
-	{
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		width: @li-size;
-		display: flex;
-		flex-flow: column;
-		
-		
-		> li
-		{
-			position: relative;
-			height: @li-size;
-			width: @li-size;
-			text-align: center;
-			border-bottom:  @panel-border;
-			border-right: @panel-border; 
-			border-left: @panel-border;
-			border-radius: 0 @radius-size @radius-size 0;
-			background: @bd-bg-color;
-			cursor: pointer;
-			
-			> span
-			{
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				line-height: 2em;
-				opacity: 0.3;
-				transition: opacity .15s;
-			}
-			
-			&:hover
-			{
-				> span
-				{
-					opacity: 1;
-				}
-			}
-			
-			&.spring
-			{
-				position: relative;
-				width: 0;
-				border: none;
-				border-left: @panel-border;
-				flex: auto;
-			}
-			
-			&.active
-			{
-				border-left: none;
-				cursor: default;
-				
-				&:hover 
-				{
-					> span
-					{
-						opacity: 1;
-					}
-				}
-				
-				> span
-				{
-					opacity: 0.8;
-				}
-			}
-		}
-	}
-	
-	> main {
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		right: @li-size;
-		background: @bd-bg-color;
-		border-bottom: @panel-border;
-		
-		> .dock
-		{
-			position: absolute;
-			left: 0;
-			top: 0;
-			height: @li-size;
-			width: @li-size;
-			line-height: @li-size;
-			text-align: center;
-			z-index: 10;
-			cursor: pointer;
-			
-			&:hover
-			{
-				> span
-				{
-					opacity: 1;
-				}
-			}
-			
-			> span
-			{
-				transform: rotate(-45deg);
-				opacity: 0.3;
-				transition: opacity .15s, transform .3s;
-				
-				&.docked
-				{
-					transform: rotate(0);
-					opacity: 0.8;
-					
-					&:hover
-					{
-						opacity: 1;
-					}
-				}
-			}
-		}
-	}
-	
-	
-	#floating-panel-container
-	{
-		transform: translateX(-@li-size);
-	}
+  }
+
+  #floating-panel-container {
+    transform: translateX(-@li-size);
+  }
 }

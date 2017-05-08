@@ -1,201 +1,178 @@
-.bd-main-menu
-{
-    > menu
-    {
-        position: relative;
-        display: block;
-        list-style: none;
-        padding: 0;
-        margin: auto;
-        width: @bd-diamond-size;
-        height: @bd-diamond-size * 2.5;
-        
-        li
-        {
-            cursor: pointer;
-            display: block;
-            position: absolute;
-            text-align: center;
-            width: 0;
-            height: 0;
-            line-height: @bd-diamond-size;
-            border-radius: 100%;
-            
-            .diamond, .text, .icon
-            {
-                z-index: 10;
-            }
-             
-            .diamond
-            {
-                position: absolute;
-                left: 0;
-                right: 0;
-                display: block;
-                width: @bd-diamond-size;
-                height: @bd-diamond-size;
-                
-                @media(min-width: 1280px)
-                {
-                    border: 2px solid rgba(255, 255, 255, 0.5);
-                }
-                @media(min-width: 1440px)
-                {
-                    border: 2px solid rgba(255, 255, 255, 0.5);
-                }
-                @media(min-width: 1600px)
-                {
-                    border: 3px solid rgba(255, 255, 255, 0.5);
-                }
-                @media(min-width: 1920px)
-                {
-                    border: 3px solid rgba(255, 255, 255, 0.5);
-                }
-                background: @bd-bg-color;
-                transform: rotate(45deg) scale(0.65);
-                transform-origin: center center;
-                transition: background-color 0.3s;
-            }
-            &.active
-            {
-                & .diamond, &:hover .diamond
-                {
-                    background-color: @bd-active-bg-color;
-                }
-            }
-            &:hover
-            {
-                .diamond
-                {
-                    background-color: @bd-hover-bg-color;
-                }
-            }
-            &:active
-            {
-                .diamond
-                {
-                    background-color: @bd-press-bg-color;
-                }
-            }
-            
-            .text, .icon
-            {
-                position: absolute;
-                display: block;
-                color: rgba(255, 255, 255, 0.7);
-            }
-            
-            .text
-            {
-                text-transform: uppercase;
-                transform: scale(0.68);
-                transform-origin: center center;
+.bd-main-menu {
+  > menu {
+    position: relative;
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: auto;
+    width: @bd-diamond-size;
+    height: @bd-diamond-size * 2.5;
 
-                width:  @bd-diamond-size;
-                height: @bd-diamond-size;
-                line-height: @bd-diamond-size;
-                border-radius: 50%;
-                
-                &:hover
-                {
-                    color: white;
-                }
-            }
-            
-            .icon
-            {
-                transform: scale(0.68);
-                transform-origin: center center;
-                width:  @bd-diamond-size * (1 / 1.8);
-                height: @bd-diamond-size * (1 / 1.8);
-                border-radius: 50%;
-                line-height: @bd-diamond-size * (1 / 1.8);
-                font-size: 1.8em;
-                font-weight: normal;
-            }
-            
-            
-            
-            &.placeholder
-            {
-                bottom: 0;
-                height: @bd-diamond-size / 2;
-                width: @bd-diamond-size;
-                overflow: hidden;
-                border-radius: 0;
-            }
-            &.row-1
-            {
-                top: 0;
-            }
-            &.row-2
-            {
-                top: @bd-diamond-size / 2;
-            }
-            &.row-3
-            {
-                top: @bd-diamond-size;
-            }
-            &.row-4
-            {
-                top: @bd-diamond-size * 1.5;
-            }
-            &.row-5
-            {
-                top: @bd-diamond-size * 2;
-                
-                &.start
-                {
-                    left: -5em;
-                    > .icon
-                    {
-                        top: -0.47em;
-                    }
-                }
-                
-                &.end
-                {
-                    right: 0;
-                    > .icon
-                    {
-                        top: -0.47em;
-                    }
-                }
-            }
-            &.left
-            {
-                left: -@bd-diamond-size / 2;
-            }
-            &.center
-            {
-                left: 0;
-            }
-            &.right
-            {
-                left: @bd-diamond-size / 2
-            }
-            
+    li {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      text-align: center;
+      width: 0;
+      height: 0;
+      line-height: @bd-diamond-size;
+      border-radius: 100%;
+
+      .diamond,
+      .icon,
+      .text {
+        z-index: 10;
+      }
+
+      .diamond {
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: block;
+        width: @bd-diamond-size;
+        height: @bd-diamond-size;
+        @media(min-width: 1280px) {
+          border: 2px solid rgba(255, 255, 255, 0.5);
         }
-        
-        
-        li.expandable
-        {
-            .hexagon-2x
-            {
-                position: absolute;
-                z-index: 0;
-                top: -@bd-diamond-size * 0.42;
-            }
-            
-            &.left-expand .hexagon-2x
-            {
-                right: -0.18em ;
-            }
-            
-            &.right-expand .hexagon-2x
-            {
-                left: @bd-diamond-size / 2 + 2.32em;
-            }
+        @media(min-width: 1440px) {
+          border: 2px solid rgba(255, 255, 255, 0.5);
         }
+        @media(min-width: 1600px) {
+          border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+        @media(min-width: 1920px) {
+          border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+        background: @bd-bg-color;
+        transform: rotate(45deg) scale(0.65);
+        transform-origin: center center;
+        transition: background-color .3s;
+      }
+
+      &.active {
+        & .diamond,
+        &:hover .diamond {
+          background-color: @bd-active-bg-color;
+        }
+      }
+
+      &:hover {
+        .diamond {
+          background-color: @bd-hover-bg-color;
+        }
+      }
+
+      &:active {
+        .diamond {
+          background-color: @bd-press-bg-color;
+        }
+      }
+
+      .icon,
+      .text {
+        position: absolute;
+        display: block;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .text {
+        text-transform: uppercase;
+        transform: scale(0.68);
+        transform-origin: center center;
+
+        width: @bd-diamond-size;
+        height: @bd-diamond-size;
+        line-height: @bd-diamond-size;
+        border-radius: 50%;
+
+        &:hover {
+          color: white;
+        }
+      }
+
+      .icon {
+        transform: scale(0.68);
+        transform-origin: center center;
+        width: @bd-diamond-size * (1 / 1.8);
+        height: @bd-diamond-size * (1 / 1.8);
+        border-radius: 50%;
+        line-height: @bd-diamond-size * (1 / 1.8);
+        font-size: 1.8em;
+        font-weight: normal;
+      }
+
+      &.placeholder {
+        bottom: 0;
+        height: @bd-diamond-size / 2;
+        width: @bd-diamond-size;
+        overflow: hidden;
+        border-radius: 0;
+      }
+
+      &.row-1 {
+        top: 0;
+      }
+
+      &.row-2 {
+        top: @bd-diamond-size / 2;
+      }
+
+      &.row-3 {
+        top: @bd-diamond-size;
+      }
+
+      &.row-4 {
+        top: @bd-diamond-size * 1.5;
+      }
+
+      &.row-5 {
+        top: @bd-diamond-size * 2;
+
+        &.start {
+          left: -5em;
+
+          > .icon {
+            top: -0.47em;
+          }
+        }
+
+        &.end {
+          right: 0;
+
+          > .icon {
+            top: -0.47em;
+          }
+        }
+      }
+
+      &.left {
+        left: -@bd-diamond-size / 2;
+      }
+
+      &.center {
+        left: 0;
+      }
+
+      &.right {
+        left: @bd-diamond-size / 2
+      }
+
     }
+
+    li.expandable {
+      .hexagon-2x {
+        position: absolute;
+        z-index: 0;
+        top: -@bd-diamond-size * .42;
+      }
+
+      &.left-expand .hexagon-2x {
+        right: -0.18em;
+      }
+
+      &.right-expand .hexagon-2x {
+        left: @bd-diamond-size / 2 + 2.32em;
+      }
+    }
+  }
 }
