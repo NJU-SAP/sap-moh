@@ -10,8 +10,8 @@ export default class CounterTile extends StandardTile {
 
   init() {
     super.init();
-    this.setTitle('Buses');
-    this.setDescription('');
+    this.setTitle('Pilgrims / Buses');
+    this.setDescription('City overall');
     this.setUnit('');
     this.setValueFormat('0');
     // this.bindSpeedIndex({
