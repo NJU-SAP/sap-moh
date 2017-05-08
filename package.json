@@ -1,14 +1,10 @@
 {
-  "name": "sap-hajj",
+  "name": "sap-moh",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js --presets es2015,stage-0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MagicCube/sap-hajj.git"
   },
   "author": "",
   "devDependencies": {
@@ -33,9 +29,5 @@
     "express": "^4.14.0",
     "geolib": "^2.0.22"
   },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MagicCube/sap-hajj/issues"
-  },
-  "homepage": "https://github.com/MagicCube/sap-hajj#readme"
+  "license": "ISC"
 }

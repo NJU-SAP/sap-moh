@@ -7,7 +7,7 @@ module.exports = {
     context: path.resolve("./src"),
     entry: {
         "vendor": [ "leaflet" ],
-        "hjj": [ "./hjj/index.js", "./hjj/resource/index.less" ]
+        "moh": [ "./moh/index.js", "./moh/resource/index.less" ]
     },
     output: {
         path: path.resolve("./public/assets"),
