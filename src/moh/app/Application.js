@@ -21,18 +21,35 @@ export default class Application extends SuperApplication {
     [
       new MenuItem({
         id: 'nowMenuItem',
-        text: 'Now',
-        active: true
+        text: 'Now'
       }),
       new MenuItem({
         id: 'historyMenuItem',
-        text: 'History',
-        active: true
+        text: 'History'
       }),
       new MenuItem({
         id: 'futureMenuItem',
-        text: 'Future',
-        active: true
+        text: 'Future'
+      }),
+      new MenuItem({
+        id: 'settingsMenuItem',
+        text: 'Settings'
+      }),
+      new MenuItem({
+        id: 'kaabaMenuItem',
+        text: 'Kaaba'
+      }),
+      new MenuItem({
+        id: 'mapMenuItem',
+        text: 'Map'
+      }),
+      new MenuItem({
+        id: 'menuItem1',
+        text: ''
+      }),
+      new MenuItem({
+        id: 'menuItem2',
+        text: ''
       })
     ].forEach((item) => {
       mainMenu.addSubview(item);
