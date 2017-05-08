@@ -36,7 +36,8 @@ module.exports = {
   },
   "globals": {
     "$": true,
-    "sap": true,
-    "moh": true
+    "L": true,
+    "moh": true,
+    "sap": true
   }
 };
