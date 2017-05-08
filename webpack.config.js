@@ -28,6 +28,10 @@ module.exports = {
       {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loaders: ['url-loader?name=assets/images/[name].[ext]&limit=10240']
       }
     ]
   },
