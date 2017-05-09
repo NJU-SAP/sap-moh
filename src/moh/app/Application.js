@@ -7,6 +7,7 @@ import BusPanel from '../panel/BusPanel';
 import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import GisModel from '../model/GisModel';
+import IndexModel from '../model/IndexModel';
 import TrafficModel from '../model/TrafficModel';
 import MapView from '../map/MapView';
 import SpeedTile from '../tile/SpeedTile';
@@ -37,6 +38,9 @@ export default class Application extends SuperApplication {
 
     const trafficModel = new TrafficModel();
     this.setModel(trafficModel, 'traffic');
+
+    const indexModel = new IndexModel();
+    this.setModel(indexModel, 'index');
   }
 
   _initDataClockView() {
