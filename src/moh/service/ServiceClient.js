@@ -4,7 +4,7 @@ import ManagedObject from 'sap/ui/base/ManagedObject';
 
 export default class ServiceClient extends ManagedObject {
   init() {
-    this._dateFormat = DateFormat.getDateTimeInstance({ pattern: 'HH:mms' });
+    this._dateFormat = DateFormat.getDateTimeInstance({ pattern: 'YYYY-MM-dd HH:mm' });
   }
 
   getBaseUrl() {
