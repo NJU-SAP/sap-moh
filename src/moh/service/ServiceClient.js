@@ -8,7 +8,7 @@ export default class ServiceClient extends ManagedObject {
   }
 
   getBaseUrl() {
-    return '/api';
+    return '/api/';
   }
 
   fetch(path, data) {
