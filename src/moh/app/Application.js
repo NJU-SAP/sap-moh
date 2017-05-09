@@ -15,6 +15,11 @@ export default class Application extends SuperApplication {
     super.init();
     this.addStyleClass('moh-app');
 
+    this.showLoading();
+    setTimeout(() => {
+      this.hideLoading();
+    }, 1000);
+
     this._initStateBus();
     this._initModels();
     this._initDataClockView();
@@ -43,6 +48,20 @@ export default class Application extends SuperApplication {
 
   _initMainMenu() {
     super._initMainMenu();
+
+    const mapMenuItem = new MenuItem({
+      id: 'mapMenuItem',
+      icon: 'mf mf-map',
+      press: () => {
+        mapMenuItem.setActive(!mapMenuItem.getActive());
+        if (mapMenuItem.getActive()) {
+          this.mapView.setBaseLayerMode('satellite');
+        } else {
+          this.mapView.setBaseLayerMode('street');
+        }
+      }
+    });
+
     const mainMenu = this.getSubview('mainMenu');
     [
       new MenuItem({
@@ -65,10 +84,7 @@ export default class Application extends SuperApplication {
         id: 'kaabaMenuItem',
         icon: 'mf mf-kaaba'
       }),
-      new MenuItem({
-        id: 'mapMenuItem',
-        icon: 'mf mf-map'
-      }),
+      mapMenuItem,
       new MenuItem({
         id: 'menuItem1',
         text: ''
@@ -83,10 +99,10 @@ export default class Application extends SuperApplication {
   }
 
   _initMapView() {
-    const mapView = new MapView('mapView');
-    mapView.$element.css('position', 'absolute');
-    mapView.addStyleClass('row-full col-full');
-    this.addSubview(mapView, 'base');
+    this.mapView = new MapView('mapView');
+    this.mapView.$element.css('position', 'absolute');
+    this.mapView.addStyleClass('row-full col-full');
+    this.addSubview(this.mapView, 'base');
   }
 
   _initTiles() {
