@@ -1,0 +1,6 @@
+{
+  bus: {
+    count: 3000,
+    keyWays: [ 'First Ring Road' ]
+  }
+}
