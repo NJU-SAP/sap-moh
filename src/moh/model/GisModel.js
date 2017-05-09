@@ -1,6 +1,6 @@
 import Model from 'nju/model/Model';
 
-import GisServiceClient from '../../service/GisServiceClient';
+import GisServiceClient from '../service/GisServiceClient';
 
 
 export default class GisModel extends Model {
