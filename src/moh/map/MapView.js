@@ -1,5 +1,8 @@
 import SuperMapView from 'bd/map/MapView';
 
+import TrafficLayer from './layers/TrafficLayer';
+
+
 export default class MapView extends SuperMapView {
   metadata = {
     properties: {
@@ -26,5 +29,12 @@ export default class MapView extends SuperMapView {
         'https://api.mapbox.com/styles/v1/mapbox/traffic-night-v2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVucnkxOTg0IiwiYSI6ImI1a0FvUzQifQ.zLCAzKNjXNiRUQoJBzAsZQ'
       );
     }
+  }
+
+  initLayers() {
+    super.initLayers();
+
+    this.trafficLayer = new TrafficLayer('trafficLayer');
+    this.addLayer(this.trafficLayer);
   }
 }
