@@ -95,6 +95,14 @@ export default class MapView extends View {
     this.map.setZoom(zoom);
   }
 
+  zoomIn() {
+    this.map.zoomIn();
+  }
+
+  zoomOut() {
+    this.map.zoomOut();
+  }
+
   setView(centerLocation, zoom) {
     this.map.setView(centerLocation, zoom);
   }
