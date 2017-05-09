@@ -18,6 +18,6 @@ export default class GisServiceClient extends ServiceClient {
     if (!this._edges) {
       this._edges = await this.fetch('edges');
     }
-    return this.edges;
+    return this._edges;
   }
 }
