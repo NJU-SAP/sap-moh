@@ -1,28 +1,27 @@
 @checkbox-size: .185;
 
 .checkbox-container {
+  display: flex;
+  align-items: center;
   position: relative;
   height: 68px;
   width: 50px;
 
   > .checkbox {
-    position: absolute;
+    display: inline-block;
+    margin-left: 2em;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 100%;
+    width: 50px;
     transform: translateX(-5em * sqrt(2) * @checkbox-size/2);
   }
 
   > .left {
-    position: absolute;
-    bottom: 22px;
-    left: -116px;
+    margin-left: 3.7em;
   }
   > .right {
-    position: absolute;
-    bottom: 22px;
-    right: -50px;
+    margin-left: 0.7em;
   }
 }
 
