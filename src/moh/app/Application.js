@@ -121,7 +121,12 @@ export default class Application extends SuperApplication {
   }
 
   _initMapView() {
-    this.mapView = new MapView('mapView');
+    this.mapView = new MapView('mapView', {
+      zoomChanged: () => {
+        const zoom = this.mapView.getZoom();
+        StateBus.getInstance().setState('map/zoom', zoom);
+      }
+    });
     this.mapView.$element.css('position', 'absolute');
     this.mapView.addStyleClass('row-full col-full');
     this.addSubview(this.mapView, 'base');
