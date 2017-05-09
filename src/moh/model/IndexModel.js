@@ -15,10 +15,22 @@ export default class IndexModel extends Model {
   }
 
   checkStates() {
-    // this.setProperty('/rt', data);
+    const timestamp = StateBus.getInstance().getState('timestamp');
+
+    this.updateRT(timestamp);
   }
 
   _onStateChange() {
     this.checkStates();
+  }
+
+  async updateRT(timestamp) {
+    const timestampDate = new Date(timestamp);
+    const from = new Date(`${timestampDate.getFullYear()}-${timestampDate.getMonth() + 1}-${timestampDate.getDate()} 00:00`);
+    const to = timestampDate;
+
+    const rt = await IndexServiceClient.getInstance().getRt(from, to);
+    console.log(rt);
+    this.setProperty('/rt', rt);
   }
 }
