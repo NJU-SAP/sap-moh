@@ -1,6 +1,5 @@
 {
   bus: {
-    count: 3000,
-    keyWays: [ 'First Ring Road' ]
+    count: 2000
   }
 }
