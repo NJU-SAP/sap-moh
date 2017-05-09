@@ -1,4 +1,4 @@
-import CheckboxView from 'bd/view/CheckboxView';
+import Checkbox from 'bd/view/Checkbox';
 import DataClockView from 'bd/view/DataClockView';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
@@ -133,7 +133,7 @@ export default class Application extends SuperApplication {
   }
 
   _initMapLayerCheckbox() {
-    const checkbox = new CheckboxView('congestionCheckboxTile');
+    const checkbox = new Checkbox('congestionCheckboxTile');
     checkbox.addStyleClass('left-13 col-4 top-3 row-1');
     this.addSubview(checkbox, 'tile');
   }
