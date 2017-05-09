@@ -15,11 +15,6 @@ export default class Application extends SuperApplication {
     super.init();
     this.addStyleClass('moh-app');
 
-    this.showLoading();
-    setTimeout(() => {
-      this.hideLoading();
-    }, 1000);
-
     this._initStateBus();
     this._initModels();
     this._initDataClockView();
@@ -49,6 +44,19 @@ export default class Application extends SuperApplication {
   _initMainMenu() {
     super._initMainMenu();
 
+    const nowMenuItem = new MenuItem({
+      id: 'nowMenuItem',
+      text: 'Now',
+      press: () => {
+
+      }
+    });
+
+    const kaabaMenuItem = new MenuItem({
+      id: 'kaabaMenuItem',
+      icon: 'mf mf-kaaba'
+    });
+
     const mapMenuItem = new MenuItem({
       id: 'mapMenuItem',
       icon: 'mf mf-map',
@@ -62,12 +70,25 @@ export default class Application extends SuperApplication {
       }
     });
 
+    const zoomInMenuItem = new MenuItem({
+      id: 'zoomInMenuItem',
+      text: '+',
+      press: () => {
+        this.mapView.zoomIn();
+      }
+    });
+
+    const zoomOutMenuItem = new MenuItem({
+      id: 'zoomOutMenuItem',
+      text: '-',
+      press: () => {
+        this.mapView.zoomOut();
+      }
+    });
+
     const mainMenu = this.getSubview('mainMenu');
     [
-      new MenuItem({
-        id: 'nowMenuItem',
-        text: 'Now'
-      }),
+      nowMenuItem,
       new MenuItem({
         id: 'historyMenuItem',
         text: 'History'
@@ -80,19 +101,10 @@ export default class Application extends SuperApplication {
         id: 'settingsMenuItem',
         icon: 'mf mf-setting'
       }),
-      new MenuItem({
-        id: 'kaabaMenuItem',
-        icon: 'mf mf-kaaba'
-      }),
+      kaabaMenuItem,
       mapMenuItem,
-      new MenuItem({
-        id: 'menuItem1',
-        text: ''
-      }),
-      new MenuItem({
-        id: 'menuItem2',
-        text: ''
-      })
+      zoomInMenuItem,
+      zoomOutMenuItem
     ].forEach((item) => {
       mainMenu.addSubview(item);
     });
