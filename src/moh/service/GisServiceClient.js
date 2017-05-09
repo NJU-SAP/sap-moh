@@ -14,11 +14,10 @@ export default class GisServiceClient extends ServiceClient {
     return '/api/gis/';
   }
 
-  getEdges() {
-    return this.fetch('edges');
-  }
-
-  getWays() {
-    return this.fetch('edges');
+  async getEdges() {
+    if (!this._edges) {
+      this._edges = await this.fetch('edges');
+    }
+    return this.edges;
   }
 }

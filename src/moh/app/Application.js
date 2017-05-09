@@ -6,6 +6,8 @@ import SuperApplication from 'bd/app/Application';
 import BusPanel from '../panel/BusPanel';
 import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
+import GisModel from '../model/GisModel';
+import TrafficModel from '../model/TrafficModel';
 import MapView from '../map/MapView';
 import SpeedTile from '../tile/SpeedTile';
 import StateBus from '../state/StateBus';
@@ -30,7 +32,11 @@ export default class Application extends SuperApplication {
   }
 
   _initModels() {
+    const gisModel = new GisModel();
+    this.setModel(gisModel, 'gis');
 
+    const trafficModel = new TrafficModel();
+    this.setModel(trafficModel, 'traffic');
   }
 
   _initDataClockView() {
