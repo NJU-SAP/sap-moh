@@ -4,7 +4,8 @@ import Layer from 'nju/map/layer/Layer';
 export default class TrafficLayer extends Layer {
   metadata = {
     properties: {
-      edges: { type: 'object', bindable: true }
+      edges: { type: 'object', bindable: true },
+      edgeSpeed: { type: 'object', bindable: true }
     }
   }
 
@@ -22,8 +23,17 @@ export default class TrafficLayer extends Layer {
     if (value) {
       this.edgesContainer.clearLayers();
 
-      const geoJSON = L.geoJson(value);
+      const geoJSON = L.geoJson(value, {
+        style: () => {
+          return { weight: 2 };
+        }
+      });
       this.edgesContainer.addLayer(geoJSON);
     }
+  }
+
+  setEdgeSpeed(value) {
+    this.setProperty('edgeSpeed', value);
+    console.log(value);
   }
 }
