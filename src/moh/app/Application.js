@@ -125,9 +125,9 @@ export default class Application extends SuperApplication {
 
     const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
     panelContainer.addPanel(busPanel);
-    //const corridorListView = new CorridorListView('corridor-list-view');
-    //corridorListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
-    //corridorPanel.setListView(corridorListView);
+    // const corridorListView = new CorridorListView('corridor-list-view');
+    // corridorListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
+    // corridorPanel.setListView(corridorListView);
     // corridorListView.attachCorridorSelected((e) => {
     //   const corridor = e.getParameter('corridor');
     //   this._selectCorridor.apply(this, [corridor]);
@@ -147,5 +147,9 @@ export default class Application extends SuperApplication {
     //     this._selectCorridor.apply(this, [target]);
     //   }
     // });
+  }
+
+  run() {
+    this.getSubview('floating-panel-container').initPanelContainer();
   }
 }
