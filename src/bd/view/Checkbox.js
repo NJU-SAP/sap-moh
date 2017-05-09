@@ -1,6 +1,6 @@
 import View from 'nju/view/View';
 
-export default class CheckboxView extends View {
+export default class Checkbox extends View {
   metadata = {
     properties: {
       text: { type: 'string' },

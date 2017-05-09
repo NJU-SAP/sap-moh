@@ -1,4 +1,4 @@
-import CheckboxView from 'bd/view/CheckboxView';
+import Checkbox from 'bd/view/Checkbox';
 import DataClockView from 'bd/view/DataClockView';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
@@ -7,6 +7,7 @@ import BusPanel from '../panel/BusPanel';
 import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import GisModel from '../model/GisModel';
+import IndexModel from '../model/IndexModel';
 import TrafficModel from '../model/TrafficModel';
 import MapView from '../map/MapView';
 import SpeedTile from '../tile/SpeedTile';
@@ -37,6 +38,9 @@ export default class Application extends SuperApplication {
 
     const trafficModel = new TrafficModel();
     this.setModel(trafficModel, 'traffic');
+
+    const indexModel = new IndexModel();
+    this.setModel(indexModel, 'index');
   }
 
   _initDataClockView() {
@@ -117,7 +121,12 @@ export default class Application extends SuperApplication {
   }
 
   _initMapView() {
-    this.mapView = new MapView('mapView');
+    this.mapView = new MapView('mapView', {
+      zoomChanged: () => {
+        const zoom = this.mapView.getZoom();
+        StateBus.getInstance().setState('map/zoom', zoom);
+      }
+    });
     this.mapView.$element.css('position', 'absolute');
     this.mapView.addStyleClass('row-full col-full');
     this.addSubview(this.mapView, 'base');
@@ -129,7 +138,7 @@ export default class Application extends SuperApplication {
   }
 
   _initMapLayerCheckbox() {
-    const checkbox = new CheckboxView('congestionCheckboxTile');
+    const checkbox = new Checkbox('congestionCheckboxTile');
     checkbox.addStyleClass('left-13 col-4 top-3 row-1');
     this.addSubview(checkbox, 'tile');
   }

@@ -18,7 +18,40 @@ export default class MapView extends SuperMapView {
         type: 'int',
         defaultValue: 15
       }
+    },
+    events: {
+      zoomChanged: {
+      }
     }
+  }
+
+  afterInit() {
+    super.afterInit();
+
+    let zoomEndTimer = null;
+    this.map.on('zoomstart', () => {
+      if (zoomEndTimer) {
+        clearTimeout(zoomEndTimer);
+        zoomEndTimer = null;
+      }
+    });
+    this.map.on('zoomend', () => {
+      if (zoomEndTimer) {
+        clearTimeout(zoomEndTimer);
+      }
+      zoomEndTimer = setTimeout(() => {
+        this.fireZoomChanged();
+      }, 500);
+    });
+  }
+
+  initLayers() {
+    super.initLayers();
+
+    this.trafficLayer = new TrafficLayer('trafficLayer', {
+      edges: '{gis>/edges}'
+    });
+    this.addLayer(this.trafficLayer);
   }
 
   setBaseLayerMode(value) {
@@ -29,14 +62,5 @@ export default class MapView extends SuperMapView {
         'https://api.mapbox.com/styles/v1/mapbox/traffic-night-v2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVucnkxOTg0IiwiYSI6ImI1a0FvUzQifQ.zLCAzKNjXNiRUQoJBzAsZQ'
       );
     }
-  }
-
-  initLayers() {
-    super.initLayers();
-
-    this.trafficLayer = new TrafficLayer('trafficLayer', {
-      edges: '{gis>/edges}'
-    });
-    this.addLayer(this.trafficLayer);
   }
 }
