@@ -20,20 +20,45 @@ export default class TrafficLayer extends Layer {
   setEdges(value) {
     this.setProperty('edges', value);
 
-    if (value) {
-      this.edgesContainer.clearLayers();
+    if (!value) return;
 
-      const geoJSON = L.geoJson(value, {
-        style: () => {
-          return { weight: 2 };
-        }
-      });
-      this.edgesContainer.addLayer(geoJSON);
-    }
+    this.edgesContainer.clearLayers();
+
+    this.edgeGeoJSON = L.geoJson(value, {
+      style: () => {
+        return { weight: 2 };
+      }
+    });
+    this.edgesContainer.addLayer(this.edgeGeoJSON);
   }
 
   setEdgeSpeed(value) {
     this.setProperty('edgeSpeed', value);
-    console.log(value);
+
+    if (!value) return;
+
+    this.edgeGeoJSON.eachLayer((edge) => {
+      const edgeId = edge.feature.properties.edge_id;
+      const color = this._getColorOfSpeed(value[edgeId]);
+      edge.setStyle({
+        color
+      });
+    });
+  }
+
+  _getColorOfSpeed(speed) {
+    const speedColorTable = ['red', 'yellow', 'rgba(0, 237, 0, 0.8)'];
+    const speedLevels = [0, 15, 30, 60];
+
+    let colorLevel = 0;
+    while (speedColorTable[colorLevel] !== 'rgba(0, 237, 0, 0.8)') {
+      if (speed > speedLevels[colorLevel + 1]) {
+        colorLevel += 1;
+      } else {
+        break;
+      }
+    }
+
+    return speedColorTable[colorLevel];
   }
 }
