@@ -48,7 +48,7 @@ export default class TrafficLayer extends Layer {
 
   _getColorOfSpeed(speed) {
     const speedColorTable = ['red', 'yellow', 'rgba(0, 237, 0, 0.8)'];
-    const speedLevels = [0, 15, 30, 60];
+    const speedLevels = [0, 25, 30, 60];
 
     let colorLevel = 0;
     while (speedColorTable[colorLevel] !== 'rgba(0, 237, 0, 0.8)') {
