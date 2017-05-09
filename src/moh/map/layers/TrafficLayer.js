@@ -1,23 +1,29 @@
 import Layer from 'nju/map/layer/Layer';
 
-import GisServiceClient from '../../service/GisServiceClient';
-
 
 export default class TrafficLayer extends Layer {
+  metadata = {
+    properties: {
+      edges: { type: 'object', bindable: true }
+    }
+  }
+
   init() {
     super.init();
 
     this.edgesContainer = L.featureGroup();
 
     this.container.addLayer(this.edgesContainer);
-
-    this._initEdges();
   }
 
-  async _initEdges() {
-    const edges = await GisServiceClient.getInstance().getEdges();
-    const geoJSON = L.geoJson(edges);
+  setEdges(value) {
+    this.setProperty('edges', value);
 
-    this.edgesContainer.addLayer(geoJSON);
+    if (value) {
+      this.edgesContainer.clearLayers();
+
+      const geoJSON = L.geoJson(value);
+      this.edgesContainer.addLayer(geoJSON);
+    }
   }
 }
