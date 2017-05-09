@@ -1,3 +1,5 @@
+import StateBus from 'nju/state/StateBus';
+
 import Checkbox from 'bd/view/Checkbox';
 import DataClockView from 'bd/view/DataClockView';
 import MenuItem from 'bd/menu/MenuItem';
@@ -11,7 +13,7 @@ import IndexModel from '../model/IndexModel';
 import TrafficModel from '../model/TrafficModel';
 import MapView from '../map/MapView';
 import SpeedTile from '../tile/SpeedTile';
-import StateBus from '../state/StateBus';
+import MohStateBus from '../state/StateBus';
 
 export default class Application extends SuperApplication {
   init() {
@@ -28,7 +30,7 @@ export default class Application extends SuperApplication {
   }
 
   _initStateBus() {
-    const stateBus = new StateBus();
+    const stateBus = new MohStateBus();
     this.setModel(sap.ui.getCore().getModel('state'), 'state');
   }
 
