@@ -30,7 +30,6 @@ export default class IndexModel extends Model {
     const to = timestampDate;
 
     const rt = await IndexServiceClient.getInstance().getRt(from, to);
-    console.log(rt);
     this.setProperty('/rt', rt);
   }
 }
