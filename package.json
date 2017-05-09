@@ -38,7 +38,8 @@
     "express": "^4.14.0",
     "geolib": "^2.0.22",
     "lodash": "^4.17.4",
-    "mathjs": "^3.12.3"
+    "mathjs": "^3.12.3",
+    "moment": "^2.18.1"
   },
   "license": "ISC"
 }
