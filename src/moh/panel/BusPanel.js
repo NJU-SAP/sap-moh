@@ -3,7 +3,7 @@ import Panel from 'bd/panel/Panel';
 export default class BusPanel extends Panel {
   metadata = {
     aggregations: {
-
+      tableView: { type: 'moh.view.BusTableView', multiple: false }
     }
   }
 
@@ -23,5 +23,10 @@ export default class BusPanel extends Panel {
     this.$container = $('<main/>');
     this.$element.append(this.$container);
     //this.$container.perfectScrollbar();
+  }
+
+  setTableView(tableView) {
+    this.setAggregation('tableView', tableView);
+    this.$container.append(tableView.$element);
   }
 }
