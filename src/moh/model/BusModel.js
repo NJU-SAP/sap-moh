@@ -12,7 +12,18 @@ export default class BusModel extends Model {
     StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
   }
 
-  async _onStateChange() {
+  checkStates() {
+    const timestamp = StateBus.getInstance().getState('timestamp');
+
+    this.updateArrivals();
+    this.updateBusRt(timestamp);
+  }
+
+  _onStateChange() {
+    this.checkStates();
+  }
+
+  async updateArrivals() {
     const selectedStationId = StateBus.getInstance().getState('selectedStationId');
     if (selectedStationId) {
       const arrivals = await BusServiceClient.getInstance().getArrivals(selectedStationId);
@@ -20,5 +31,10 @@ export default class BusModel extends Model {
     } else {
       this.setProperty('/arrivals', []);
     }
+  }
+
+  async updateBusRt(timestamp) {
+    const busRt = await BusServiceClient.getInstance().getRt(timestamp);
+    this.setProperty('/rt', busRt);
   }
 }
