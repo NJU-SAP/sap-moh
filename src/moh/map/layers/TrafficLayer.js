@@ -46,7 +46,7 @@ export default class TrafficLayer extends Layer {
       const color = this._getColorOfSpeed(value[edgeId]);
       edge.setStyle({
         color,
-        opacity: 0.8
+        opacity: 0.6
       });
     });
   }
