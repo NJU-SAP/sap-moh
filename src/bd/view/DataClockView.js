@@ -7,7 +7,7 @@ export default class DataClockView extends View {
     properties:
     {
       time: { type: 'object', bindable: true },
-      historical: { type: 'boolean', defaultValue: false }
+      historicalModel: { type: 'boolean', defaultValue: false }
     }
   }
 
@@ -59,9 +59,9 @@ export default class DataClockView extends View {
     this.$element.find('.colon').text(':');
   }
 
-  setHistorical(historical) {
-    this.setProperty('historical', historical);
-    this.$('.container').toggleClass('historical', historical);
-    this.$('.colon').toggleClass('active', !historical);
+  setHistoricalModel(historicalMode) {
+    this.setProperty('historicalMode', historicalMode);
+    this.$('.container').toggleClass('historical', historicalMode);
+    this.$('.colon').toggleClass('active', !historicalMode);
   }
 }

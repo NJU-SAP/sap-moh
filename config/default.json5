@@ -1,5 +1,5 @@
 {
   bus: {
-    count: 2000
+    count: 200
   }
 }

@@ -20,4 +20,11 @@ export default class GisServiceClient extends ServiceClient {
     }
     return this._edges;
   }
+
+  async getStations() {
+    if (!this._stations) {
+      this._stations = await this.fetch('stations');
+    }
+    return this._stations;
+  }
 }
