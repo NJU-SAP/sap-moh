@@ -2,89 +2,89 @@ import ManagedObject from "sap/ui/base/ManagedObject";
 
 export default class Series extends ManagedObject
 {
-    metadata = {
-        properties: {
-            data: { type: "object", bindable: true },
-            dataNormalizer: { type: "any", defaultValue: d => d },
-            scaleX: { type: "any" },
-            scaleY: { type: "any" },
-            transition: { type: "boolean", defaultValue: true },    // If show transition(animation) or not.
-            transitionDuration: { type: "int", defaultValue: 800 }
-        }
-    };
-
-    attachToParentNode(parentNode)
-    {
-        this.container = parentNode.append("g");
-        this.initContainer();
+  metadata = {
+    properties: {
+      data: { type: "object", bindable: true },
+      dataNormalizer: { type: "any", defaultValue: d => d },
+      scaleX: { type: "any" },
+      scaleY: { type: "any" },
+      transition: { type: "boolean", defaultValue: true },    // If show transition(animation) or not.
+      transitionDuration: { type: "int", defaultValue: 800 }
     }
+  };
 
-    initContainer()
-    {
-        this.container.classed("series", true);
-        this.container.attr("id", this.getId());
-    }
+  attachToParentNode(parentNode)
+  {
+    this.container = parentNode.append("g");
+    this.initContainer();
+  }
 
-    getSeriesGroupNode()
-    {
-        return this.container.node();
-    }
+  initContainer()
+  {
+    this.container.classed("series", true);
+    this.container.attr("id", this.getId());
+  }
 
-    setData(data)
-    {
-        this.setProperty("data", data);
-        if (!data)
-        {
-            return;
-        }
-        this.normalizedData = this.getDataNormalizer()(data);
-        this.redrawOnce();
-    }
+  getSeriesGroupNode()
+  {
+    return this.container.node();
+  }
 
-    redraw()
+  setData(data)
+  {
+    this.setProperty("data", data);
+    if (!data)
     {
-        this._redrawTimeout = null;
+      return;
     }
+    this.normalizedData = this.getDataNormalizer()(data);
+    this.redrawOnce();
+  }
 
-    redrawOnce()
-    {
-        if (this._redrawTimeout)
-        {
-            clearTimeout(this._redrawTimeout);
-            this._redrawTimeout = null;
-        }
-        this._redrawTimeout = setTimeout(this.redraw.bind(this, this.getTransition()), 100);
-    }
+  redraw()
+  {
+    this._redrawTimeout = null;
+  }
 
-    show()
+  redrawOnce()
+  {
+    if (this._redrawTimeout)
     {
-        if (this.container)
-        {
-            this.container
-                .transition()
-                .style("opacity", 1);
-        }
+      clearTimeout(this._redrawTimeout);
+      this._redrawTimeout = null;
     }
+    this._redrawTimeout = setTimeout(this.redraw.bind(this, this.getTransition()), 100);
+  }
 
-    hide()
+  show()
+  {
+    if (this.container)
     {
-        if (this.container)
-        {
-            this.container
-                .transition()
-                .style("opacity", 0);
-        }
+      this.container
+        .transition()
+        .style("opacity", 1);
     }
+  }
 
-    toggle(visible)
+  hide()
+  {
+    if (this.container)
     {
-        if (visible)
-        {
-            this.show();
-        }
-        else
-        {
-            this.hide();
-        }
+      this.container
+        .transition()
+        .style("opacity", 0);
     }
+  }
+
+  toggle(visible)
+  {
+    if (visible)
+    {
+      this.show();
+    }
+    else
+    {
+      this.hide();
+    }
+  }
 }

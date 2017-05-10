@@ -2,20 +2,19 @@ import Chart from "./Chart";
 import DateFormat from "sap/ui/core/format/DateFormat";
 
 export default class AxisChart extends Chart {
-    metadata = {
-        aggregations: {
-        	axes: { type: "sap.a.chart.axis.Axis", singularName: "axis" }
-        },
-
-        events: {
-			contentClick: {
-				parameters: {
-					x: { type: "float" },
-					y: { type: "float" }
-				}
-			}
-		}
-    };
+  metadata = {
+    aggregations: {
+    	axes: { type: "nju.chart.axis.Axis", singularName: "axis" }
+    },
+    events: {
+    	contentClick: {
+    		parameters: {
+    			x: { type: "float" },
+    			y: { type: "float" }
+    		}
+    	}
+	 }
+  };
 
     initChart()
 	{

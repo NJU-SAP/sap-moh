@@ -4,21 +4,21 @@ export default class Axis extends ManagedObject
 {
 	metadata = {
 		properties: {
-            customAxis: { type: "any", defaultValue: () => {} },
+      customAxis: { type: "any", defaultValue: () => {} },
 			domain: { type: "object", defaultValue: [0, 100] },
-            innerTickSize: { type: "float", defaultValue: 0 },
+      innerTickSize: { type: "float", defaultValue: 0 },
 			orient: { type: "string", defaultValue: "bottom" },
 			outerTickSize: { type: "float", defaultValue: 0 },
-            range: { type: "object", defaultValue: [0, 300] },
-            scaleType: { type: "object" },                          // linear, ordinal, time.scale, etc.
+      range: { type: "object", defaultValue: [0, 300] },
+      scaleType: { type: "object" },                          // linear, ordinal, time.scale, etc.
 			ticks: { type: "any", defaultValue: 2 },
-            tickFormat: { type: "any", defaultValue: d => d },  // function
+      tickFormat: { type: "any", defaultValue: d => d },  // function
 			tickPadding: { type: "float", defaultValue: 5},
-            tickSize: { type: "float", defaultValue: 1 },
+      tickSize: { type: "float", defaultValue: 1 },
 			tickValues: { type: "object" },
-            transition: { type: "boolean", defaultValue: true },    // If show transition(animation) or not.
-            transitionDuration: { type: "int", defaultValue: 800 },
-            unit: { type: "string", defaultValue: "" }
+      transition: { type: "boolean", defaultValue: true },    // If show transition(animation) or not.
+      transitionDuration: { type: "int", defaultValue: 800 },
+      unit: { type: "string", defaultValue: "" }
 		}
 	};
 
@@ -32,17 +32,17 @@ export default class Axis extends ManagedObject
 	initAxis()
 	{
 		this.axisGroup
-            .classed("axis", true)
-            .attr("id", this.getId());
+      .classed("axis", true)
+      .attr("id", this.getId());
 		this.unitText = this.axisGroup.append("text")
 			.text(this.getUnit())
-            .attr("class", "unit")
-            .attr("dx", this.getRange()[1])
-            .attr("dy", "1em");
-        this.scale = this.getScaleType() ? this.getScaleType() : d3.scale.linear();
-        this.scale.domain(this.getDomain())
-            .range(this.getRange());
-        let ticks = Array.isArray(this.getTicks()) ? this.getTicks() : [this.getTicks()];
+      .attr("class", "unit")
+      .attr("dx", this.getRange()[1])
+      .attr("dy", "1em");
+    this.scale = this.getScaleType() ? this.getScaleType() : d3.scale.linear();
+    this.scale.domain(this.getDomain())
+        .range(this.getRange());
+    let ticks = Array.isArray(this.getTicks()) ? this.getTicks() : [this.getTicks()];
 		this.axis = d3.svg.axis()
 			.scale(this.scale)
 			.orient(this.getOrient())
@@ -54,33 +54,32 @@ export default class Axis extends ManagedObject
 			.tickFormat(this.getTickFormat());
 	}
 
-    getAxisGroupNode()
-    {
-        return this.axisGroup.node();
-    }
+  getAxisGroupNode()
+  {
+    return this.axisGroup.node();
+  }
 
-    getScale()
-    {
-        return this.scale;
-    }
+  getScale()
+  {
+    return this.scale;
+  }
 
 	setDomain(domain)
 	{
 		this.setProperty("domain", domain);
 		if (Array.isArray(domain) && domain.length === 2)
 		{
-            this.updateScale();
-        }
+      this.updateScale();
+    }
 	}
 
-    setRange(range)
-    {
-        this.setProperty("range", range);
-        if (Array.isArray(range) && range.length === 2)
-		{
-			this.updateScale();
-		}
-    }
+  setRange(range)
+  {
+    this.setProperty("range", range);
+    if (Array.isArray(range) && range.length === 2) {
+  		this.updateScale();
+  	}
+  }
 
 	setOrient(orient)
 	{
@@ -163,41 +162,40 @@ export default class Axis extends ManagedObject
 		}
 	}
 
-
-    redraw()
+  redraw()
+  {
+    this.axisGroup.style("opacity", 1);
+    if (this.getTransition())
     {
-        this.axisGroup.style("opacity", 1);
-        if (this.getTransition())
-        {
-            this.axisGroup
-                .transition()
-                .duration(this.getTransitionDuration());
-        }
-        this.unitText.attr("dx", this.getRange()[1]);
-        const tickText = this.axisGroup
-            .call(this.axis)
-            .call(this.getCustomAxis());
+      this.axisGroup
+        .transition()
+        .duration(this.getTransitionDuration());
     }
+    this.unitText.attr("dx", this.getRange()[1]);
+    const tickText = this.axisGroup
+      .call(this.axis)
+      .call(this.getCustomAxis());
+  }
 
-    translate(x, y)
-    {
-        this.axisGroup.attr("transform", `translate(${x}, ${y})`);
-    }
+  translate(x, y)
+  {
+    this.axisGroup.attr("transform", `translate(${x}, ${y})`);
+  }
 
-    updateScale()
+  updateScale()
+  {
+    if (this.scale && this.axis)
     {
-        if (this.scale && this.axis)
-        {
-            this.scale.domain(this.getDomain()).range(this.getRange());
-            this.axis.scale(this.scale);
-        }
+      this.scale.domain(this.getDomain()).range(this.getRange());
+      this.axis.scale(this.scale);
     }
+  }
 
-    addStyleClass(styleClass)
+  addStyleClass(styleClass)
+  {
+    if (this.axisGroup)
     {
-        if (this.axisGroup)
-        {
-            this.axisGroup.classed(styleClass, true);
-        }
+      this.axisGroup.classed(styleClass, true);
     }
+  }
 }

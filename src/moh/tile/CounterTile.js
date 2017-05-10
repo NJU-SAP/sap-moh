@@ -1,5 +1,5 @@
 import StandardTile from 'bd/tile/StandardTile';
-
+// import XYAxisChart from ''
 
 export default class CounterTile extends StandardTile {
   metadata = {
@@ -21,5 +21,9 @@ export default class CounterTile extends StandardTile {
     // this.attachEventOnce('addedToParent', () => {
     //   self._initChart();
     // });
+  }
+
+  initChart() {
+
   }
 }
