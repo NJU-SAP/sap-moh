@@ -26,6 +26,8 @@ export default class BusTableView extends TableView {
 
     if (!rows) return;
 
+    this._clearRows();
+
     rows.forEach((row) => {
       this._addRow(row);
     });
@@ -48,5 +50,9 @@ export default class BusTableView extends TableView {
     $row.find('.busId').text(row.id);
     $row.find('.pilgrims').text(row.pilgrims);
     $row.find('.arrivalTime').text(row.arrivalIn);
+  }
+
+  _clearRows() {
+    this.$container.empty();
   }
 }
