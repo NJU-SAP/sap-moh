@@ -1,17 +1,15 @@
 import StandardTile from 'bd/tile/StandardTile';
-// import XYAxisChart from ''
 
 export default class CounterTile extends StandardTile {
   metadata = {
     properties: {
-      speedIndex: { type: 'object', bindable: true }
+      index: { type: 'object', bindable: true }
     }
   }
 
   init() {
     super.init();
     this.setTitle('Pilgrims / Buses');
-    this.setDescription('');
     this.setUnit('');
     this.setValueFormat('0');
     // this.bindSpeedIndex({
@@ -21,9 +19,5 @@ export default class CounterTile extends StandardTile {
     // this.attachEventOnce('addedToParent', () => {
     //   self._initChart();
     // });
-  }
-
-  initChart() {
-
   }
 }

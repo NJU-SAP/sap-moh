@@ -173,7 +173,10 @@ export default class Application extends SuperApplication {
   }
 
   _initSpeedTile() {
-    const tile = new SpeedTile('speedTile');
+    const tile = new SpeedTile({
+      rt: '{index>/rt}',
+      unit: 'km/h'
+    });
     tile.addStyleClass('right-1 bottom-1');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
