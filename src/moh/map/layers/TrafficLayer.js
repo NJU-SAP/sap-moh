@@ -26,7 +26,7 @@ export default class TrafficLayer extends Layer {
 
     this.edgeGeoJSON = L.geoJson(value, {
       style: () => {
-        return { weight: 2 };
+        return { weight: 4 };
       }
     });
     this.edgesContainer.addLayer(this.edgeGeoJSON);
