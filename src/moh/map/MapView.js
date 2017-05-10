@@ -26,6 +26,11 @@ export default class MapView extends SuperMapView {
     }
   }
 
+  init() {
+    super.init();
+    this.addStyleClass('moh-map-view');
+  }
+
   afterInit() {
     super.afterInit();
 
