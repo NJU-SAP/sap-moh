@@ -17,7 +17,7 @@ export default class BusPanel extends Panel {
 
   _initHeader() {
     this.$header = $('<header><div class="title h3"/></header>');
-    this.$header.children('.title').text('Arriving Bus/Coach');
+    this.$header.children('.title').text('Arriving Bus / Coach');
     this.$element.append(this.$header);
   }
 
