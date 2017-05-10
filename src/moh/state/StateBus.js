@@ -10,7 +10,7 @@ export default class StateBus extends SuperStateBus {
 
   _updateTimestamp() {
     this.setState('timestamp', new Date());
-    setTimeout(this._updateTimestamp.bind(this), 10000 * 1000);
+    setTimeout(this._updateTimestamp.bind(this), 10 * 1000);
   }
 
   getInitialState() {
