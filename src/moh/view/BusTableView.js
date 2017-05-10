@@ -53,6 +53,6 @@ export default class BusTableView extends TableView {
   }
 
   _clearRows() {
-    this.$container.empty();
+    this.$container.find('tr:not(:first-child)').remove();
   }
 }
