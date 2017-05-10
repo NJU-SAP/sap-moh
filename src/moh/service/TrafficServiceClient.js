@@ -14,7 +14,9 @@ export default class TrafficServiceClient extends ServiceClient {
     return '/api/traffic/';
   }
 
-  async getEdgeSpeed() {
-    return this.fetch('edge-speed');
+  async getEdgeSpeed(time) {
+    return this.fetch('edge-speed', {
+      time
+    });
   }
 }
