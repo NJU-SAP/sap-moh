@@ -6,45 +6,84 @@ import Tile from './Tile';
 export default class StandardTile extends Tile {
   metadata = {
     properties: {
-      value: { type: 'any', defaultValue: '', bindable: true },
-      valueFormat: { type: 'string', defaultValue: '.0' },
-      description: { type: 'string', defaultValue: 'Description' },
-      unit: { type: 'string', defaultValue: 'unit' }
+      title1: { type: 'string', defaultValue: 'Undefined' },
+      title2: { type: 'string', defaultValue: 'Undefined' },
+      unit: { type: 'string', defaultValue: 'unit' },
+      value1: { type: 'any', defaultValue: '', bindable: true },
+      value2: { type: 'any', defaultValue: '', bindable: true },
+      valueFormat: { type: 'string', defaultValue: '.0' }
     }
   }
 
   init() {
     super.init();
-    this.addStyleClass('bd-standard-tile col-4 row-4');
-    this.$element.append("<header><div class='title bd-text-shadow h2'></div><section><span class='value h1 bd-text-shadow'></span><span class='description bd-text-shadow'></span><span class='unit bd-text-shadow'></span></section></header>");
-    this.$element.append('<figure></figure>');
+    this.addStyleClass('bd-standard-tile col-5 row-4');
+    this.$element.append(`
+      <header>
+        <section class='section1'>
+          <div class='title h4 bd-text-shadow'></div>
+          <span class='value h2 bd-text-shadow'></span>
+          <span class='unit bd-text-shadow'></span>
+        </section>
+        <section class='section2'>
+          <div class='title h4 bd-text-shadow'></div>
+          <span class='value h2 bd-text-shadow'></span>
+          <span class='unit bd-text-shadow'></span>
+        </section>
+      </header>
+    `);
     this._numberFormat = NumberFormat.getFloatInstance({ pattern: '#,###.0' });
   }
 
-  setValue(value) {
-    // Format
-    let strValue = null;
-    if (typeof value === 'string') {
-      strValue = value;
-    } else if (typeof value === 'number') {
-      strValue = this._numberFormat.format(value).toString();
-    } else {
-      return;
-    }
+  setValue1(value) {
+    let strValue = this.formatValue(value);
 
-    if (strValue !== this.getValue()) {
-      this.$('header > section > .value').transit({
+    if (strValue !== this.getValue1()) {
+      this.$('header > .section1 > .value').transit({
         scale: 0.7,
         opacity: 0.7
       }, 160, () => {
-        this.$('header > section > .value').text(strValue);
-        this.$('header > section > .value').transit({
+        this.$('header > .section1 > .value').text(strValue);
+        this.$('header > .section1 > .value').transit({
           scale: 1,
           opacity: 1
         }, 160);
       });
     }
-    this.setProperty('value', strValue);
+    this.setProperty('value1', strValue);
+  }
+
+  setValue2(value) {
+    let strValue = this.formatValue(value);
+
+    if (strValue !== this.getValue2()) {
+      this.$('header > .section2 > .value').transit({
+        scale: 0.7,
+        opacity: 0.7
+      }, 160, () => {
+        this.$('header > .section2 > .value').text(strValue);
+        this.$('header > .section2 > .value').transit({
+          scale: 1,
+          opacity: 1
+        }, 160);
+      });
+    }
+    this.setProperty('value2', strValue);
+  }
+
+  setTitle1(title) {
+    this.setProperty('title1', title);
+    this.$('header > .section1 > .title').text(title);
+  }
+
+  setTitle2(title) {
+    this.setProperty('title2', title);
+    this.$('header > .section2 > .title').text(title);
+  }
+
+  setUnit(unit) {
+    this.setProperty('unit', unit);
+    this.$('header .unit').text(unit);
   }
 
   setValueFormat(format) {
@@ -52,18 +91,13 @@ export default class StandardTile extends Tile {
     this._numberFormat = NumberFormat.getFloatInstance({ pattern: format });
   }
 
-  setTitle(title) {
-    this.setProperty('title', title);
-    this.$('header > .title').text(title);
-  }
-
-  setDescription(desc) {
-    this.setProperty('description', desc);
-    this.$('header > section > .description').text(desc);
-  }
-
-  setUnit(unit) {
-    this.setProperty('unit', unit);
-    this.$('header > section > .unit').text(unit);
+  formatValue(value) {
+    if (typeof value === 'string') {
+      return value;
+    } else if (typeof value === 'number') {
+      return this._numberFormat.format(value).toString();
+    } else {
+      return null;
+    }
   }
 }
