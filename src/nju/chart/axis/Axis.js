@@ -2,32 +2,32 @@ import ManagedObject from "sap/ui/base/ManagedObject";
 
 export default class Axis extends ManagedObject
 {
-	metadata = {
-		properties: {
+  metadata = {
+    properties: {
       customAxis: { type: "any", defaultValue: () => {} },
-			domain: { type: "object", defaultValue: [0, 100] },
+      domain: { type: "object", defaultValue: [0, 100] },
       innerTickSize: { type: "float", defaultValue: 0 },
-			orient: { type: "string", defaultValue: "bottom" },
-			outerTickSize: { type: "float", defaultValue: 0 },
+      orient: { type: "string", defaultValue: "bottom" },
+      outerTickSize: { type: "float", defaultValue: 0 },
       range: { type: "object", defaultValue: [0, 300] },
       scaleType: { type: "object" },                          // linear, ordinal, time.scale, etc.
-			ticks: { type: "any", defaultValue: 2 },
+      ticks: { type: "any", defaultValue: 2 },
       tickFormat: { type: "any", defaultValue: d => d },  // function
-			tickPadding: { type: "float", defaultValue: 5},
+      tickPadding: { type: "float", defaultValue: 5},
       tickSize: { type: "float", defaultValue: 1 },
-			tickValues: { type: "object" },
+      tickValues: { type: "object" },
       transition: { type: "boolean", defaultValue: true },    // If show transition(animation) or not.
       transitionDuration: { type: "int", defaultValue: 800 },
       unit: { type: "string", defaultValue: "" }
-		}
-	};
-
-    attachToParentNode(parentNode)
-    {
-        this.axisGroup = parentNode.append("g")
-            .style("opacity", 0);
-        this.initAxis();
     }
+  };
+
+  attachToParentNode(parentNode)
+  {
+    this.axisGroup = parentNode.append("g")
+      .style("opacity", 0);
+    this.initAxis();
+  }
 
 	initAxis()
 	{
