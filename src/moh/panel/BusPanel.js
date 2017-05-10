@@ -9,13 +9,15 @@ export default class BusPanel extends Panel {
 
   init() {
     super.init();
+    this.addStyleClass('moh-bus-panel');
+
     this._initHeader();
     this._initMain();
   }
 
   _initHeader() {
-    this.$header = $('<header><div class=title h3/></header>');
-    this.$header.children('.title').text('Bus');
+    this.$header = $('<header><div class="title h3"/></header>');
+    this.$header.children('.title').text('Arriving Bus/Coach');
     this.$element.append(this.$header);
   }
 
