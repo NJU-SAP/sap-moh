@@ -64,7 +64,7 @@ export default class MapView extends SuperMapView {
     this.busLayer = new BusLayer('bus-layer', {
       buses: '{bus>/rt}'
     });
-    //this.addLayer(this.busLayer);
+    this.addLayer(this.busLayer);
 
     this.stationLayer = new StationLayer('station-layer', {
 
