@@ -5,6 +5,7 @@ import DataClockView from 'bd/view/DataClockView';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
+import BusModel from '../model/BusModel';
 import BusPanel from '../panel/BusPanel';
 import BusTableView from '../view/BusTableView';
 import CounterTile from '../tile/CounterTile';
@@ -47,12 +48,20 @@ export default class Application extends SuperApplication {
         this.hideLoading();
       });
     });
-
     this.setModel(gisModel, 'gis');
-    const trafficModel = new TrafficModel();
-    this.setModel(trafficModel, 'traffic');
+    sap.ui.getCore().setModel(gisModel, 'gis');
+
+    const busModel = new BusModel();
+    this.setModel(busModel, 'bus');
+    sap.ui.getCore().setModel(busModel, 'bus');
+
     const indexModel = new IndexModel();
     this.setModel(indexModel, 'index');
+    sap.ui.getCore().setModel(indexModel, 'index');
+
+    const trafficModel = new TrafficModel();
+    this.setModel(trafficModel, 'traffic');
+    sap.ui.getCore().setModel(trafficModel, 'traffic');
   }
 
   _initDataClockView() {
