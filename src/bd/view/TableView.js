@@ -6,13 +6,4 @@ export default class TableView extends View {
       rows: { type: 'object' }
     }
   }
-
-  init() {
-    super.init();
-    this.rowSet = {};
-  }
-
-  getElementTag() {
-    return 'ul';
-  }
 }
