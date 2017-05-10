@@ -1,5 +1,6 @@
 import SuperMapView from 'bd/map/MapView';
 
+import BusLayer from './layers/BusLayer';
 import TrafficLayer from './layers/TrafficLayer';
 
 
@@ -48,11 +49,16 @@ export default class MapView extends SuperMapView {
   initLayers() {
     super.initLayers();
 
-    this.trafficLayer = new TrafficLayer('trafficLayer', {
+    this.trafficLayer = new TrafficLayer('traffic-layer', {
       edges: '{gis>/edges}',
       edgeSpeed: '{traffic>/edge-speed}'
     });
     this.addLayer(this.trafficLayer);
+
+    this.busLayer = new BusLayer('bus-layer', {
+      buses: '{bus>/rt}'
+    });
+    this.addLayer(this.busLayer);
   }
 
   setBaseLayerMode(value) {
