@@ -27,19 +27,18 @@ export default class BusLayer extends Layer {
   _updateBuses(buses) {
     this.busesContainer.clearLayers();
 
-    console.log(buses);
     Object.keys(buses).forEach((busId) => {
       const bus = buses[busId];
 
       const busIcon = L.divIcon({
         html: '<div class="bus-container"></div>',
-        iconSize: [30, 30],
-        iconAnchor: [15, 15],
+        iconSize: [10, 10],
+        iconAnchor: [5, 5],
         className: 'bus'
       });
       const busMarker = L.marker([bus.location[1], bus.location[0]], {
         icon: busIcon,
-        zIndexOffset: 500
+        zIndexOffset: 50000
       });
 
       this.busesContainer.addLayer(busMarker);
