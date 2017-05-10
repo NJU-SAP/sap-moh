@@ -30,7 +30,7 @@ export default class SpeedTile extends StandardTile {
     this.setProperty('rt', value);
     if (value && value.length) {
       const record = value[value.length - 1];
-      this.setValue1(record.busSpeed);
+      this.setValue1(record.overallSpeed);
       this.setValue2(record.busSpeed);
     }
   }
