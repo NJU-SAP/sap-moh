@@ -31,14 +31,14 @@ export default class BusLayer extends Layer {
       const bus = buses[busId];
 
       const busIcon = L.divIcon({
-        html: '<div class="bus-container"></div>',
-        iconSize: [10, 10],
-        iconAnchor: [5, 5],
+        html: `<div class="bus-container ${bus.vacant ? 'vacant' : ''}"><span class="mf mf-bus h1"></div>`,
+        iconSize: [60, 60],
+        iconAnchor: [30, 30],
         className: 'bus'
       });
       const busMarker = L.marker([bus.location[1], bus.location[0]], {
         icon: busIcon,
-        zIndexOffset: 50000
+        zIndexOffset: 500
       });
 
       this.busesContainer.addLayer(busMarker);
