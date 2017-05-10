@@ -30,10 +30,11 @@ export default class BusLayer extends Layer {
     Object.keys(buses).forEach((busId) => {
       const bus = buses[busId];
 
+      const iconSize = 38;
       const busIcon = L.divIcon({
         html: `<div class="bus-container ${bus.vacant ? 'vacant' : ''}"><span class="mf mf-bus h1"></div>`,
-        iconSize: [60, 60],
-        iconAnchor: [30, 30],
+        iconSize: [iconSize, iconSize],
+        iconAnchor: [iconSize / 2, iconSize / 2],
         className: 'bus'
       });
       const busMarker = L.marker([bus.location[1], bus.location[0]], {
