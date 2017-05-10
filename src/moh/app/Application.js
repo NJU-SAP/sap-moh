@@ -35,12 +35,21 @@ export default class Application extends SuperApplication {
   }
 
   _initModels() {
+    this.showLoading();
     const gisModel = new GisModel();
-    this.setModel(gisModel, 'gis');
+    gisModel.initialLoad();
+    gisModel.attachEvent('initialLoadCompleted', () => {
+      Promise.all([
+        trafficModel.initialLoad(),
+        indexModel.initialLoad()
+      ]).then(() => {
+        this.hideLoading();
+      });
+    });
 
+    this.setModel(gisModel, 'gis');
     const trafficModel = new TrafficModel();
     this.setModel(trafficModel, 'traffic');
-
     const indexModel = new IndexModel();
     this.setModel(indexModel, 'index');
   }

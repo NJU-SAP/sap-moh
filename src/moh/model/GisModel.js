@@ -4,12 +4,12 @@ import GisServiceClient from '../service/GisServiceClient';
 
 
 export default class GisModel extends Model {
-  constructor(props = {}) {
-    super(props);
-    this._initEdges();
+  async initialLoad() {
+    await this._loadEdges();
+    this.fireEvent('initialLoadCompleted');
   }
 
-  async _initEdges() {
+  async _loadEdges() {
     const edges = await GisServiceClient.getInstance().getEdges();
     this.setProperty('/edges', edges);
   }

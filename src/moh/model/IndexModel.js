@@ -5,15 +5,17 @@ import IndexServiceClient from '../service/IndexServiceClient';
 
 
 export default class IndexModel extends Model {
-  constructor(props = {}) {
-    super(props);
+  constructor() {
+    super();
 
-    StateBus.getInstance().attachReady(async () => {
-      StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
-      await this.checkStates();
-      this.fireEvent('initialLoadCompleted');
-    });
+    StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
   }
+
+  async initialLoad() {
+    await this.checkStates();
+    this.fireEvent('initialLoadCompleted');
+  }
+
 
   async checkStates() {
     const timestamp = StateBus.getInstance().getState('timestamp');
