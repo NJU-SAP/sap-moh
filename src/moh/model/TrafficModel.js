@@ -5,19 +5,23 @@ import StateBus from 'nju/state/StateBus';
 import TrafficServiceClient from '../service/TrafficServiceClient';
 
 export default class TrafficModel extends Model {
-  constructor(props = {}) {
-    super(props);
+  constructor() {
+    super();
 
-    StateBus.getInstance().attachReady(() => {
+    StateBus.getInstance().attachReady(async () => {
       StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
-      this.checkStates();
     });
   }
 
-  checkStates() {
-    const timestamp = StateBus.getInstance().getState('timestamp');
+  async initialLoad() {
+    await this.checkStates();
+    this.fireEvent('initialLoadCompleted');
+  }
 
-    this.updateEdgeSpeed(timestamp);
+  async checkStates() {
+    const timestamp = StateBus.getInstance().getState('timestamp');
+    await this.updateEdgeSpeed(timestamp);
+    this.fireEvent('initialLoadCompleted');
   }
 
   _onStateChange() {
