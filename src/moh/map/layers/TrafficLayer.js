@@ -26,7 +26,11 @@ export default class TrafficLayer extends Layer {
 
     this.edgeGeoJSON = L.geoJson(value, {
       style: () => {
-        return { weight: 4 };
+        return {
+          weight: 4,
+          opacity: 0,
+          color: '#eee'
+        };
       }
     });
     this.edgesContainer.addLayer(this.edgeGeoJSON);
@@ -35,13 +39,14 @@ export default class TrafficLayer extends Layer {
   setEdgeSpeed(value) {
     this.setProperty('edgeSpeed', value);
 
-    if (!value) return;
+    if (!value || !this.edgeGeoJSON) return;
 
     this.edgeGeoJSON.eachLayer((edge) => {
       const edgeId = edge.feature.properties.edge_id;
       const color = this._getColorOfSpeed(value[edgeId]);
       edge.setStyle({
-        color
+        color,
+        opacity: 1
       });
     });
   }
