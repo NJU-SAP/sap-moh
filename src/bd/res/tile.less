@@ -11,28 +11,25 @@
     padding-left: 1.7em;
     @title-height: 40%;
 
-    > .title {
-      height: @title-height;
-    }
-
     > section {
       height: 100% - @title-height;
-      @left: 54%;
 
-      position: relative;
+      width: 50%;
+      float: left;
 
       > span {
-        position: absolute;
       }
 
-      > .description {
-        left: @left;
-        top: .5em;
+      .title {
+        height: @title-height;
+      }
+
+      .value {
+        display: inline-block;
       }
 
       > .unit {
-        left: @left;
-        top: 2em;
+        display: inline-block;
       }
     }
   }
@@ -41,6 +38,5 @@
     height: 100% - @header-height;
     margin: 0;
     padding: 0;
-
   }
 }
