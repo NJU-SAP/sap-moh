@@ -9,10 +9,16 @@ export default class BusTableView extends TableView {
 
   _initTable() {
     this.$container = $('<table class=bus-table-view/>');
-    this.$element.append(this.$container);
+    const $footer = $(`
+      <div class="footer">
+        <div class="time">within 15min Above</div>
+        <a class"more">Read More</a>
+      </div>
+    `);
+    this.$element.append(this.$container, $footer);
 
     this._tableHead = `
-      <tr>
+      <tr class="small">
         <th>Bus ID</th>
         <th>Pilgrims</th>
         <th>Arrive Time</th>
@@ -49,7 +55,7 @@ export default class BusTableView extends TableView {
     $row.data(row);
     $row.find('.busId').text(row.id);
     $row.find('.pilgrims').text(row.pilgrims);
-    $row.find('.arrivalTime').text(row.arrivalIn);
+    $row.find('.arrivalTime').text(`${row.arrivalIn} min`);
   }
 
   _clearRows() {
