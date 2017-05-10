@@ -5,7 +5,9 @@ import DataClockView from 'bd/view/DataClockView';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
+import BusModel from '../model/BusModel';
 import BusPanel from '../panel/BusPanel';
+import BusTableView from '../view/BusTableView';
 import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import GisModel from '../model/GisModel';
@@ -46,12 +48,20 @@ export default class Application extends SuperApplication {
         this.hideLoading();
       });
     });
-
     this.setModel(gisModel, 'gis');
-    const trafficModel = new TrafficModel();
-    this.setModel(trafficModel, 'traffic');
+    sap.ui.getCore().setModel(gisModel, 'gis');
+
+    const busModel = new BusModel();
+    this.setModel(busModel, 'bus');
+    sap.ui.getCore().setModel(busModel, 'bus');
+
     const indexModel = new IndexModel();
     this.setModel(indexModel, 'index');
+    sap.ui.getCore().setModel(indexModel, 'index');
+
+    const trafficModel = new TrafficModel();
+    this.setModel(trafficModel, 'traffic');
+    sap.ui.getCore().setModel(trafficModel, 'traffic');
   }
 
   _initDataClockView() {
@@ -179,13 +189,11 @@ export default class Application extends SuperApplication {
 
     const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
     panelContainer.addPanel(busPanel);
-    // const corridorListView = new CorridorListView('corridor-list-view');
-    // corridorListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
-    // corridorPanel.setListView(corridorListView);
-    // corridorListView.attachCorridorSelected((e) => {
-    //   const corridor = e.getParameter('corridor');
-    //   this._selectCorridor.apply(this, [corridor]);
-    // });
+
+    const busTableView = new BusTableView('bus-table-view', {
+      rows: '{bus>/arrivals}'
+    });
+    busPanel.setTableView(busTableView);
 
     // const favPanel = new FavPanel('fav-panel', { icon: 'fa fa-star h3' });
     // panelContainer.addPanel(favPanel);
@@ -204,6 +212,6 @@ export default class Application extends SuperApplication {
   }
 
   run() {
-    this.getSubview('floating-panel-container').initPanelContainer();
+    //this.getSubview('floating-panel-container').initPanelContainer();
   }
 }

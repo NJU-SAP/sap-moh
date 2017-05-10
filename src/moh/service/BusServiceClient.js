@@ -19,4 +19,10 @@ export default class BusServiceClient extends ServiceClient {
       stationId
     });
   }
+
+  async getRt(time) {
+    return this.fetch('rt', {
+      time
+    });
+  }
 }
