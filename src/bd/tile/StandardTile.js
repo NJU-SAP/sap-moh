@@ -17,17 +17,17 @@ export default class StandardTile extends Tile {
 
   init() {
     super.init();
-    this.addStyleClass('bd-standard-tile col-4 row-4');
+    this.addStyleClass('bd-standard-tile col-5 row-4');
     this.$element.append(`
       <header>
         <section class='section1'>
-          <div class='title h2 bd-text-shadow'></div>
-          <span class='value h1 bd-text-shadow'></span>
+          <div class='title h4 bd-text-shadow'></div>
+          <span class='value h2 bd-text-shadow'></span>
           <span class='unit bd-text-shadow'></span>
         </section>
         <section class='section2'>
-          <div class='title h2 bd-text-shadow'></div>
-          <span class='value h1 bd-text-shadow'></span>
+          <div class='title h4 bd-text-shadow'></div>
+          <span class='value h2 bd-text-shadow'></span>
           <span class='unit bd-text-shadow'></span>
         </section>
       </header>
