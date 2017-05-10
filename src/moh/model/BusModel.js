@@ -9,6 +9,7 @@ export default class BusModel extends Model {
     super();
 
     StateBus.getInstance().bindState('selectedStationId').attachChange(this._onStateChange.bind(this));
+    StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
   }
 
   async _onStateChange() {
