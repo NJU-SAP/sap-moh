@@ -6,6 +6,7 @@ import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
 import BusPanel from '../panel/BusPanel';
+import BusTableView from '../view/BusTableView';
 import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import GisModel from '../model/GisModel';
@@ -179,13 +180,9 @@ export default class Application extends SuperApplication {
 
     const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
     panelContainer.addPanel(busPanel);
-    // const corridorListView = new CorridorListView('corridor-list-view');
-    // corridorListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
-    // corridorPanel.setListView(corridorListView);
-    // corridorListView.attachCorridorSelected((e) => {
-    //   const corridor = e.getParameter('corridor');
-    //   this._selectCorridor.apply(this, [corridor]);
-    // });
+
+    const busTableView = new BusTableView('bus-table-view');
+    busPanel.setTableView(busTableView);
 
     // const favPanel = new FavPanel('fav-panel', { icon: 'fa fa-star h3' });
     // panelContainer.addPanel(favPanel);
