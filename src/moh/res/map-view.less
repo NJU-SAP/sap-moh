@@ -1,7 +1,19 @@
 .moh-map-view {
+  @container-height: 60px;
   .bus-container {
-    height: 10px;
-    width: 10px;
-    background: blue;
+    height: @container-height;
+    width: 60px;
+    background: #1DFFF9;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #000;
+
+    > span {
+      line-height: @container-height;
+    }
+
+    &.vacant {
+      background: #E2F2F1;
+    }
   }
 }
