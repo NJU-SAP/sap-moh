@@ -8,16 +8,17 @@ export default class IndexModel extends Model {
   constructor(props = {}) {
     super(props);
 
-    StateBus.getInstance().attachReady(() => {
+    StateBus.getInstance().attachReady(async () => {
       StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
-      this.checkStates();
+      await this.checkStates();
+      this.fireEvent('initialLoadCompleted');
     });
   }
 
-  checkStates() {
+  async checkStates() {
     const timestamp = StateBus.getInstance().getState('timestamp');
 
-    this.updateRT(timestamp);
+    await this.updateRT(timestamp);
   }
 
   _onStateChange() {
@@ -30,7 +31,6 @@ export default class IndexModel extends Model {
     const to = timestampDate;
 
     const rt = await IndexServiceClient.getInstance().getRt(from, to);
-    console.log(rt);
     this.setProperty('/rt', rt);
   }
 }

@@ -49,7 +49,8 @@ export default class MapView extends SuperMapView {
     super.initLayers();
 
     this.trafficLayer = new TrafficLayer('trafficLayer', {
-      edges: '{gis>/edges}'
+      edges: '{gis>/edges}',
+      edgeSpeed: '{traffic>/edge-speed}'
     });
     this.addLayer(this.trafficLayer);
   }
