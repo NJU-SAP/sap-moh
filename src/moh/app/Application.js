@@ -190,7 +190,9 @@ export default class Application extends SuperApplication {
     const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
     panelContainer.addPanel(busPanel);
 
-    const busTableView = new BusTableView('bus-table-view');
+    const busTableView = new BusTableView('bus-table-view', {
+      rows: '{bus>/arrivals}'
+    });
     busPanel.setTableView(busTableView);
 
     // const favPanel = new FavPanel('fav-panel', { icon: 'fa fa-star h3' });
@@ -210,6 +212,6 @@ export default class Application extends SuperApplication {
   }
 
   run() {
-    this.getSubview('floating-panel-container').initPanelContainer();
+    //this.getSubview('floating-panel-container').initPanelContainer();
   }
 }
