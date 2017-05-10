@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Mina Transit Station",
+    "location": [39.83059, 21.42386]
+  },
+  {
+    "id": 2,
+    "name": "Station 1",
+    "location": [39.82965, 21.42424]
+  },
+  {
+    "id": 3,
+    "name": "Station 2",
+    "location": [39.82521, 21.42012]
+  }
+]
