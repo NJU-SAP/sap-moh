@@ -15,8 +15,4 @@ export default class TableView extends View {
   getElementTag() {
     return 'ul';
   }
-
-  initRows() {
-
-  }
 }
