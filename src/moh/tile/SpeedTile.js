@@ -1,25 +1,37 @@
 import StandardTile from 'bd/tile/StandardTile';
-
+import XYAxisChart from 'nju/chart/XYAxisChart';
 
 export default class SpeedTile extends StandardTile {
   metadata = {
     properties: {
-      speedIndex: { type: 'object', bindable: true }
+      rt: { type: 'object', bindable: true }
     }
   }
 
   init() {
     super.init();
-    this.setTitle('Speed');
-    this.setDescription('');
+    this.setTitle1('Speed(Whole City)');
+    this.setTitle2('Speed(Buses)');
     this.setUnit('Km/h');
     this.setValueFormat('.0');
+    this.initSpeedChart();
     // this.bindSpeedIndex({
     //   model: 'index',
     //   path: '/cityIndex'
     // });
-    // this.attachEventOnce('addedToParent', () => {
-    //   self._initChart();
-    // });
+  }
+
+  initSpeedChart() {
+    this.speedChart = new XYAxisChart();
+    this.addSubview(this.speedChart);
+  }
+
+  setRt(value) {
+    this.setProperty('rt', value);
+    if (value && value.length) {
+      const record = value[value.length - 1];
+      this.setValue1(record.overallSpeed);
+      this.setValue2(record.busSpeed);
+    }
   }
 }
