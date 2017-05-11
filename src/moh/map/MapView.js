@@ -23,6 +23,11 @@ export default class MapView extends SuperMapView {
     },
     events: {
       zoomChanged: {
+      },
+      stationChange: {
+        parameters: {
+          id: { type: 'int' },
+        }
       }
     }
   }
@@ -74,7 +79,14 @@ export default class MapView extends SuperMapView {
     this.addLayer(this.busLayer);
 
     this.stationLayer = new StationLayer('station-layer', {
-
+      stations: '{gis>/stations}'
+    });
+    this.addLayer(this.stationLayer);
+    this.stationLayer.attachStationSelect((e) => {
+      const id = e.getParameter('id');
+      this.fireStationChange({
+        id
+      });
     });
   }
 
