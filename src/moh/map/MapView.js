@@ -35,6 +35,8 @@ export default class MapView extends SuperMapView {
   afterInit() {
     super.afterInit();
 
+    this._zoomLevel = this.getDefaultZoom();
+
     let zoomEndTimer = null;
     this.map.on('zoomstart', () => {
       if (zoomEndTimer) {
@@ -43,6 +45,11 @@ export default class MapView extends SuperMapView {
       }
     });
     this.map.on('zoomend', () => {
+      this.removeStyleClass(`zoom-level-${this._zoomLevel}`);
+      const zoomLevel = this.map.getZoom();
+      this._zoomLevel = zoomLevel;
+      this.addStyleClass(`zoom-level-${this._zoomLevel}`);
+
       if (zoomEndTimer) {
         clearTimeout(zoomEndTimer);
       }

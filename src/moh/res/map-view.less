@@ -8,6 +8,8 @@
     border-radius: 50%;
     border: 2px solid #000;
 
+    transform: scale(0.83333333);
+
     > span {
       line-height: @container-height;
       color: #000;
@@ -18,4 +20,20 @@
       background: #E2F2F1;
     }
   }
+}
+
+@maxZoom: 17;
+@minZoom: 11;
+
+.generate-zooms(@maxZoom);
+
+.generate-zooms(@n, @i: @minZoom) when (@i =< @n) {
+  .moh-map-view {
+  	&.zoom-level-@{i} {
+      .bus-container {
+      	transform: scale(0.5 / (@maxZoom - @minZoom) * (@i - @minZoom) + 0.5);
+      }
+    }
+  }
+  .generate-zooms(@n, (@i + 1));
 }
