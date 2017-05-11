@@ -30,7 +30,7 @@ export default class BusTableView extends TableView {
   setRows(rows) {
     this.setProperty('rows', rows);
 
-    if (!rows) return;
+    if (!rows || rows.length === 0) return;
 
     this._clearRows();
 
