@@ -1,8 +1,8 @@
 .moh-map-view {
-  @container-height: 38px;
+  @bus-container-height: 38px;
   .bus-container {
-    height: @container-height;
-    width: @container-height;
+    height: @bus-container-height;
+    width: @bus-container-height;
     background: #1DFFF9;
     text-align: center;
     border-radius: 50%;
@@ -11,7 +11,7 @@
     transform: scale(0.77);
 
     > span {
-      line-height: @container-height;
+      line-height: @bus-container-height;
       color: #000;
       font-size: 2em;
     }
@@ -19,6 +19,20 @@
     &.vacant {
       background: #E2F2F1;
     }
+  }
+
+  @station-container-height: 38px;
+  .station-container {
+    height: @station-container-height;
+    width: @station-container-height;
+    background-image: url('./imgs/icon-station.png');
+    background-size: cover;
+  }
+
+  .selected > .station-container {
+    background-image: url('./imgs/icon-station-selected.png');
+    transform: scale(1.1);
+    background-size: cover;
   }
 }
 
