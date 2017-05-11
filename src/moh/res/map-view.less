@@ -8,7 +8,7 @@
     border-radius: 50%;
     border: 2px solid #000;
 
-    transform: scale(0.83333333);
+    transform: scale(0.77);
 
     > span {
       line-height: @container-height;
@@ -24,6 +24,7 @@
 
 @maxZoom: 17;
 @minZoom: 11;
+@minScale: 0.3;
 
 .generate-zooms(@maxZoom);
 
@@ -31,7 +32,7 @@
   .moh-map-view {
   	&.zoom-level-@{i} {
       .bus-container {
-      	transform: scale(0.5 / (@maxZoom - @minZoom) * (@i - @minZoom) + 0.5);
+      	transform: scale((1 - @minScale) / (@maxZoom - @minZoom) * (@i - @minZoom) + @minScale);
       }
     }
   }
