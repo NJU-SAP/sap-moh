@@ -12,7 +12,7 @@ export default class BusTableView extends TableView {
     const $footer = $(`
       <div class="footer">
         <div class="time">within 15min Above</div>
-        <a class"more">Read More</a>
+        <a class="more">Read More</a>
       </div>
     `);
     this.$element.append(this.$container, $footer);
