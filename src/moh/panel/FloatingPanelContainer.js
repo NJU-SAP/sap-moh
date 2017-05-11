@@ -58,7 +58,7 @@ export default class FloatingPanelContainer extends PanelContainer {
 
   initPanelContainer() {
     this.hidePanel();
-    this._startPanelListening();
+    //this._startPanelListening();
   }
 
   addPanel(panel) {
