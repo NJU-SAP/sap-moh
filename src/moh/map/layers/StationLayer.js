@@ -5,11 +5,21 @@ export default class StationLayer extends Layer {
   metadata = {
     properties: {
       stations: { type: 'object', bindable: true }
+    },
+    events: {
+      stationSelect: {
+        parameters: {
+          id: { type: 'int' },
+        }
+      }
     }
   }
 
   init() {
     super.init();
+
+    this._stationMarkers = [];
+    this._selectedMarker = null;
 
     this.stationsContainer = L.featureGroup();
 
@@ -21,29 +31,48 @@ export default class StationLayer extends Layer {
 
     if (!value) return;
 
-    //console.log(value);
-
-    //this._updateStations(value);
+    this._updateStations(value);
   }
 
   _updateStations(stations) {
     this.stationsContainer.clearLayers();
 
-    Object.keys(stations).forEach((busId) => {
-      const bus = stations[busId];
-
-      const busIcon = L.divIcon({
-        html: '<div class="bus-container"></div>',
-        iconSize: [10, 10],
-        iconAnchor: [5, 5],
-        className: 'bus'
+    stations.forEach((station) => {
+      const iconSize = 38;
+      const stationIcon = L.divIcon({
+        html: '<div class="station-container"></div>',
+        iconSize: [iconSize, iconSize],
+        iconAnchor: [iconSize / 2, iconSize / 2],
+        className: 'station'
       });
-      const busMarker = L.marker([bus.location[1], bus.location[0]], {
-        icon: busIcon,
-        zIndexOffset: 50000
+      const stationMarker = L.marker([station.location[1], station.location[0]], {
+        icon: stationIcon,
+        zIndexOffset: 500,
+        stationId: station.id,
+        stationName: station.name
+      });
+      stationMarker.on('click', (e) => {
+        if (this._selectedMarker === null) {
+          $(stationMarker._icon).addClass('selected');
+          this._selectedMarker = stationMarker;
+        } else {
+          if (this._selectedMarker === stationMarker) {
+            $(stationMarker._icon).removeClass('selected');
+            this._selectedMarker = null;
+          } else {
+            $(this._selectedMarker._icon).removeClass('selected');
+            $(stationMarker._icon).addClass('selected');
+            this._selectedMarker = stationMarker;
+          }
+        }
+
+        this.fireStationSelect({
+          id: this._selectedMarker === null ? null : e.target.options.stationId
+        });
       });
 
-      this.busesContainer.addLayer(busMarker);
+      this._stationMarkers.push(stationMarker);
+      this.stationsContainer.addLayer(stationMarker);
     });
   }
 
