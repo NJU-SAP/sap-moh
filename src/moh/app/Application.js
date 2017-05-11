@@ -148,6 +148,15 @@ export default class Application extends SuperApplication {
         StateBus.getInstance().setState('map/zoom', zoom);
       }
     });
+    this.mapView.attachStationChange((e) => {
+      const id = e.getParameter('id');
+      StateBus.getInstance().setState('selectedStationId', id);
+      if (id === null) {
+        this.getSubview('floating-panel-container').hidePanel();
+      } else {
+        this.getSubview('floating-panel-container').showPanel();
+      }
+    });
     this.mapView.$element.css('position', 'absolute');
     this.mapView.addStyleClass('row-full col-full');
     this.addSubview(this.mapView, 'base');
@@ -217,6 +226,6 @@ export default class Application extends SuperApplication {
   }
 
   run() {
-    //this.getSubview('floating-panel-container').initPanelContainer();
+    this.getSubview('floating-panel-container').initPanelContainer();
   }
 }
