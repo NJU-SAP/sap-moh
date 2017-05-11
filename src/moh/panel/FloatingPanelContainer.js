@@ -8,7 +8,7 @@ export default class FloatingPanelContainer extends PanelContainer {
 
     this.animating = true;   // if floating panel is animating
 
-    this._initDock();
+    //this._initDock();
 
     this._timeoutId = null;
     this._panelStatus = true; // false indicates hidden, true indicates shown.
@@ -124,9 +124,10 @@ export default class FloatingPanelContainer extends PanelContainer {
 
   hidePanel() {
     const containerWidth = this.$container.width();
+    const headerWidth = this.$header.width();
     this.animating = true;
     this.$element.animate({
-      left: `${-containerWidth - 1}px`
+      left: `${-containerWidth - 1 - headerWidth}px`
     }, 200, () => {
       this._timeoutId = null;
       this.animating = false;
