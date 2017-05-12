@@ -3,16 +3,15 @@
 }
 
 .bd-standard-tile {
-  @header-height: 50%;
+  @header-height: 35%;
 
   > header {
     height: @header-height;
-    padding-top: 1em;
     padding-left: 1.7em;
     @title-height: 40%;
 
     > section {
-      height: 100% - @title-height;
+      height: 100%;
       width: 50%;
       float: left;
       cursor: pointer;
@@ -25,9 +24,11 @@
 
       .title {
         height: @title-height;
+        font-size: 1.2em;
       }
 
       .value {
+        height: 60%;
         display: inline-block;
       }
 
@@ -37,7 +38,7 @@
     }
   }
 
-  > figure {
+  > .sap-a-chart {
     height: 100% - @header-height;
     margin: 0;
     padding: 0;
