@@ -18,7 +18,7 @@ export default class MapView extends View {
       },
       maxZoom: {
         type: 'int',
-        defaultValue: 17
+        defaultValue: 18
       },
       allowZoom: {
         type: 'boolean',
