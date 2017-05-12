@@ -13,11 +13,14 @@
 
     > section {
       height: 100% - @title-height;
-
       width: 50%;
       float: left;
+      cursor: pointer;
 
-      > span {
+      &.selected, &:hover {
+        .title {
+          border-bottom: 2px solid white;
+        }
       }
 
       .title {
