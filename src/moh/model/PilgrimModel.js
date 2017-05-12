@@ -9,6 +9,12 @@ export default class PilgrimModel extends Model {
     super();
 
     StateBus.getInstance().bindState('timestamp').attachChange(this._onStateChange.bind(this));
+    StateBus.getInstance().bindState('kaaba').attachChange(() => {
+      const kaaba = StateBus.getInstance().getState('kaaba');
+      if (kaaba) {
+        this.checkStates();
+      }
+    });
   }
 
   async checkStates() {
