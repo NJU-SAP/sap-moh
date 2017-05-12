@@ -118,7 +118,7 @@ export default class MapView extends SuperMapView {
   setKaaba(value) {
     this.setProperty('kaaba', value);
 
-    if (value) this.setCenterLocation([21.4239645, 39.825767], this.getMaxZoom());
+    if (value) this.setCenterLocation([21.4225, 39.8262], this.getMaxZoom());
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
