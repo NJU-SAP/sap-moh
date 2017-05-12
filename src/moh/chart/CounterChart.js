@@ -9,15 +9,11 @@ export default class CounterChart extends XYAxisChart {
 
   initChart() {
     super.initChart();
-    this._initAxisX();
     this._initSeries();
   }
 
-  _initAxisX()
-  {
+  _initAxisX() {
     super._initAxisX({
-      domain: [1, 100],
-      scaleType: d3.time.scale(),
       ticks: 8
     });
   }
