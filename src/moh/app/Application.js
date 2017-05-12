@@ -31,6 +31,11 @@ export default class Application extends SuperApplication {
     this._initTiles();
     this._initMapLayerCheckbox();
     this._initFloatingPanelContainer();
+
+    StateBus.getInstance().bindState('kaaba').attachChange(() => {
+      const kaaba = StateBus.getInstance().getState('kaaba');
+      console.log(kaaba);
+    });
   }
 
   _initStateBus() {
