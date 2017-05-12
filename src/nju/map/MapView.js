@@ -6,7 +6,7 @@ export default class MapView extends View {
     properties: {
       defaultCenterLocation: {
         type: 'object',
-        defaultValue: [21.4239645, 39.825767]
+        defaultValue: [21.4225, 39.8262]
       },
       defaultZoom: {
         type: 'int',
@@ -18,7 +18,7 @@ export default class MapView extends View {
       },
       maxZoom: {
         type: 'int',
-        defaultValue: 17
+        defaultValue: 18
       },
       allowZoom: {
         type: 'boolean',

@@ -1,6 +1,7 @@
 import SuperMapView from 'bd/map/MapView';
 
 import BusLayer from './layers/BusLayer';
+import HeatmapLayer from './layers/HeatmapLayer';
 import StationLayer from './layers/StationLayer';
 import TrafficLayer from './layers/TrafficLayer';
 
@@ -92,6 +93,14 @@ export default class MapView extends SuperMapView {
         id
       });
     });
+
+    this.heatmapLayer = new HeatmapLayer('heatmap-layer', {
+      heatmap: '{pilgrim>/heatmap}'
+    });
+    this.addLayer(this.heatmapLayer);
+    setTimeout(() => {
+      this.map.addLayer(this.heatmapLayer.heatmap);
+    }, 2000);
   }
 
   setBaseLayerMode(value) {
@@ -108,10 +117,22 @@ export default class MapView extends SuperMapView {
   setKaaba(value) {
     this.setProperty('kaaba', value);
 
-    this.setCenterLocation([21.4239645, 39.825767], 15);
+    if (value) {
+      this.setCenterLocation([21.4225, 39.8262], this.getMaxZoom());
+    } else {
+      this.setCenterLocation(this.getDefaultCenterLocation(), this.getDefaultZoom());
+    }
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
     this.toggleLayer(this.busLayer, !value);
+
+    if (value) {
+      this.showLayer(this.heatmapLayer);
+      this.map.addLayer(this.heatmapLayer.heatmap);
+    } else {
+      this.hideLayer(this.heatmapLayer);
+      this.map.removeLayer(this.heatmapLayer.heatmap);
+    }
   }
 }
