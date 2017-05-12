@@ -26,6 +26,9 @@ export default class CounterTile extends StandardTile {
       this.setValue1(record.pilgrimCount);
       this.setValue2(record.busCount);
     }
+    if (this.chart) {
+      this.chart.setData(value);
+    }
   }
 
   initChart() {
