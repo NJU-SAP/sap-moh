@@ -19,6 +19,10 @@ export default class MapView extends SuperMapView {
       defaultZoom: {
         type: 'int',
         defaultValue: 15
+      },
+      kaaba: {
+        type: 'boolean',
+        defaultValue: false
       }
     },
     events: {
@@ -98,5 +102,14 @@ export default class MapView extends SuperMapView {
         'https://api.mapbox.com/styles/v1/mapbox/traffic-night-v2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVucnkxOTg0IiwiYSI6ImI1a0FvUzQifQ.zLCAzKNjXNiRUQoJBzAsZQ'
       );
     }
+  }
+
+
+  setKaaba(value) {
+    this.setProperty('kaaba', value);
+
+    this.toggleLayer(this.stationLayer, !value);
+    this.toggleLayer(this.trafficLayer, !value);
+    this.toggleLayer(this.busLayer, !value);
   }
 }
