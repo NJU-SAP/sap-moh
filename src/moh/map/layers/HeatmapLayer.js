@@ -27,7 +27,7 @@ export default class HeatmapLayer extends Layer {
   }
 
   _updateHeatmap(value) {
-    const va = value.map(v => [v.lng, v.lat, v.count / 70]);
+    const va = value.map(v => [v.location[1], v.location[0], v.count / 200]);
 
     this.heatmap.setLatLngs(va);
   }
