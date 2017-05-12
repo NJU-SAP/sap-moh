@@ -1,6 +1,7 @@
 import SuperMapView from 'bd/map/MapView';
 
 import BusLayer from './layers/BusLayer';
+import HeatmapLayer from './layers/HeatmapLayer';
 import StationLayer from './layers/StationLayer';
 import TrafficLayer from './layers/TrafficLayer';
 
@@ -92,6 +93,11 @@ export default class MapView extends SuperMapView {
         id
       });
     });
+
+    this.heatmapLayer = new HeatmapLayer('heatmap-layer', {
+
+    });
+    this.addLayer(this.heatmapLayer);
   }
 
   setBaseLayerMode(value) {
@@ -108,10 +114,11 @@ export default class MapView extends SuperMapView {
   setKaaba(value) {
     this.setProperty('kaaba', value);
 
-    this.setCenterLocation([21.4239645, 39.825767], 15);
+    if (value) this.setCenterLocation([21.4239645, 39.825767], 15);
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
     this.toggleLayer(this.busLayer, !value);
+    this.toggleLayer(this.heatmapLayer, value);
   }
 }
