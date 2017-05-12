@@ -76,17 +76,17 @@ export default class MapView extends SuperMapView {
       edges: '{gis>/edges}',
       edgeSpeed: '{traffic>/edge-speed}'
     });
-    this.addLayer(this.trafficLayer);
+    //this.addLayer(this.trafficLayer);
 
     this.busLayer = new BusLayer('bus-layer', {
       buses: '{bus>/rt}'
     });
-    this.addLayer(this.busLayer);
+    //this.addLayer(this.busLayer);
 
     this.stationLayer = new StationLayer('station-layer', {
       stations: '{gis>/stations}'
     });
-    this.addLayer(this.stationLayer);
+    //this.addLayer(this.stationLayer);
     this.stationLayer.attachStationSelect((e) => {
       const id = e.getParameter('id');
       this.fireStationChange({
@@ -95,9 +95,13 @@ export default class MapView extends SuperMapView {
     });
 
     this.heatmapLayer = new HeatmapLayer('heatmap-layer', {
-
+      heatmap: '{pilgrim>/heatmap}'
     });
     this.addLayer(this.heatmapLayer);
+    console.log(this.heatmapLayer.heatmap);
+    setTimeout(() => {
+      this.map.addLayer(this.heatmapLayer.heatmap);
+    }, 2000);
   }
 
   setBaseLayerMode(value) {
@@ -114,7 +118,7 @@ export default class MapView extends SuperMapView {
   setKaaba(value) {
     this.setProperty('kaaba', value);
 
-    if (value) this.setCenterLocation([21.4239645, 39.825767], 15);
+    if (value) this.setCenterLocation([21.4239645, 39.825767], this.getMaxZoom());
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
