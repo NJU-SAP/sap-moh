@@ -33,6 +33,13 @@ export default class Application extends SuperApplication {
     this._initFloatingPanelContainer();
   }
 
+  afterInit() {
+    super.afterInit();
+    setTimeout(() => {
+      this.invalidateSize();
+    });
+  }
+
   _initStateBus() {
     const stateBus = new MohStateBus();
     this.setModel(sap.ui.getCore().getModel('state'), 'state');

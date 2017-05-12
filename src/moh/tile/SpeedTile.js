@@ -22,8 +22,6 @@ export default class SpeedTile extends StandardTile {
   }
 
   initSpeedChart() {
-    this.speedChart = new XYAxisChart();
-    this.addSubview(this.speedChart);
   }
 
   setRt(value) {

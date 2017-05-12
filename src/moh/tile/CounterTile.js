@@ -1,4 +1,5 @@
 import StandardTile from 'bd/tile/StandardTile';
+import CounterChart from '../chart/CounterChart';
 
 export default class CounterTile extends StandardTile {
   metadata = {
@@ -13,9 +14,9 @@ export default class CounterTile extends StandardTile {
     this.setTitle2('Buses');
     this.setUnit('');
     this.setValueFormat('0');
-    // this.attachEventOnce('addedToParent', () => {
-    //   self._initChart();
-    // });
+    this.attachEventOnce('addedToParent', () => {
+      this.initChart();
+    });
   }
 
   setRt(value) {
@@ -25,5 +26,10 @@ export default class CounterTile extends StandardTile {
       this.setValue1(record.pilgrimCount);
       this.setValue2(record.busCount);
     }
+  }
+
+  initChart() {
+    this.chart = new CounterChart();
+    this.addSubview(this.chart);
   }
 }
