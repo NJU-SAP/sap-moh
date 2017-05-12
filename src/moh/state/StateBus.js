@@ -15,8 +15,9 @@ export default class StateBus extends SuperStateBus {
 
   getInitialState() {
     return {
-      timestamp: new Date(),
-      selectedStationId: null
+      kaaba: false,
+      selectedStationId: null,
+      timestamp: new Date()
     };
   }
 }

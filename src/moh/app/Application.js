@@ -12,10 +12,12 @@ import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import GisModel from '../model/GisModel';
 import IndexModel from '../model/IndexModel';
-import TrafficModel from '../model/TrafficModel';
 import MapView from '../map/MapView';
-import SpeedTile from '../tile/SpeedTile';
 import MohStateBus from '../state/StateBus';
+import PilgrimModel from '../model/PilgrimModel';
+import SpeedTile from '../tile/SpeedTile';
+import TrafficModel from '../model/TrafficModel';
+
 
 export default class Application extends SuperApplication {
   init() {
@@ -62,6 +64,10 @@ export default class Application extends SuperApplication {
     const trafficModel = new TrafficModel();
     this.setModel(trafficModel, 'traffic');
     sap.ui.getCore().setModel(trafficModel, 'traffic');
+
+    const pilgrimModel = new PilgrimModel();
+    this.setModel(pilgrimModel, 'pilgrim');
+    sap.ui.getCore().setModel(pilgrimModel, 'pilgrim');
   }
 
   _initDataClockView() {
@@ -85,7 +91,11 @@ export default class Application extends SuperApplication {
 
     const kaabaMenuItem = new MenuItem({
       id: 'kaabaMenuItem',
-      icon: 'mf mf-kaaba'
+      icon: 'mf mf-kaaba',
+      press: () => {
+        kaabaMenuItem.setActive(!kaabaMenuItem.getActive());
+        StateBus.getInstance().setState('kaaba', kaabaMenuItem.getActive());
+      }
     });
 
     const mapMenuItem = new MenuItem({
@@ -143,6 +153,7 @@ export default class Application extends SuperApplication {
 
   _initMapView() {
     this.mapView = new MapView('mapView', {
+      kaaba: '{state>/kaaba}',
       zoomChanged: () => {
         const zoom = this.mapView.getZoom();
         StateBus.getInstance().setState('map/zoom', zoom);
