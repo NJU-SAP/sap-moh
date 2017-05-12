@@ -2,6 +2,7 @@ import StateBus from 'nju/state/StateBus';
 
 import Checkbox from 'bd/view/Checkbox';
 import DataClockView from 'bd/view/DataClockView';
+import ExpandableMenuItem from 'bd/menu/ExpandableMenuItem';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
@@ -35,6 +36,13 @@ export default class Application extends SuperApplication {
     StateBus.getInstance().bindState('kaaba').attachChange(() => {
       const kaaba = StateBus.getInstance().getState('kaaba');
       console.log(kaaba);
+    });
+  }
+
+  afterInit() {
+    super.afterInit();
+    setTimeout(() => {
+      this.invalidateSize();
     });
   }
 
@@ -94,6 +102,28 @@ export default class Application extends SuperApplication {
       }
     });
 
+    const historyMenuItem = new ExpandableMenuItem({
+      id: 'historyMenuItem',
+      text: 'History',
+      expandDirection: 'left',
+      expandWidth: `${this.getEmSize(28)}px`,
+      expanding: () => {
+        // sap.ui.getCore().getModel('index').updateLast8Hour();
+        // sap.ui.getCore().getModel('index').updateLast8HourTrend();
+      }
+    });
+    // historyMenuItem.addSubview(chart);
+
+    const futureMenuItem = new ExpandableMenuItem({
+      id: 'futureMenuItem',
+      text: 'Future',
+      expandDirection: 'right',
+      expandWidth: `${this.getEmSize(12)}px`,
+      expanding: () => {
+        //sap.ui.getCore().getModel("index").updateNext20Min();
+      }
+    });
+
     const kaabaMenuItem = new MenuItem({
       id: 'kaabaMenuItem',
       icon: 'mf mf-kaaba',
@@ -135,14 +165,8 @@ export default class Application extends SuperApplication {
     const mainMenu = this.getSubview('mainMenu');
     [
       nowMenuItem,
-      new MenuItem({
-        id: 'historyMenuItem',
-        text: 'History'
-      }),
-      new MenuItem({
-        id: 'futureMenuItem',
-        text: 'Future'
-      }),
+      historyMenuItem,
+      futureMenuItem,
       new MenuItem({
         id: 'settingsMenuItem',
         icon: 'mf mf-setting'

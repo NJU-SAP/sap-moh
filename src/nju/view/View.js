@@ -192,4 +192,11 @@ export default class View extends ManagedObject {
     }
     $target.append(this.$element);
   }
+
+  invalidateSize() {
+    const views = this.getSubviews();
+    views.forEach(view => {
+      view.invalidateSize();
+    });
+  }
 }

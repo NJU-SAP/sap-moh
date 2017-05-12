@@ -20,18 +20,23 @@ export default class StandardTile extends Tile {
     this.addStyleClass('bd-standard-tile col-5 row-4');
     this.$element.append(`
       <header>
-        <section class='section1'>
+        <section class='section' id='section1'>
           <div class='title h4 bd-text-shadow'></div>
           <span class='value h2 bd-text-shadow'></span>
           <span class='unit bd-text-shadow'></span>
         </section>
-        <section class='section2'>
+        <section class='section' id='section2'>
           <div class='title h4 bd-text-shadow'></div>
           <span class='value h2 bd-text-shadow'></span>
           <span class='unit bd-text-shadow'></span>
         </section>
       </header>
     `);
+    this.$('header > .section').on('click', (e) => {
+      this.$('header > .section').removeClass('selected');
+      $(e.currentTarget).addClass('selected');
+      this.titleSelected(e.currentTarget.id === 'section1' ? 0 : 1);
+    });
     this._numberFormat = NumberFormat.getFloatInstance({ pattern: '#,###.0' });
   }
 
@@ -39,12 +44,12 @@ export default class StandardTile extends Tile {
     let strValue = this.formatValue(value);
 
     if (strValue !== this.getValue1()) {
-      this.$('header > .section1 > .value').transit({
+      this.$('header > #section1 > .value').transit({
         scale: 0.7,
         opacity: 0.7
       }, 160, () => {
-        this.$('header > .section1 > .value').text(strValue);
-        this.$('header > .section1 > .value').transit({
+        this.$('header > #section1 > .value').text(strValue);
+        this.$('header > #section1 > .value').transit({
           scale: 1,
           opacity: 1
         }, 160);
@@ -57,12 +62,12 @@ export default class StandardTile extends Tile {
     let strValue = this.formatValue(value);
 
     if (strValue !== this.getValue2()) {
-      this.$('header > .section2 > .value').transit({
+      this.$('header > #section2 > .value').transit({
         scale: 0.7,
         opacity: 0.7
       }, 160, () => {
-        this.$('header > .section2 > .value').text(strValue);
-        this.$('header > .section2 > .value').transit({
+        this.$('header > #section2 > .value').text(strValue);
+        this.$('header > #section2 > .value').transit({
           scale: 1,
           opacity: 1
         }, 160);
@@ -73,12 +78,13 @@ export default class StandardTile extends Tile {
 
   setTitle1(title) {
     this.setProperty('title1', title);
-    this.$('header > .section1 > .title').text(title);
+    this.$('header > #section1 > .title').text(title);
+    this.$('header > #section1').addClass('selected');
   }
 
   setTitle2(title) {
     this.setProperty('title2', title);
-    this.$('header > .section2 > .title').text(title);
+    this.$('header > #section2 > .title').text(title);
   }
 
   setUnit(unit) {
@@ -99,5 +105,8 @@ export default class StandardTile extends Tile {
     } else {
       return null;
     }
+  }
+
+  titleSelected(index) {
   }
 }
