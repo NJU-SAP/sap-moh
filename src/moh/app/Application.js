@@ -85,7 +85,11 @@ export default class Application extends SuperApplication {
 
     const kaabaMenuItem = new MenuItem({
       id: 'kaabaMenuItem',
-      icon: 'mf mf-kaaba'
+      icon: 'mf mf-kaaba',
+      press: () => {
+        kaabaMenuItem.setActive(!kaabaMenuItem.getActive());
+        StateBus.getInstance().setState('kaaba', kaabaMenuItem.getActive());
+      }
     });
 
     const mapMenuItem = new MenuItem({
