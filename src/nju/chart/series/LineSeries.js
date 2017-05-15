@@ -13,7 +13,7 @@ export default class LineSeries extends Series {
 	initContainer()
 	{
 		super.initContainer();
-        this.container.classed("line-series", true);
+    this.container.classed("line-series", true);
 		this._initLine();
 	}
 
