@@ -13,7 +13,6 @@ export default class SpeedTile extends StandardTile {
     this.setTitle1('Speed(Whole City)');
     this.setTitle2('Speed(Buses)');
     this.setUnit('Km/h');
-    this.setValueFormat('.0');
     this.initSpeedChart();
     // this.bindSpeedIndex({
     //   model: 'index',
