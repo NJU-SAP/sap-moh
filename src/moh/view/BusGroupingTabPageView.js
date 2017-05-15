@@ -1,5 +1,7 @@
 import TabPageView from 'bd/view/TabPageView';
 
+import SendMessageDialog from '../dialog/SendMessageDialog';
+
 
 export default class BusGroupingTabPageView extends TabPageView {
   metadata = {
@@ -33,9 +35,11 @@ export default class BusGroupingTabPageView extends TabPageView {
 
   _delayButtonClick(e) {
     console.log(e);
+    const sendMessageDialog = new SendMessageDialog();
+    sendMessageDialog.popup();
   }
 
-  _onLocationButtonClick(e) {
+  _onLocationButtonClick() {
     this.getParent().getParent().putAside();
   }
 }
