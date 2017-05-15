@@ -37,6 +37,18 @@ export default class Application extends SuperApplication {
       const kaaba = StateBus.getInstance().getState('kaaba');
       console.log(kaaba);
     });
+
+    StateBus.getInstance().bindState('selectedBusId').attachChange(() => {
+      const selectedBusId = StateBus.getInstance().getState('selectedBusId');
+      if (selectedBusId !== null) {
+        this.showOverlay(() => {
+          this.$overlay.on('click', () => {
+            StateBus.getInstance().setState('selectedBusId', null);
+            this.hideOverlay();
+          });
+        });
+      }
+    });
   }
 
   afterInit() {
@@ -200,7 +212,7 @@ export default class Application extends SuperApplication {
     });
     this.mapView.attachBusChange((e) => {
       const id = e.getParameter('id');
-      console.log(id);
+      StateBus.getInstance().setState('selectedBusId', id);
     });
 
     this.mapView.$element.css('position', 'absolute');
