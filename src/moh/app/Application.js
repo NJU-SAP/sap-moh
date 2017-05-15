@@ -1,4 +1,5 @@
 import StateBus from 'nju/state/StateBus';
+import View from 'nju/view/View';
 
 import Checkbox from 'bd/view/Checkbox';
 import DataClockView from 'bd/view/DataClockView';
@@ -6,6 +7,7 @@ import ExpandableMenuItem from 'bd/menu/ExpandableMenuItem';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
+import BusDetailDialog from '../dialog/BusDetailDialog';
 import BusModel from '../model/BusModel';
 import BusPanel from '../panel/BusPanel';
 import BusTableView from '../view/BusTableView';
@@ -36,6 +38,13 @@ export default class Application extends SuperApplication {
     StateBus.getInstance().bindState('kaaba').attachChange(() => {
       const kaaba = StateBus.getInstance().getState('kaaba');
       console.log(kaaba);
+    });
+
+    StateBus.getInstance().bindState('selectedBusId').attachChange(() => {
+      const selectedBusId = StateBus.getInstance().getState('selectedBusId');
+      if (selectedBusId !== null) {
+        this.getBusDetailDialog().popup();
+      }
     });
   }
 
@@ -200,7 +209,7 @@ export default class Application extends SuperApplication {
     });
     this.mapView.attachBusChange((e) => {
       const id = e.getParameter('id');
-      console.log(id);
+      StateBus.getInstance().setState('selectedBusId', id);
     });
 
     this.mapView.$element.css('position', 'absolute');
@@ -269,6 +278,18 @@ export default class Application extends SuperApplication {
     //     this._selectCorridor.apply(this, [target]);
     //   }
     // });
+  }
+
+  _initBusDetailDialog() {
+    this._busDetailDialog = new BusDetailDialog('bus-dialog');
+    //this.addSubview(this._busDetailDialog, 'popup');
+  }
+
+  getBusDetailDialog() {
+    if (!this._busDetailDialog) {
+      this._initBusDetailDialog();
+    }
+    return this._busDetailDialog;
   }
 
   run() {
