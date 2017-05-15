@@ -7,7 +7,7 @@ export default class CounterChart extends XYAxisChart {
     properties: {
       padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 0, bottom: 20 } },
       rtCount: { type: 'object' },
-      predictedCount: { type: 'object' }
+      predictCount: { type: 'object' }
     }
   }
 
@@ -18,13 +18,14 @@ export default class CounterChart extends XYAxisChart {
     const from = new Date(now.getYear(), now.getMonth(), now.getDate());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate() + 1);
     this.domainX = [from, to];
-    this.domainY = [0, 60000];
+    this.domainY = [0, 80000];
   }
 
   initChart() {
     super.initChart();
     this._initRtSeries();
     this._initAreaSeries();
+    this._initPredictSeries();
   }
 
   _initAxisX() {
@@ -47,9 +48,20 @@ export default class CounterChart extends XYAxisChart {
         if (num === 0) {
           return '';
         }
-        return num / 10000;
+        return num;
       }
     });
+  }
+
+  _initPredictSeries() {
+    this.predictSeries = new LineSeries({
+      dashed: true,
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
+      xPath: 'date',
+      yPath: 'count'
+    });
+    this.addSeries(this.predictSeries);
   }
 
   _initRtSeries() {
@@ -57,7 +69,7 @@ export default class CounterChart extends XYAxisChart {
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
-      yPath: 'pilgrimCount'
+      yPath: 'count'
     });
     this.addSeries(this.rtSeries);
   }
@@ -67,26 +79,36 @@ export default class CounterChart extends XYAxisChart {
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
-      y1Path: 'pilgrimCount',
+      y1Path: 'count',
       fillColor: 'steelBlue',
       opacity: 0.8
     });
     this.addSeries(this.areaSeries);
   }
 
-  setData(value) {
-    this.setProperty('data', value);
+  setRtCount(value) {
+    this.setProperty('rtCount', value);
     if (value) {
       const from = this.domainX[0];
-      const pilgrims = value.map((item, i) => {
-        const date = new Date(from.getTime() + i * 60 * 1000);
-        return {
-          date,
-          pilgrimCount: item.pilgrimCount
-        };
-      });
-      this.rtSeries.setData(pilgrims);
-      this.areaSeries.setData(pilgrims);
+      const transformed = value.map((item, i) => ({
+        date: new Date(from.getTime() + i * 60 * 1000),
+        count: item
+      }));
+      this.rtSeries.setData(transformed);
+      this.areaSeries.setData(transformed);
+    }
+    this.redraw();
+  }
+
+  setPredictCount(value) {
+    this.setProperty('predictCount', value);
+    if (value) {
+      const from = this.domainX[0];
+      const transformed = value.map((item, i) => ({
+        date: new Date(from.getTime() + i * 60 * 1000),
+        count: item
+      }));
+      this.predictSeries.setData(transformed);
     }
     this.redraw();
   }
