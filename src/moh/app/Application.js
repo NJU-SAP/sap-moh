@@ -188,6 +188,7 @@ export default class Application extends SuperApplication {
         StateBus.getInstance().setState('map/zoom', zoom);
       }
     });
+
     this.mapView.attachStationChange((e) => {
       const id = e.getParameter('id');
       StateBus.getInstance().setState('selectedStationId', id);
@@ -197,6 +198,11 @@ export default class Application extends SuperApplication {
         this.getSubview('floating-panel-container').showPanel();
       }
     });
+    this.mapView.attachBusChange((e) => {
+      const id = e.getParameter('id');
+      console.log(id);
+    });
+
     this.mapView.$element.css('position', 'absolute');
     this.mapView.addStyleClass('row-full col-full');
     this.addSubview(this.mapView, 'base');
@@ -217,7 +223,7 @@ export default class Application extends SuperApplication {
     const tile = new CounterTile({
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-7');
+    tile.addStyleClass('right-1 bottom-6');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
