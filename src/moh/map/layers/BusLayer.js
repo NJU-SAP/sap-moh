@@ -5,6 +5,13 @@ export default class BusLayer extends Layer {
   metadata = {
     properties: {
       buses: { type: 'object', bindable: true }
+    },
+    events: {
+      busSelect: {
+        parameters: {
+          busId: { type: 'string' }
+        }
+      }
     }
   }
 
@@ -12,6 +19,8 @@ export default class BusLayer extends Layer {
     super.init();
 
     this.busesContainer = L.featureGroup();
+
+    this._selecteBusId = null;
 
     this.container.addLayer(this.busesContainer);
   }
@@ -39,7 +48,15 @@ export default class BusLayer extends Layer {
       });
       const busMarker = L.marker([bus.location[1], bus.location[0]], {
         icon: busIcon,
-        zIndexOffset: 500
+        zIndexOffset: 500,
+        busId
+      });
+
+      busMarker.on('click', (e) => {
+        const id = e.target.options.busId;
+        if (this._selecteBusId !== id) {
+          this.fireBusSelect({ busId: id });
+        }
       });
 
       this.busesContainer.addLayer(busMarker);
