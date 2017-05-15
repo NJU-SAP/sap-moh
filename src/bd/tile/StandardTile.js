@@ -37,7 +37,9 @@ export default class StandardTile extends Tile {
       $(e.currentTarget).addClass('selected');
       this.titleSelected(e.currentTarget.id === 'section1' ? 0 : 1);
     });
-    this._numberFormat = NumberFormat.getFloatInstance({ pattern: '#,###.0' });
+    this._numberFormat = NumberFormat.getFloatInstance({
+       pattern: '#,###.0',
+     });
   }
 
   setValue1(value) {

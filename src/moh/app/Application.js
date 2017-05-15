@@ -235,7 +235,7 @@ export default class Application extends SuperApplication {
     const tile = new CounterTile({
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-7');
+    tile.addStyleClass('right-1 bottom-6');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');

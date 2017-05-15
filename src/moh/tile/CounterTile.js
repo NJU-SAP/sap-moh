@@ -13,7 +13,7 @@ export default class CounterTile extends StandardTile {
     this.setTitle1('Pilgrims');
     this.setTitle2('Buses');
     this.setUnit('');
-    this.setValueFormat('0');
+    this.setValueFormat('#,###');
     this.attachEventOnce('addedToParent', () => {
       this.initChart();
     });
