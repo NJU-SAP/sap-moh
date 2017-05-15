@@ -22,6 +22,7 @@ html {
 body {
   background: #091842;
   cursor: default;
+  -webkit-perspective: 5000;
 }
 
 area,
@@ -114,6 +115,11 @@ button.active {
 
 .bd-dialog {
   outline: none;
+  transition: transform 0.5s;
+
+  &.aside {
+    transform: scale(0.2) rotateY(45deg) rotateZ(-5deg) translate(-120em, 10em) !important;
+  }
 
   > .container {
     position: absolute;

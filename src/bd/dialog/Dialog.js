@@ -171,4 +171,21 @@ export default class Dialog extends View {
       Application.getInstance().closePopupDialog();
     }
   }
+
+  putAside() {
+    this.$element.addClass('aside');
+    Application.getInstance().$overlay.fadeOut();
+    setTimeout(() => {
+      this.$element.one('mouseup', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.resume();
+      });
+    }, 1000);
+  }
+
+  resume() {
+    this.$element.removeClass('aside');
+    Application.getInstance().$overlay.fadeIn();
+  }
 }
