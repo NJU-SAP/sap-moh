@@ -15,7 +15,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    width: 50px;
+    width: 30px;
     transform: translateX(-5em * sqrt(2) * @checkbox-size/2);
   }
 
@@ -46,7 +46,9 @@
       background-color: rgba(255, 255, 255, 1);
     }
 
+    @multiple: 1;
     > aside {
+      width: 1.3em;
       transition: background .3s;
 
       > span {
@@ -56,14 +58,15 @@
     }
   }
 
+  @scale: 0.7;
   .diamond {
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto;
-    height: @bd-diamond-size * @checkbox-size;
-    width: @bd-diamond-size * @checkbox-size;
-    right: -@bd-diamond-size * @checkbox-size/2;
+    height: @bd-diamond-size * @checkbox-size * @scale;
+    width: @bd-diamond-size * @checkbox-size * @scale;
+    right: -@bd-diamond-size * @checkbox-size *@scale / 2;
     z-index: 10;
 
     > span {
