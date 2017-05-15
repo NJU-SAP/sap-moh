@@ -5,7 +5,7 @@ import Tile from './Tile';
 export default class StandardTile extends Tile {
   metadata = {
     properties: {
-      selected: { type: 'string', defaultValue: 'Undefined' },
+      selectedTitle: { type: 'string', defaultValue: 'Undefined' },
       title1: { type: 'string', defaultValue: 'Undefined' },
       title2: { type: 'string', defaultValue: 'Undefined' },
       unit: { type: 'string', defaultValue: 'unit' },
@@ -35,7 +35,7 @@ export default class StandardTile extends Tile {
     this.$('header > .section').on('click', (e) => {
       this.$('header > .section').removeClass('selected');
       $(e.currentTarget).addClass('selected');
-      this.setSelected($(e.currentTarget).find('.title').text());
+      this.setSelectedTitle($(e.currentTarget).find('.title').text());
     });
     this._numberFormat = NumberFormat.getFloatInstance({
       pattern: '#,###.0',

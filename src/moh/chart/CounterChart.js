@@ -114,7 +114,19 @@ export default class CounterChart extends XYAxisChart {
   }
 
   redraw() {
-    super.redraw();
+    if (!this.getRtCount() || !this.getPredictCount()) return;
+
+    const maxCount = this.getRtCount()
+      .concat(this.getPredictCount())
+      .reduce((prev, cur) => Math.max(prev, cur), 0);
+    const newScale = this.rtSeries.getScaleY().domain([0, maxCount]);
+
     this.axisY.setInnerTickSize(-this.contentFrame.width);
+    this.axisY.setDomain([0, maxCount]);
+    this.areaSeries.setScaleY(newScale);
+    this.rtSeries.setScaleY(newScale);
+    this.predictSeries.setScaleY(newScale);
+
+    super.redraw();
   }
 }

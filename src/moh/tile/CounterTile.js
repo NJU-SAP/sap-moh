@@ -13,7 +13,7 @@ export default class CounterTile extends StandardTile {
     super.init();
     this.setTitle1('Pilgrims');
     this.setTitle2('Buses');
-    this.setSelected('Pilgrims');
+    this.setSelectedTitle('Pilgrims');
     this.setUnit('');
     this.setValueFormat('#,###');
     this.attachEventOnce('addedToParent', () => {
@@ -29,14 +29,16 @@ export default class CounterTile extends StandardTile {
       this.setValue2(lastRecord.busCount);
     }
     if (this.chart) {
-      this.chart.setRtCount(value.map(item => item.pilgrimCount));
+      const path = this.getSelectedTitle() === 'Pilgrims' ? 'pilgrimCount' : 'busCount';
+      this.chart.setRtCount(value.map(item => item[path]));
     }
   }
 
   setPredict(value) {
     this.setProperty('predict', value);
     if (this.chart) {
-      this.chart.setPredictCount(value.map(item => item.pilgrimCount));
+      const path = this.getSelectedTitle() === 'Pilgrims' ? 'pilgrimCount' : 'busCount';
+      this.chart.setPredictCount(value.map(item => item[path]));
     }
   }
 
@@ -45,7 +47,9 @@ export default class CounterTile extends StandardTile {
     this.addSubview(this.chart);
   }
 
-  setSelected(value) {
-    this.setProperty('selected', value);
+  setSelectedTitle(value) {
+    this.setProperty('selectedTitle', value);
+    this.setRt(this.getRt());
+    this.setPredict(this.getPredict());
   }
 }
