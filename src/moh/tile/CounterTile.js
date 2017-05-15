@@ -4,6 +4,7 @@ import CounterChart from '../chart/CounterChart';
 export default class CounterTile extends StandardTile {
   metadata = {
     properties: {
+      predict: { type: 'object', bindable: true },
       rt: { type: 'object', bindable: true }
     }
   }
@@ -31,8 +32,16 @@ export default class CounterTile extends StandardTile {
     }
   }
 
+  setPredict(value) {
+    this.setProperty('predict', value);
+  }
+
   initChart() {
     this.chart = new CounterChart();
     this.addSubview(this.chart);
+  }
+
+  titleSelected(index) {
+
   }
 }

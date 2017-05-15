@@ -230,6 +230,7 @@ export default class Application extends SuperApplication {
 
   _initCounterTile() {
     const tile = new CounterTile({
+      predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
     tile.addStyleClass('right-1 bottom-6');

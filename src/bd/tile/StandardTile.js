@@ -2,7 +2,6 @@ import NumberFormat from 'sap/ui/core/format/NumberFormat';
 
 import Tile from './Tile';
 
-
 export default class StandardTile extends Tile {
   metadata = {
     properties: {
@@ -35,11 +34,11 @@ export default class StandardTile extends Tile {
     this.$('header > .section').on('click', (e) => {
       this.$('header > .section').removeClass('selected');
       $(e.currentTarget).addClass('selected');
-      this.titleSelected(e.currentTarget.id === 'section1' ? 0 : 1);
+      this.titleSelected($(e.currentTarget).find('.title').text());
     });
     this._numberFormat = NumberFormat.getFloatInstance({
-       pattern: '#,###.0',
-     });
+      pattern: '#,###.0',
+    });
   }
 
   setValue1(value) {

@@ -6,7 +6,8 @@ export default class CounterChart extends XYAxisChart {
   metadata = {
     properties: {
       padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 0, bottom: 20 } },
-      data: { type: 'object' }
+      rtCount: { type: 'object' },
+      predictedCount: { type: 'object' }
     }
   }
 
