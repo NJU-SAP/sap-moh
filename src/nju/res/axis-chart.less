@@ -1,34 +1,33 @@
 .sap-a-axis-chart
 {
-    .axis-layer
+  .axis-layer
+  {
+    .axis
     {
-        .axis
+      .domain
+      {
+        stroke: rgba(255, 255, 255, 0.8);
+        fill: transparent;
+      }
+
+      .tick
+      {
+        line
         {
-            .domain
-            {
-                stroke: gray;
-                fill: transparent;
-            }
-
-            .tick
-            {
-                line
-                {
-                    stroke: rgba(255, 255, 255, 0.3);
-                    fill: transparent;
-                }
-            }
+          stroke: rgba(255, 255, 255, 0.8);
         }
+      }
     }
+  }
 
-    .series-layer
+  .series-layer
+  {
+    .area-series
     {
-        .area-series
-        {
-            .area
-            {
+      .area
+      {
 
-            }
-        }
+      }
     }
+  }
 }

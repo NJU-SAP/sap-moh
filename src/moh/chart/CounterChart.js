@@ -8,9 +8,15 @@ export default class CounterChart extends XYAxisChart {
       data: { type: 'object' }
     }
   }
+
   init() {
     super.init();
     this.addStyleClass('moh-counter-chart');
+    const now = new Date();
+    const from = new Date(now.getYear(), now.getMonth(), now.getDate());
+    const to = new Date(now.getYear(), now.getMonth(), now.getDate() + 1);
+    this.domainX = [from, to];
+    this.domainY = [0, 60000];
   }
 
   initChart() {
@@ -23,17 +29,21 @@ export default class CounterChart extends XYAxisChart {
     super._initAxisX({
       scaleType: d3.time.scale(),
       ticks: 8,
-      domain: this.getDomainX(),
-      tickFormat: (date) => {
-        return hourFormat(date);
+      domain: this.domainX,
+      tickFormat: (date, i) => {
+        return 3 * i;
       }
     });
   }
 
   _initAxisY() {
     super._initAxisY({
-      domain: [0, 50000],
+      domain: this.domainY,
+      ticks: 3,
       tickFormat: (num) => {
+        if (num === 0) {
+          return '';
+        }
         return num / 10000;
       }
     });
@@ -41,8 +51,8 @@ export default class CounterChart extends XYAxisChart {
 
   _initSeries() {
     this.series = new LineSeries({
-      scaleX: d3.time.scale().domain(this.getDomainX()),
-      scaleY: d3.scale.linear().domain([0, 50000]),
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
       yPath: 'pilgrimCount'
     });
@@ -52,7 +62,7 @@ export default class CounterChart extends XYAxisChart {
   setData(value) {
     this.setProperty('data', value);
     if (value) {
-      const from = this.getDomainX()[0];
+      const from = this.domainX[0];
       const pilgrims = value.map((item, i) => {
         const date = new Date(from.getTime() + i * 60 * 1000);
         return {
@@ -62,16 +72,11 @@ export default class CounterChart extends XYAxisChart {
       });
       this.series.setData(pilgrims);
     }
+    this.redraw();
   }
 
   redraw() {
     super.redraw();
-  }
-
-  getDomainX() {
-    const now = new Date();
-    const from = new Date(now.getYear(), now.getMonth(), now.getDate());
-    const to = new Date(now.getYear(), now.getMonth(), now.getDate() + 1);
-    return [from, to];
+    this.axisY.setInnerTickSize(-this.contentFrame.width);
   }
 }
