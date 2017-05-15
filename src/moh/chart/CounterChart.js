@@ -1,4 +1,5 @@
 import XYAxisChart from 'nju/chart/XYAxisChart';
+import AreaSeries from 'nju/chart/series/AreaSeries';
 import LineSeries from 'nju/chart/series/LineSeries';
 
 export default class CounterChart extends XYAxisChart {
@@ -21,7 +22,8 @@ export default class CounterChart extends XYAxisChart {
 
   initChart() {
     super.initChart();
-    this._initSeries();
+    this._initRtSeries();
+    this._initAreaSeries();
   }
 
   _initAxisX() {
@@ -49,14 +51,26 @@ export default class CounterChart extends XYAxisChart {
     });
   }
 
-  _initSeries() {
-    this.series = new LineSeries({
+  _initRtSeries() {
+    this.rtSeries = new LineSeries({
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
       yPath: 'pilgrimCount'
     });
-    this.addSeries(this.series);
+    this.addSeries(this.rtSeries);
+  }
+
+  _initAreaSeries() {
+    this.areaSeries = new AreaSeries({
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
+      xPath: 'date',
+      y1Path: 'pilgrimCount',
+      fillColor: 'steelBlue',
+      opacity: 0.8
+    });
+    this.addSeries(this.areaSeries);
   }
 
   setData(value) {
@@ -70,7 +84,8 @@ export default class CounterChart extends XYAxisChart {
           pilgrimCount: item.pilgrimCount
         };
       });
-      this.series.setData(pilgrims);
+      this.rtSeries.setData(pilgrims);
+      this.areaSeries.setData(pilgrims);
     }
     this.redraw();
   }
