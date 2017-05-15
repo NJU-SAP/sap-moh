@@ -6,6 +6,7 @@ import ExpandableMenuItem from 'bd/menu/ExpandableMenuItem';
 import MenuItem from 'bd/menu/MenuItem';
 import SuperApplication from 'bd/app/Application';
 
+import BusDetailDialog from '../dialog/BusDetailDialog';
 import BusModel from '../model/BusModel';
 import BusPanel from '../panel/BusPanel';
 import BusTableView from '../view/BusTableView';
@@ -47,6 +48,7 @@ export default class Application extends SuperApplication {
             this.hideOverlay();
           });
         });
+        this.getBusDetailDialog().popup();
       }
     });
   }
@@ -281,6 +283,18 @@ export default class Application extends SuperApplication {
     //     this._selectCorridor.apply(this, [target]);
     //   }
     // });
+  }
+
+  _initBusDetailDialog() {
+    this._busDetailDialog = new BusDetailDialog('bus-dialog');
+    this.addSubview(this._busDetailDialog, 'popup');
+  }
+
+  getRoadDetailDialog() {
+    if (!this._busDetailDialog) {
+      this._initBusDetailDialog();
+    }
+    return this._busDetailDialog;
   }
 
   run() {
