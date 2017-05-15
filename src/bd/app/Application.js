@@ -226,7 +226,7 @@ export default class Application extends SuperApplication {
         this.hideOverlay(() => {
           this.activeDialogPopup = null;
           this.dialogAnimating = false;
-          this.getSubview('mapView').resetLayers();
+          //this.getSubview('mapView').resetLayers();
         });
       });
     }

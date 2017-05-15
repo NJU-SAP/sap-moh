@@ -1,4 +1,5 @@
 import StateBus from 'nju/state/StateBus';
+import View from 'nju/view/View';
 
 import Checkbox from 'bd/view/Checkbox';
 import DataClockView from 'bd/view/DataClockView';
@@ -42,12 +43,6 @@ export default class Application extends SuperApplication {
     StateBus.getInstance().bindState('selectedBusId').attachChange(() => {
       const selectedBusId = StateBus.getInstance().getState('selectedBusId');
       if (selectedBusId !== null) {
-        this.showOverlay(() => {
-          this.$overlay.on('click', () => {
-            StateBus.getInstance().setState('selectedBusId', null);
-            this.hideOverlay();
-          });
-        });
         this.getBusDetailDialog().popup();
       }
     });
@@ -287,10 +282,10 @@ export default class Application extends SuperApplication {
 
   _initBusDetailDialog() {
     this._busDetailDialog = new BusDetailDialog('bus-dialog');
-    this.addSubview(this._busDetailDialog, 'popup');
+    //this.addSubview(this._busDetailDialog, 'popup');
   }
 
-  getRoadDetailDialog() {
+  getBusDetailDialog() {
     if (!this._busDetailDialog) {
       this._initBusDetailDialog();
     }
