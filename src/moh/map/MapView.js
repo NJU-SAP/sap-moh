@@ -33,6 +33,11 @@ export default class MapView extends SuperMapView {
         parameters: {
           id: { type: 'int' },
         }
+      },
+      busChange: {
+        parameters: {
+          id: { type: 'string' }
+        }
       }
     }
   }
@@ -82,6 +87,12 @@ export default class MapView extends SuperMapView {
       buses: '{bus>/rt}'
     });
     this.addLayer(this.busLayer);
+    this.busLayer.attachBusSelect((e) => {
+      const id = e.getParameter('busId');
+      this.fireBusChange({
+        id
+      });
+    });
 
     this.stationLayer = new StationLayer('station-layer', {
       stations: '{gis>/stations}'
