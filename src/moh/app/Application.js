@@ -37,7 +37,6 @@ export default class Application extends SuperApplication {
 
     StateBus.getInstance().bindState('kaaba').attachChange(() => {
       const kaaba = StateBus.getInstance().getState('kaaba');
-      console.log(kaaba);
     });
 
     StateBus.getInstance().bindState('selectedBusId').attachChange(() => {
@@ -241,8 +240,8 @@ export default class Application extends SuperApplication {
 
   _initSpeedTile() {
     const tile = new SpeedTile({
-      rt: '{index>/rt}',
-      unit: 'km/h'
+      predict: '{index>/predict}',
+      rt: '{index>/rt}'
     });
     tile.addStyleClass('right-1 bottom-1');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
@@ -252,9 +251,6 @@ export default class Application extends SuperApplication {
 
   _initFloatingPanelContainer() {
     const panelContainer = new FloatingPanelContainer('floating-panel-container');
-    // panelContainer.$element.css({
-    //   opacity: 0
-    // });
     this.addSubview(panelContainer, 'floatingPanel');
 
     const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
