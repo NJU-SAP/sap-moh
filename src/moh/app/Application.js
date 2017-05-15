@@ -224,7 +224,7 @@ export default class Application extends SuperApplication {
 
   _initMapLayerCheckbox() {
     const checkbox = new Checkbox('congestionCheckboxTile');
-    checkbox.addStyleClass('left-13 col-4 top-3 row-1');
+    checkbox.addStyleClass('left-14 col-3 top-2 row-1');
     this.addSubview(checkbox, 'tile');
   }
 

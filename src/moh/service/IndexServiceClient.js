@@ -20,4 +20,11 @@ export default class IndexServiceClient extends ServiceClient {
       to
     });
   }
+
+  getPredict(from, to) {
+    return this.fetch('predict', {
+      from,
+      to
+    });
+  }
 }

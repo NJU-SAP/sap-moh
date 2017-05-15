@@ -13,6 +13,7 @@ export default class IndexModel extends Model {
 
   async initialLoad() {
     await this.checkStates();
+    await this.loadPredict();
     this.fireEvent('initialLoadCompleted');
   }
 
@@ -21,6 +22,15 @@ export default class IndexModel extends Model {
     const timestamp = StateBus.getInstance().getState('timestamp');
 
     await this.updateRT(timestamp);
+  }
+
+  async loadPredict() {
+    const timestampDate = new Date();
+    const from = new Date(`${timestampDate.getFullYear()}-${timestampDate.getMonth() + 1}-${timestampDate.getDate()} 00:00`);
+    const to = new Date(`${timestampDate.getFullYear()}-${timestampDate.getMonth() + 1}-${timestampDate.getDate()} 23:59`);
+
+    const predict = await IndexServiceClient.getInstance().getPredict(from, to);
+    this.setProperty('/predict', predict);
   }
 
   _onStateChange() {

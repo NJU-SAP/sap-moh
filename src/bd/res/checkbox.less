@@ -3,9 +3,11 @@
 .checkbox-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   height: 68px;
   width: 50px;
+  background-color: @bd-bg-color;
 
   > .checkbox {
     display: inline-block;
@@ -18,7 +20,7 @@
   }
 
   > .left {
-    margin-left: 3.7em;
+    margin-left: 0em;
   }
   > .right {
     margin-left: 0.7em;
@@ -41,6 +43,7 @@
 
     > main {
       transition: background .3s;
+      background-color: rgba(255, 255, 255, 1);
     }
 
     > aside {
@@ -48,6 +51,7 @@
 
       > span {
         transition: background .3s;
+        background-color: rgba(255, 255, 255, 1);
       }
     }
   }
@@ -67,22 +71,26 @@
       position: relative;
       height: 100%;
       width: 100%;
-      background: #fff;
+      //background: #fff;
+      background-color: @bd-bg-color;
+      opacity: 1;
       transform: rotate(45deg);
     }
   }
 
   &.checked {
     .hexagon-small {
-      background: rgba(255, 255, 255, 0.5);
+      //background: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 1);
 
       > main {
-        background: transparent;
+        //background: transparent;
       }
 
       > aside {
         > span {
-          background: rgba(255, 255, 255, 0.5);
+          //background: rgba(255, 255, 255, 0.5);
+          background-color: rgba(255, 255, 255, 1);
         }
       }
     }
