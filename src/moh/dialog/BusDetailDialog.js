@@ -1,8 +1,8 @@
 import StateBus from 'nju/state/StateBus';
 
-import Dialog from 'bd/dialog/Dailog';
+import Dialog from 'bd/dialog/Dialog';
 
-import '../res/bus-detail-dialog.less';
+//import '../res/bus-detail-dialog.less';
 
 
 export default class BusDetailDialog extends Dialog {
