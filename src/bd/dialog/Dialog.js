@@ -171,4 +171,14 @@ export default class Dialog extends View {
       Application.getInstance().closePopupDialog();
     }
   }
+
+  putAside() {
+    this.$container.addClass('aside');
+    Application.getInstance().$overlay.fadeOut();
+  }
+
+  resume() {
+    this.$container.removeClass('aside');
+    Application.getInstance().$overlay.fadeIn();
+  }
 }
