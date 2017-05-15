@@ -3,6 +3,15 @@ import View from 'nju/view/View';
 
 
 export default class Dialog extends View {
+  metadata = {
+    properties: {
+      title: {
+        type: 'string'
+      }
+    }
+  }
+
+
   init() {
     super.init();
 
@@ -121,6 +130,11 @@ export default class Dialog extends View {
   _initMain() {
     this.$main = $('<main/>');
     this.$container.append(this.$main);
+  }
+
+  setTitle(title) {
+    this.setProperty('title', title);
+    this.$title.text(title);
   }
 
   activate(params) {
