@@ -6,12 +6,27 @@
   },
   {
     "id": 2,
-    "name": "Station 1",
-    "location": [39.82965, 21.42424]
+    "name": "Hajj Terminal East",
+    "location": [39.14141, 21.69950]
   },
   {
     "id": 3,
-    "name": "Station 2",
-    "location": [39.82521, 21.42012]
+    "name": "Masjid al-Taneem Bus Stop / Miqat Ahl Mecca",
+    "location": [39.81757, 21.42970]
+  },
+  {
+    "id": 4,
+    "name": "SAPTCO - Al Haram",
+    "location": [39.81726, 21.43038]
+  },
+  {
+    "id": 5,
+    "name": "Taif Regional Airport - Bus Station",
+    "location": [40.55247, 21.48065]
+  },
+  {
+    "id": 6,
+    "name": "Mecca East Airport - Bus Station",
+    "location": [39.99566, 21.43611]
   }
 ]
