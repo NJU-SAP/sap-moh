@@ -213,6 +213,7 @@ export default class Application extends SuperApplication {
   _initMapView() {
     this.mapView = new MapView('mapView', {
       kaaba: '{state>/kaaba}',
+      kaabaGroup: '{state>/kaaba-group}',
       zoomChanged: () => {
         const zoom = this.mapView.getZoom();
         StateBus.getInstance().setState('map/zoom', zoom);
@@ -245,7 +246,12 @@ export default class Application extends SuperApplication {
   }
 
   _initMapLayerCheckbox() {
-    const checkbox = new Checkbox('congestionCheckboxTile');
+    const checkbox = new Checkbox('congestionCheckboxTile', {
+      statusChanged: (e) => {
+        const visible = e.getParameter('status');
+        this.mapView.setBusLineVisible(visible);
+      }
+    });
     checkbox.addStyleClass('left-14 col-3 top-2 row-1');
     this.addSubview(checkbox, 'tile');
   }

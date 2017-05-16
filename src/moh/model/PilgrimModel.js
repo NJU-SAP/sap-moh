@@ -35,6 +35,10 @@ export default class PilgrimModel extends Model {
       // Active only in Kaaba mode
       this.checkStates();
     }
+
+    if (StateBus.getInstance().getState('kaaba-group')) {
+      this.updateGroup(StateBus.getInstance().getState('timestamp'));
+    }
   }
 
   async updateHeatmap(timestamp) {
