@@ -196,6 +196,10 @@ export default class Application extends SuperApplication {
     ].forEach((item) => {
       mainMenu.addSubview(item);
     });
+
+    mainMenu.attachReset(() => {
+      this.mapView.setCenterLocation(this.mapView.getDefaultCenterLocation(), this.mapView.getDefaultZoom());
+    });
   }
 
   _initMapView() {
