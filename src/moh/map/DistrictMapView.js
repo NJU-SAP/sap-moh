@@ -10,7 +10,7 @@ export default class MapView extends SuperMapView {
 
   init() {
     super.init();
-    this.addStyleClass('moh-district-map-view');
+    this.addStyleClass('moh-district-map');
   }
 
   afterInit() {
