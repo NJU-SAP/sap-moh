@@ -1,3 +1,11 @@
+.bd-standard-tile {
+  padding: 0 2em 2.8em 0;
+
+  > header {
+    padding-left: 0;
+  }
+}
+
 .moh-counter-chart, .moh-speed-chart {
   .line-series {
     stroke: rgba(255, 255, 255, 0.9);
@@ -17,8 +25,12 @@
   }
 
   .axis-layer {
-    .axis.axis-y {
+    .axis {
       .tick {
+        text {
+          font-size: 14px;
+        }
+
         line {
           stroke: rgba(255, 255, 255, 0.6);
           fill: none;

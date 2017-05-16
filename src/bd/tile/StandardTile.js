@@ -17,7 +17,7 @@ export default class StandardTile extends Tile {
 
   init() {
     super.init();
-    this.addStyleClass('bd-standard-tile col-5 row-4');
+    this.addStyleClass('bd-standard-tile col-4 row-3');
     this.$element.append(`
       <header>
         <section class='section' id='section1'>
