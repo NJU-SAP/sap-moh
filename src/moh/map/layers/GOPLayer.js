@@ -29,7 +29,7 @@ export default class GOPLayer extends Layer {
 
     Object.keys(groups).forEach((groupId) => {
       const group = groups[groupId];
-      const iconSize = 8;
+      const iconSize = 5;
       const groupIcon = L.divIcon({
         html: '<div class="group-container"></div>',
         iconSize: [iconSize, iconSize],
