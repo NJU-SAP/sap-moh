@@ -17,10 +17,11 @@ export default class FutureChart extends XYAxisChart {
     const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
     this.domainX = [from, to];
+    this.domainY = [0, 50];
   }
 
   initChart() {
-    super.initchart();
+    super.initChart();
     this._initLineSeries();
   }
 
@@ -38,7 +39,7 @@ export default class FutureChart extends XYAxisChart {
 
   _initAxisY() {
     super._initAxisY({
-      domain: [0, 50],
+      domain: this.domainY,
       tickValues: [0, 25, 50],
       tickFormat: (num) => {
         return num === 0 ? '' : num;
@@ -47,21 +48,41 @@ export default class FutureChart extends XYAxisChart {
   }
 
   _initLineSeries() {
-
+    this.lineSeries = new LineSeries({
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
+      xPath: 'date',
+      yPath: 'value',
+      dashed: true
+    });
+    this.addSeries(this.lineSeries);
   }
 
   setData(value) {
     this.setProperty('data', value);
+    if (value) {
+      const [from, to] = this.domainX;
+      const transformed = value.map((item, i) => ({
+        date: new Date(from.getTime() + i * 60 * 1000),
+        value: item.overallSpeed
+      })).filter(item => item.date >= from && item.date <= to);
+      console.log(transformed);
+      this.lineSeries.setData(transformed);
+    }
+    this.redraw();
   }
 
   redraw() {
+    if (!this.contentFrame) {
+      return;
+    }
     this.axisY.setInnerTickSize(-this.contentFrame.width);
     this.axisX.setOuterTickSize(-this.contentFrame.height);
 
     super.redraw();
   }
 
-  refresh() {
+  refreshDomainX() {
 
   }
 }
