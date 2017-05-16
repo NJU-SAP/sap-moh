@@ -1,6 +1,8 @@
 import SuperMapView from 'bd/map/MapView';
 
 import BusLayer from './layers/BusLayer';
+import BusLineLayer from './layers/BusLineLayer';
+import GOPLayer from './layers/GOPLayer';
 import HeatmapLayer from './layers/HeatmapLayer';
 import StationLayer from './layers/StationLayer';
 import TrafficLayer from './layers/TrafficLayer';
@@ -12,6 +14,10 @@ export default class MapView extends SuperMapView {
       baseLayerMode: {
         type: 'string',
         default: 'street'
+      },
+      busLineVisiable: {
+        type: 'boolean',
+        default: false
       },
       perspectiveAngle: {
         type: 'float',
@@ -105,6 +111,17 @@ export default class MapView extends SuperMapView {
       });
     });
 
+    this.busLineLayer = new BusLineLayer('bus-line-layer', {
+      lines: '{gis>/lines}'
+    });
+    this.addLayer(this.busLineLayer);
+    this.hideLayer(this.busLineLayer);
+
+    this.gopLayer = new GOPLayer('gop-layer', {
+      group: '{pilgrim>/group}'
+    });
+    this.addLayer(this.gopLayer);
+
     this.heatmapLayer = new HeatmapLayer('heatmap-layer', {
       heatmap: '{pilgrim>/heatmap}'
     });
@@ -124,6 +141,11 @@ export default class MapView extends SuperMapView {
     }
   }
 
+  setBusLineVisiable(value) {
+    this.setProperty('busLineVisiable', value);
+
+    this.toggleLayer(this.busLineLayer, value);
+  }
 
   setKaaba(value) {
     this.setProperty('kaaba', value);
@@ -136,7 +158,9 @@ export default class MapView extends SuperMapView {
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
+    this.toggleLayer(this.busLineLayer, !value && this.getBusLineVisiable());
     this.toggleLayer(this.busLayer, !value);
+    this.toggleLayer(this.gopLayer, value);
 
     if (value) {
       this.showLayer(this.heatmapLayer);

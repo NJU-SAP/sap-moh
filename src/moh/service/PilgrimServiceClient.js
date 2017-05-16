@@ -19,4 +19,10 @@ export default class PilgrimServiceClient extends ServiceClient {
       time
     });
   }
+
+  getGroup(time) {
+    return this.fetch('group/rt', {
+      time
+    });
+  }
 }

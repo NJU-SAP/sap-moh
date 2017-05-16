@@ -298,7 +298,10 @@ export default class Application extends SuperApplication {
     });
     this._busDetailDialog.attachPutAside(() => {
       this._busDetailDialog.putAside();
-      StateBus.getInstance().setState('kaaba', true);
+      setTimeout(() => {
+        StateBus.getInstance().setState('kaaba', true);
+        StateBus.getInstance().setState('kaaba-group', true);
+      }, 500);
     });
     this._busDetailDialog.attachResume(() => {
       StateBus.getInstance().setState('kaaba', false);
