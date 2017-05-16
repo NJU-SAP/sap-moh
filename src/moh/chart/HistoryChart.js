@@ -91,7 +91,6 @@ export default class HistoryChart extends XYAxisChart {
     const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours() - 8, now.getMinutes());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes())
     this.domainX = [from, to];
-    console.log(this.domainX);
 
     const value = this.getData();
     if (!value) return;
