@@ -45,10 +45,7 @@ export default class CounterChart extends XYAxisChart {
       domain: this.domainY,
       ticks: 3,
       tickFormat: (num) => {
-        if (num === 0) {
-          return '';
-        }
-        return num;
+        return num === 0 ? '' : num;
       }
     });
   }
