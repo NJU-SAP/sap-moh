@@ -12,6 +12,7 @@ import BusModel from '../model/BusModel';
 import BusPanel from '../panel/BusPanel';
 import BusTableView from '../view/BusTableView';
 import CounterTile from '../tile/CounterTile';
+import DistrictMapView from '../map/DistrictMapView';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import FutureChart from '../chart/FutureChart';
 import GisModel from '../model/GisModel';
