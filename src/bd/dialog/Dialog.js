@@ -8,6 +8,9 @@ export default class Dialog extends View {
       title: {
         type: 'string'
       }
+    },
+    events: {
+      resume: {}
     }
   }
 
@@ -188,5 +191,6 @@ export default class Dialog extends View {
   resume() {
     this.$element.removeClass('aside');
     Application.getInstance().$overlay.fadeIn();
+    this.fireResume();
   }
 }
