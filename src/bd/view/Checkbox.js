@@ -10,7 +10,6 @@ export default class Checkbox extends View {
     events: {
       statusChanged: {
         parameters: {
-          itemId: 'string',
           status: 'boolean'
         }
       }
@@ -69,7 +68,6 @@ export default class Checkbox extends View {
     }, 150, 'easeOutCubic');
 
     this.fireStatusChanged({
-      itemId: this.getId(),
       status
     });
   }
