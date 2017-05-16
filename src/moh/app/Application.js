@@ -128,19 +128,23 @@ export default class Application extends SuperApplication {
     });
     historyMenuItem.addSubview(historyChart);
 
-    const futureChart = new FutureChart({
-      id: 'futureChart'
-    });
     const futureMenuItem = new ExpandableMenuItem({
       id: 'futureMenuItem',
       text: 'Future',
       expandDirection: 'right',
       expandWidth: `${this.getEmSize(12)}px`,
       expanding: () => {
-
+      },
+      expanded: () => {
+        if (!this.futureChart) {
+          this.futureChart = new FutureChart({
+            id: 'futureChart'
+          });
+          futureMenuItem.addSubview(this.futureChart);
+        }
+        this.futureChart.invalidateSize();
       }
     });
-    futureMenuItem.addSubview(futureChart);
 
     const kaabaMenuItem = new MenuItem({
       id: 'kaabaMenuItem',
@@ -268,7 +272,10 @@ export default class Application extends SuperApplication {
     const panelContainer = new FloatingPanelContainer('floating-panel-container');
     this.addSubview(panelContainer, 'floatingPanel');
 
-    const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
+    const busPanel = new BusPanel('bus-panel', {
+      icon: 'mf mf-bus h3',
+      stationId: '{state>/selectedStationId}'
+    });
     panelContainer.addPanel(busPanel);
 
     const busTableView = new BusTableView('bus-table-view', {
