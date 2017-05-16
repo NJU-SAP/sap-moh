@@ -242,7 +242,12 @@ export default class Application extends SuperApplication {
   }
 
   _initMapLayerCheckbox() {
-    const checkbox = new Checkbox('congestionCheckboxTile');
+    const checkbox = new Checkbox('congestionCheckboxTile', {
+      statusChanged: (e) => {
+        const visible = e.getParameter('status');
+        this.mapView.setBusLineVisible(visible);
+      }
+    });
     checkbox.addStyleClass('left-14 col-3 top-2 row-1');
     this.addSubview(checkbox, 'tile');
   }
