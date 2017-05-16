@@ -142,8 +142,11 @@ export default class Application extends SuperApplication {
             data: '{index>/predict}'
           });
           futureMenuItem.addSubview(this.futureChart);
+          this.futureChart.invalidateSize();
+        } else {
+          this.futureChart.invalidateDomainX();
+          this.futureChart.redraw();
         }
-        this.futureChart.invalidateSize();
       }
     });
 
@@ -311,6 +314,7 @@ export default class Application extends SuperApplication {
     });
     this._busDetailDialog.attachResume(() => {
       StateBus.getInstance().setState('kaaba', false);
+      StateBus.getInstance().setState('kaaba-group', false);
     });
   }
 

@@ -13,16 +13,14 @@ export default class FutureChart extends XYAxisChart {
   init() {
     super.init();
     this.addStyleClass('moh-future-chart');
-    const now = new Date();
-    const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
-    const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
-    this.domainX = [from, to];
     this.domainY = [0, 50];
+    this.invalidateDomainX();
   }
 
   initChart() {
     super.initChart();
-    this._initLineSeries();
+    this._initBusLineSeries();
+    this._initCityLineSeries();
   }
 
   _initAxisX() {
@@ -47,26 +45,43 @@ export default class FutureChart extends XYAxisChart {
     });
   }
 
-  _initLineSeries() {
-    this.lineSeries = new LineSeries({
+  _initBusLineSeries() {
+    this.busLineSeries = new LineSeries({
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
       yPath: 'value',
       dashed: true
     });
-    this.addSeries(this.lineSeries);
+    this.addSeries(this.busLineSeries);
+  }
+
+  _initCityLineSeries() {
+    this.cityLineSeries = new LineSeries({
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
+      xPath: 'date',
+      yPath: 'value',
+      dashed: true
+    });
+    this.addSeries(this.cityLineSeries);
   }
 
   setData(value) {
     this.setProperty('data', value);
     if (value) {
+      this.invalidateDomainX();
       const [from, to] = this.domainX;
-      const transformed = value.map((item, i) => ({
+      const busSpeed = value.map((item, i) => ({
+        date: new Date(from.getTime() + i * 60 * 1000),
+        value: item.busSpeed
+      })).filter(item => item.date >= from && item.date <= to);
+      const overallSpeed = value.map((item, i) => ({
         date: new Date(from.getTime() + i * 60 * 1000),
         value: item.overallSpeed
       })).filter(item => item.date >= from && item.date <= to);
-      this.lineSeries.setData(transformed);
+      this.busLineSeries.setData(busSpeed);
+      this.cityLineSeries.setData(overallSpeed);
     }
     this.redraw();
   }
@@ -81,7 +96,10 @@ export default class FutureChart extends XYAxisChart {
     super.redraw();
   }
 
-  refreshDomainX() {
-
+  invalidateDomainX() {
+    const now = new Date();
+    const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
+    const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
+    this.domainX = [from, to];
   }
 }
