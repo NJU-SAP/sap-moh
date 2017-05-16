@@ -231,6 +231,7 @@ export default class Application extends SuperApplication {
   }
 
   _initTiles() {
+    this.$('#bd-tile-layer').append($('<div class="shadow bottom-1 right-1">'));
     this._initCounterTile();
     this._initSpeedTile();
   }
