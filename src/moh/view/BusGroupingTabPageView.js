@@ -7,6 +7,10 @@ export default class BusGroupingTabPageView extends TabPageView {
   metadata = {
     properties: {
       title: { type: 'string', defaultValue: 'Grouping' }
+    },
+    events: {
+      sendMessage: {
+      }
     }
   }
 
@@ -34,9 +38,10 @@ export default class BusGroupingTabPageView extends TabPageView {
   }
 
   _delayButtonClick(e) {
-    console.log(e);
-    const sendMessageDialog = new SendMessageDialog();
-    sendMessageDialog.popup();
+    //console.log(e);
+    //const sendMessageDialog = new SendMessageDialog();
+    //sendMessageDialog.popup();
+    this.fireSendMessage();
   }
 
   _onLocationButtonClick() {

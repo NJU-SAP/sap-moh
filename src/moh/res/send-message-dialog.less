@@ -1,4 +1,61 @@
 .moh-send-message-dialog {
   background-image: url('./imgs/popup-reschedule-sending.png');
   background-size: contain;
+  background-repeat: no-repeat;
+
+  &.sent {
+    background-image: url('./imgs/popup-reschedule-sent.png');
+  }
+
+  #plane {
+    position: absolute;
+    left: 280px;
+    top: 295px;
+    width: 33px;
+    height: 25px;
+    background: url('./imgs/send-message-plane.png');
+    opacity: 0;
+
+    animation-delay: .5s;
+    animation-duration: 1s;
+    animation-name: fly;
+    animation-fill-mode: forwards;
+  }
+
+  #line {
+    position: absolute;
+    background: url('./imgs/send-message-line.png');
+    left: 291px;
+    top: 312px;
+    width: 118px;
+    height: 7px;
+    opacity: 0;
+
+    animation-delay: .5s;
+    animation-duration: 1s;
+    animation-name: spread;
+    animation-fill-mode: forwards;
+  }
+  @keyframes spread {
+    from {
+      opacity: 0;
+      width: 0;
+    }
+
+    to {
+      opacity: 1;
+      width: 118px;
+    }
+  }
+  @keyframes fly {
+    from {
+      opacity: 0;
+      transform: rotate(60deg);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(130px) translateY(0) rotate(0deg);
+    }
+  }
 }
