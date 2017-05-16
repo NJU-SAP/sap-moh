@@ -2,7 +2,7 @@
   padding-left: 2em;
 
   header {
-    padding-left: 0 !important;
+    padding-left: 0;
   }
 }
 
@@ -11,18 +11,21 @@
 
   > header {
     height: @header-height;
-    padding-left: 1.7em;
-    @title-height: 40%;
+    padding-left: 1.7rem;
+    padding-bottom: 20px;
 
     > section {
       height: 100%;
       width: 47%;
       float: left;
       cursor: pointer;
+      position: relative;
+      overflow: visible;
 
-      &.selected, &:hover {
+      &.selected {
         .title {
           border-bottom: 2px solid white;
+          font-size: 1.2rem;
         }
       }
 
@@ -31,19 +34,31 @@
       }
 
       .title {
-        height: @title-height;
-        font-size: 0.8em;
+        position: absolute;
+        bottom: 1.5rem;
+        left: 0;
+        right: 0;
+
+        font-size: 0.8rem;
+        vertical-align: bottom;
       }
 
-      .value {
-        font-size: 1.4em;
-        height: 60%;
-        display: inline-block;
-      }
+      .info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1.5rem;
 
-      > .unit {
-        display: inline-block;
-        font-size: 0.8em;
+        .value {
+          font-size: 1.4em;
+          display: inline-block;
+        }
+
+        > .unit {
+          display: inline-block;
+          font-size: 0.8em;
+        }
       }
     }
   }
