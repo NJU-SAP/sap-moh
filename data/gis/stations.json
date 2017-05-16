@@ -11,7 +11,7 @@
   },
   {
     "id": 3,
-    "name": "Masjid al-Taneem Bus Stop / Miqat Ahl Mecca",
+    "name": "Masjid al-Taneem / Miqat Ahl Mecca",
     "location": [39.81757, 21.42970]
   },
   {
@@ -21,14 +21,14 @@
   },
   {
     "id": 5,
-    "name": "Taif Regional Airport - Bus Station",
+    "name": "Taif Regional Airport",
     "location": [40.55247, 21.48065]
   },
   {
     "id": 6,
-    "name": "Mecca East Airport - Bus Station",
+    "name": "Mecca East Airport",
     "location": [39.99566, 21.43611]
-  }
+  },
   {
     "id": 7,
     "name": "Shamiyah Parking Lot",
