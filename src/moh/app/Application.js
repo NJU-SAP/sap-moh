@@ -309,6 +309,6 @@ export default class Application extends SuperApplication {
   }
 
   run() {
-    this.getSubview('floating-panel-container').initPanelContainer();
+    //this.getSubview('floating-panel-container').initPanelContainer();
   }
 }
