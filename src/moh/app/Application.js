@@ -252,7 +252,7 @@ export default class Application extends SuperApplication {
         this.mapView.setBusLineVisible(visible);
       }
     });
-    checkbox.addStyleClass('left-14 col-3 top-2 row-1');
+    checkbox.addStyleClass('left-14 col-3 top-5 row-1');
     this.addSubview(checkbox, 'tile');
   }
 
