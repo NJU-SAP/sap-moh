@@ -37,10 +37,7 @@ export default class BusGroupingTabPageView extends TabPageView {
     this.$container.append($footer);
   }
 
-  _delayButtonClick(e) {
-    //console.log(e);
-    //const sendMessageDialog = new SendMessageDialog();
-    //sendMessageDialog.popup();
+  _delayButtonClick() {
     this.fireSendMessage();
   }
 
