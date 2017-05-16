@@ -1,6 +1,8 @@
 import SuperMapView from 'bd/map/MapView';
 
 import BusLayer from './layers/BusLayer';
+import BusLineLayer from './layers/BusLineLayer';
+import GOPLayer from './layers/GOPLayer';
 import HeatmapLayer from './layers/HeatmapLayer';
 import StationLayer from './layers/StationLayer';
 import TrafficLayer from './layers/TrafficLayer';
@@ -105,6 +107,11 @@ export default class MapView extends SuperMapView {
       });
     });
 
+    this.gopLayer = new GOPLayer('gop-layer', {
+      group: '{pilgrim>/group}'
+    });
+    this.addLayer(this.gopLayer);
+
     this.heatmapLayer = new HeatmapLayer('heatmap-layer', {
       heatmap: '{pilgrim>/heatmap}'
     });
@@ -112,6 +119,9 @@ export default class MapView extends SuperMapView {
     setTimeout(() => {
       this.map.addLayer(this.heatmapLayer.heatmap);
     }, 2000);
+
+    this.busLineLayer = new BusLineLayer('bus-line-layer');
+    this.addLayer(this.busLineLayer);
   }
 
   setBaseLayerMode(value) {
@@ -137,6 +147,7 @@ export default class MapView extends SuperMapView {
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
     this.toggleLayer(this.busLayer, !value);
+    this.toggleLayer(this.gopLayer, value);
 
     if (value) {
       this.showLayer(this.heatmapLayer);
