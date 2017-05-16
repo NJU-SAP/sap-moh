@@ -22,13 +22,17 @@ export default class StandardTile extends Tile {
       <header>
         <section class='section' id='section1'>
           <div class='title h4 bd-text-shadow'></div>
-          <span class='value h2 bd-text-shadow'></span>
-          <span class='unit bd-text-shadow'></span>
+          <div class='info'>
+            <span class='value h2 bd-text-shadow'></span>
+            <span class='unit bd-text-shadow'></span>
+          </div>
         </section>
         <section class='section' id='section2'>
           <div class='title h4 bd-text-shadow'></div>
-          <span class='value h2 bd-text-shadow'></span>
-          <span class='unit bd-text-shadow'></span>
+          <div class='info'>
+            <span class='value h2 bd-text-shadow'></span>
+            <span class='unit bd-text-shadow'></span>
+          </div>
         </section>
       </header>
     `);
@@ -46,12 +50,12 @@ export default class StandardTile extends Tile {
     let strValue = this.formatValue(value);
 
     if (strValue !== this.getValue1()) {
-      this.$('header > #section1 > .value').transit({
+      this.$('header > #section1 .value').transit({
         scale: 0.7,
         opacity: 0.7
       }, 160, () => {
-        this.$('header > #section1 > .value').text(strValue);
-        this.$('header > #section1 > .value').transit({
+        this.$('header > #section1 .value').text(strValue);
+        this.$('header > #section1 .value').transit({
           scale: 1,
           opacity: 1
         }, 160);
@@ -64,12 +68,12 @@ export default class StandardTile extends Tile {
     let strValue = this.formatValue(value);
 
     if (strValue !== this.getValue2()) {
-      this.$('header > #section2 > .value').transit({
+      this.$('header > #section2 .value').transit({
         scale: 0.7,
         opacity: 0.7
       }, 160, () => {
-        this.$('header > #section2 > .value').text(strValue);
-        this.$('header > #section2 > .value').transit({
+        this.$('header > #section2 .value').text(strValue);
+        this.$('header > #section2 .value').transit({
           scale: 1,
           opacity: 1
         }, 160);

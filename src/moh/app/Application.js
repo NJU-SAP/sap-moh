@@ -288,6 +288,13 @@ export default class Application extends SuperApplication {
         this.popupDialog(sendMessageDialog);
       });
     });
+    this._busDetailDialog.attachPutAside(() => {
+      this._busDetailDialog.putAside();
+      StateBus.getInstance().setState('kaaba', true);
+    });
+    this._busDetailDialog.attachResume(() => {
+      StateBus.getInstance().setState('kaaba', false);
+    });
   }
 
   _initSendMessageDialog() {

@@ -9,8 +9,8 @@ export default class BusGroupingTabPageView extends TabPageView {
       title: { type: 'string', defaultValue: 'Grouping' }
     },
     events: {
-      sendMessage: {
-      }
+      sendMessage: {},
+      groupingLocation: {}
     }
   }
 
@@ -42,6 +42,7 @@ export default class BusGroupingTabPageView extends TabPageView {
   }
 
   _onLocationButtonClick() {
-    this.getParent().getParent().putAside();
+    //this.getParent().getParent().putAside();
+    this.fireGroupingLocation();
   }
 }
