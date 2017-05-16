@@ -15,6 +15,10 @@ export default class MapView extends SuperMapView {
         type: 'string',
         default: 'street'
       },
+      busLineVisiable: {
+        type: 'boolean',
+        default: false
+      },
       perspectiveAngle: {
         type: 'float',
         defaultValue: 0
@@ -107,6 +111,10 @@ export default class MapView extends SuperMapView {
       });
     });
 
+    this.busLineLayer = new BusLineLayer('bus-line-layer');
+    this.addLayer(this.busLineLayer);
+    this.hideLayer(this.busLineLayer);
+
     this.gopLayer = new GOPLayer('gop-layer', {
       group: '{pilgrim>/group}'
     });
@@ -119,9 +127,6 @@ export default class MapView extends SuperMapView {
     setTimeout(() => {
       this.map.addLayer(this.heatmapLayer.heatmap);
     }, 2000);
-
-    this.busLineLayer = new BusLineLayer('bus-line-layer');
-    this.addLayer(this.busLineLayer);
   }
 
   setBaseLayerMode(value) {
@@ -134,6 +139,11 @@ export default class MapView extends SuperMapView {
     }
   }
 
+  setBusLineVisiable(value) {
+    this.setProperty('busLineVisiable', value);
+
+    this.toggleLayer(this.busLineLayer, value);
+  }
 
   setKaaba(value) {
     this.setProperty('kaaba', value);
@@ -146,6 +156,7 @@ export default class MapView extends SuperMapView {
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
+    this.toggleLayer(this.busLineLayer, !value && this.getBusLineVisiable());
     this.toggleLayer(this.busLayer, !value);
     this.toggleLayer(this.gopLayer, value);
 
