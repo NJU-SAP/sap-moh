@@ -280,14 +280,13 @@ export default class Application extends SuperApplication {
     this._busDetailDialog = new BusDetailDialog('bus-dialog');
     this._busDetailDialog.attachSendMessage(() => {
       const sendMessageDialog = new SendMessageDialog('send-message');
+      sendMessageDialog.attachDialogClosed(() => {
+        this.getBusDetailDialog().popup();
+      });
       this.closePopupDialog(() => {
         this.popupDialog(sendMessageDialog);
       });
     });
-
-    // setTimeout(() => {
-    //   this.getBusDetailDialog().popup();
-    // }, 8000);
   }
 
   _initSendMessageDialog() {

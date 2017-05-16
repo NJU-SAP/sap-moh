@@ -28,7 +28,9 @@ export default class SendMessageDialog extends Dialog {
       this.$('#plane').remove();
       this.addStyleClass('sent');
       setTimeout(() => {
-        this.closePopup();
+        this.closePopup(() => {
+          this.fireDialogClosed();
+        });
       }, 1500);
     }, 2500);
   }
