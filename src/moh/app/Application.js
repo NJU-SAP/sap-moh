@@ -138,7 +138,8 @@ export default class Application extends SuperApplication {
       expanded: () => {
         if (!this.futureChart) {
           this.futureChart = new FutureChart({
-            id: 'futureChart'
+            id: 'futureChart',
+            data: '{index>/predict}'
           });
           futureMenuItem.addSubview(this.futureChart);
         }

@@ -52,6 +52,9 @@ export default class Axis extends ManagedObject
 			.ticks(...ticks)
 			.tickPadding(this.getTickPadding())
 			.tickFormat(this.getTickFormat());
+    if (this.getTickValues()) {
+      this.axis.tickValues(this.getTickValues());
+    }
 	}
 
   getAxisGroupNode()
@@ -153,7 +156,7 @@ export default class Axis extends ManagedObject
 		}
 	}
 
-    setUnit(unit = "")
+  setUnit(unit = "")
 	{
 		this.setProperty("unit", unit);
 		if (this.unitText)
