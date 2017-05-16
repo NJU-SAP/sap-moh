@@ -6,7 +6,8 @@ import GisServiceClient from '../service/GisServiceClient';
 export default class GisModel extends Model {
   async initialLoad() {
     await this._loadEdges();
-    await this._loadStations();
+    await this._loadBusStations();
+    await this._loadBusLines();
     this.fireEvent('initialLoadCompleted');
   }
 
@@ -15,9 +16,14 @@ export default class GisModel extends Model {
     this.setProperty('/edges', edges);
   }
 
-  async _loadStations() {
-    const stations = await GisServiceClient.getInstance().getStations();
+  async _loadBusStations() {
+    const stations = await GisServiceClient.getInstance().getBusStations();
     this.setProperty('/stations', stations);
+  }
+
+  async _loadBusLines() {
+    const lines = await GisServiceClient.getInstance().getBusLines();
+    this.setProperty('/lines', lines);
   }
 
   getStation(id) {
