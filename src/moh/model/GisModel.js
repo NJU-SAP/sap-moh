@@ -19,4 +19,9 @@ export default class GisModel extends Model {
     const stations = await GisServiceClient.getInstance().getStations();
     this.setProperty('/stations', stations);
   }
+
+  getStation(id) {
+    const stations = this.getProperty('/stations');
+    return stations.find(station => station.id === id);
+  }
 }
