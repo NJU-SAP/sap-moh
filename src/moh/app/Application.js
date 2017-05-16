@@ -18,6 +18,7 @@ import IndexModel from '../model/IndexModel';
 import MapView from '../map/MapView';
 import MohStateBus from '../state/StateBus';
 import PilgrimModel from '../model/PilgrimModel';
+import SendMessageDialog from '../dialog/SendMessageDialog';
 import SpeedTile from '../tile/SpeedTile';
 import TrafficModel from '../model/TrafficModel';
 
@@ -279,7 +280,18 @@ export default class Application extends SuperApplication {
 
   _initBusDetailDialog() {
     this._busDetailDialog = new BusDetailDialog('bus-dialog');
-    //this.addSubview(this._busDetailDialog, 'popup');
+    this._busDetailDialog.attachSendMessage(() => {
+      //this.getBusDetailDialog().closePopup();
+      const sendMessageDialog = new SendMessageDialog('send-message');
+      this.closePopupDialog(false, () => {
+        this.popupDialog(sendMessageDialog);
+      });
+      //sendMessageDialog.popup();
+    });
+  }
+
+  _initSendMessageDialog() {
+    this._sendMessageDialog = new SendMessageDialog('send-message');
   }
 
   getBusDetailDialog() {
@@ -287,6 +299,13 @@ export default class Application extends SuperApplication {
       this._initBusDetailDialog();
     }
     return this._busDetailDialog;
+  }
+
+  getSendMessageDialog() {
+    if (!this._sendMessageDialog) {
+      this._initSendMessageDialog();
+    }
+    return this._sendMessageDialog;
   }
 
   run() {

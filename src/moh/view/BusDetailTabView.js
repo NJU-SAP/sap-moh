@@ -6,6 +6,12 @@ import BusDriverTabPageView from './BusDriverTabPageView';
 
 
 export default class BusDetailTabView extends TabView {
+  metadata = {
+    events: {
+      sendMessage: {}
+    }
+  }
+
   init() {
     super.init();
 
@@ -14,7 +20,11 @@ export default class BusDetailTabView extends TabView {
 
   _initPages() {
     this.addPage(new BusOperationTabPageView('busOperationTabPage'));
-    this.addPage(new BusGroupingTabPageView('busGroupingTabPageView'));
+    const busGroupingTabPageView = new BusGroupingTabPageView('busGroupingTabPageView');
+    busGroupingTabPageView.attachSendMessage(() => {
+      this.fireSendMessage();
+    });
+    this.addPage(busGroupingTabPageView);
     this.addPage(new BusDriverTabPageView('busDriverTabPageView'));
   }
 }

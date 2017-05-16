@@ -5,6 +5,12 @@ import BusDetailTabView from '../view/BusDetailTabView';
 
 
 export default class BusDetailDialog extends Dialog {
+  metadata = {
+    events: {
+      sendMessage: {}
+    }
+  }
+
   init() {
     super.init();
     this.addStyleClass('moh-bus-detail-dialog col-9 row-7 top-3');
@@ -13,6 +19,9 @@ export default class BusDetailDialog extends Dialog {
 
   _initTabView() {
     this.tabView = new BusDetailTabView();
+    this.tabView.attachSendMessage(() => {
+      this.fireSendMessage();
+    });
     this.addSubview(this.tabView, this.$('>.container >main'));
   }
 
