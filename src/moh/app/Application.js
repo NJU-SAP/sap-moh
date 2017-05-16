@@ -12,6 +12,7 @@ import BusModel from '../model/BusModel';
 import BusPanel from '../panel/BusPanel';
 import BusTableView from '../view/BusTableView';
 import CounterTile from '../tile/CounterTile';
+import DistrictMapView from '../map/DistrictMapView';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
 import FutureChart from '../chart/FutureChart';
 import GisModel from '../model/GisModel';
@@ -34,6 +35,7 @@ export default class Application extends SuperApplication {
     this._initModels();
     this._initDataClockView();
     this._initMapView();
+    this._initDistrictMapView();
     this._initTiles();
     this._initMapLayerCheckbox();
     this._initFloatingPanelContainer();
@@ -236,6 +238,13 @@ export default class Application extends SuperApplication {
     this.mapView.$element.css('position', 'absolute');
     this.mapView.addStyleClass('row-full col-full');
     this.addSubview(this.mapView, 'base');
+  }
+
+  _initDistrictMapView() {
+    this.districtMapView = new DistrictMapView('districtMapView');
+    this.districtMapView.$element.addClass('top-2 right-2 row-5 col-6');
+    this.districtMapView.$element.css('position', 'absolute');
+    this.addSubview(this.districtMapView, 'tile');
   }
 
   _initTiles() {
