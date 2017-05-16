@@ -32,6 +32,6 @@ export default class GisServiceClient extends ServiceClient {
     if (!this._lines) {
       this._lines = await this.fetch('bus/lines');
     }
-    return this._stations;
+    return this._lines;
   }
 }
