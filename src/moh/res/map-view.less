@@ -46,7 +46,7 @@
   .moh-map-view {
   	&.zoom-level-@{i} {
       .bus-container {
-      	transform: scale((1 - @minScale) / (@maxZoom - @minZoom) * (@i - @minZoom) + @minScale);
+      	transform: scale((1 - @minScale) / (@maxZoom - @minZoom) * (@i - @minZoom) + @minScale - 0.2);
       }
     }
   }
