@@ -15,12 +15,19 @@ export default class PilgrimModel extends Model {
         this.checkStates();
       }
     });
+
+    StateBus.getInstance().bindState('kaaba-group').attachChange(() => {
+      const kaabaGroup = StateBus.getInstance().getState('kaaba-group');
+      if (kaabaGroup) {
+        this.updateGroup(StateBus.getInstance().getState('timestamp'));
+      }
+    });
   }
 
-  async checkStates() {
+  checkStates() {
     const timestamp = StateBus.getInstance().getState('timestamp');
 
-    await this.updateHeatmap(timestamp);
+    this.updateHeatmap(timestamp);
   }
 
   _onStateChange() {
@@ -33,5 +40,10 @@ export default class PilgrimModel extends Model {
   async updateHeatmap(timestamp) {
     const heatmap = await PilgrimServiceClient.getInstance().getHeatmap(timestamp);
     this.setProperty('/heatmap', heatmap);
+  }
+
+  async updateGroup(timestamp) {
+    const group = await PilgrimServiceClient.getInstance().getGroup(timestamp);
+    this.setProperty('/group', group);
   }
 }
