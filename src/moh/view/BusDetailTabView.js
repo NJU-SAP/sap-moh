@@ -8,7 +8,8 @@ import BusDriverTabPageView from './BusDriverTabPageView';
 export default class BusDetailTabView extends TabView {
   metadata = {
     events: {
-      sendMessage: {}
+      sendMessage: {},
+      groupingLocation: {}
     }
   }
 
@@ -23,6 +24,9 @@ export default class BusDetailTabView extends TabView {
     const busGroupingTabPageView = new BusGroupingTabPageView('busGroupingTabPageView');
     busGroupingTabPageView.attachSendMessage(() => {
       this.fireSendMessage();
+    });
+    busGroupingTabPageView.attachGroupingLocation(() => {
+      this.fireGroupingLocation();
     });
     this.addPage(busGroupingTabPageView);
     this.addPage(new BusDriverTabPageView('busDriverTabPageView'));
