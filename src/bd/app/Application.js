@@ -210,8 +210,7 @@ export default class Application extends SuperApplication {
     });
   }
 
-  closePopupDialog(hideOverlay, cb) {
-    if (hideOverlay === undefined) hideOverlay = true;
+  closePopupDialog(cb) {
     if (this.activeDialogPopup) {
       if (this.dialogAnimating) {
         return;
@@ -224,17 +223,13 @@ export default class Application extends SuperApplication {
         this.activeDialogPopup.deactivate();
         this.activeDialogPopup.$element.detach();
         this.removeSubview(this.activeDialogPopup);
-        if (hideOverlay) {
-          this.hideOverlay(() => {
-            this.activeDialogPopup = null;
-            this.dialogAnimating = false;
-            //this.getSubview('mapView').resetLayers();
-          });
-        }
-        if (typeof cb === 'function') {
-          console.log('cb');
-          cb();
-        }
+        this.hideOverlay(() => {
+          this.activeDialogPopup = null;
+          this.dialogAnimating = false;
+          if (typeof cb === 'function') {
+            cb();
+          }
+        });
       });
     }
   }

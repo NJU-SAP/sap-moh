@@ -261,32 +261,15 @@ export default class Application extends SuperApplication {
       rows: '{bus>/arrivals}'
     });
     busPanel.setTableView(busTableView);
-
-    // const favPanel = new FavPanel('fav-panel', { icon: 'fa fa-star h3' });
-    // panelContainer.addPanel(favPanel);
-    // const favListView = new FavListView('fav-list-view');
-    // favListView.setModel(sap.ui.getCore().getModel('fav'), 'fav');
-    // favListView.setModel(sap.ui.getCore().getModel('gis'), 'gis');
-    // favPanel.setListView(favListView);
-    // favListView.attachFavSelected((e) => {
-    //   const target = e.getParameter('target');
-    //   if (target.roadId) {
-    //     this._selectRoad.apply(this, [target]);
-    //   } else if (target.corridorId) {
-    //     this._selectCorridor.apply(this, [target]);
-    //   }
-    // });
   }
 
   _initBusDetailDialog() {
     this._busDetailDialog = new BusDetailDialog('bus-dialog');
     this._busDetailDialog.attachSendMessage(() => {
-      //this.getBusDetailDialog().closePopup();
       const sendMessageDialog = new SendMessageDialog('send-message');
-      this.closePopupDialog(false, () => {
+      this.closePopupDialog(() => {
         this.popupDialog(sendMessageDialog);
       });
-      //sendMessageDialog.popup();
     });
   }
 
