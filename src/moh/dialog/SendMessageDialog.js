@@ -4,6 +4,12 @@ import Dialog from 'bd/dialog/Dialog';
 
 
 export default class SendMessageDialog extends Dialog {
+  metadata = {
+    events: {
+      dialogClosed: {}
+    }
+  }
+
   init() {
     super.init();
     this.addStyleClass('moh-send-message-dialog col-6 row-5 top-5');
@@ -24,6 +30,6 @@ export default class SendMessageDialog extends Dialog {
       setTimeout(() => {
         this.closePopup();
       }, 1500);
-    }, 2000);
+    }, 2500);
   }
 }

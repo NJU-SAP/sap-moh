@@ -280,6 +280,10 @@ export default class Application extends SuperApplication {
         this.popupDialog(sendMessageDialog);
       });
     });
+
+    // setTimeout(() => {
+    //   this.getBusDetailDialog().popup();
+    // }, 8000);
   }
 
   _initSendMessageDialog() {

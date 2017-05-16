@@ -166,7 +166,7 @@ export default class Dialog extends View {
   }
 
   // if popup is self, close it
-  closePopup() {
+  closePopup(cb) {
     if (Application.getInstance() && Application.getInstance().activeDialogPopup === this) {
       Application.getInstance().closePopupDialog();
     }
