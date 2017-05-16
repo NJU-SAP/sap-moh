@@ -56,10 +56,10 @@ export default class FloatingPanelContainer extends PanelContainer {
     });
   }
 
-  initPanelContainer() {
-    this.hidePanel();
-    //this._startPanelListening();
-  }
+  // initPanelContainer() {
+  //   this.hidePanel();
+  //   //this._startPanelListening();
+  // }
 
   addPanel(panel) {
     this.addAggregation('panels', panel);
