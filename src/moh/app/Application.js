@@ -113,28 +113,28 @@ export default class Application extends SuperApplication {
       }
     });
 
-
-    const historyChart = new HistoryChart({
-      id: 'historyChart'
-    });
     const historyMenuItem = new ExpandableMenuItem({
       id: 'historyMenuItem',
       text: 'History',
       expandDirection: 'left',
       expandWidth: `${this.getEmSize(28)}px`,
-      expanding: () => {
-
+      expanded: () => {
+        if (!this.historyChart) {
+          this.historyChart = new HistoryChart({
+            id: 'historyChart',
+            data: '{index>/rt}'
+          });
+          historyMenuItem.addSubview(historyChart);
+          this.historyChart.invalidateSize();
+        }
       }
     });
-    historyMenuItem.addSubview(historyChart);
 
     const futureMenuItem = new ExpandableMenuItem({
       id: 'futureMenuItem',
       text: 'Future',
       expandDirection: 'right',
       expandWidth: `${this.getEmSize(12)}px`,
-      expanding: () => {
-      },
       expanded: () => {
         if (!this.futureChart) {
           this.futureChart = new FutureChart({
@@ -145,7 +145,6 @@ export default class Application extends SuperApplication {
           this.futureChart.invalidateSize();
         } else {
           this.futureChart.invalidateDomainX();
-          this.futureChart.redraw();
         }
       }
     });
@@ -252,7 +251,7 @@ export default class Application extends SuperApplication {
         this.mapView.setBusLineVisible(visible);
       }
     });
-    checkbox.addStyleClass('left-14 col-3 top-2 row-1');
+    checkbox.addStyleClass('left-14 col-3 top-5 row-1');
     this.addSubview(checkbox, 'tile');
   }
 
