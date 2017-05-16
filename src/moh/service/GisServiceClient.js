@@ -21,9 +21,16 @@ export default class GisServiceClient extends ServiceClient {
     return this._edges;
   }
 
-  async getStations() {
+  async getBusStations() {
     if (!this._stations) {
-      this._stations = await this.fetch('stations');
+      this._stations = await this.fetch('bus/stations');
+    }
+    return this._stations;
+  }
+
+  async getBusLines() {
+    if (!this._stations) {
+      this._stations = await this.fetch('bus/lines');
     }
     return this._stations;
   }
