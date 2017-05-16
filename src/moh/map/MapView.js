@@ -15,7 +15,7 @@ export default class MapView extends SuperMapView {
         type: 'string',
         default: 'street'
       },
-      busLineVisiable: {
+      busLineVisible: {
         type: 'boolean',
         default: false
       },
@@ -141,8 +141,8 @@ export default class MapView extends SuperMapView {
     }
   }
 
-  setBusLineVisiable(value) {
-    this.setProperty('busLineVisiable', value);
+  setBusLineVisible(value) {
+    this.setProperty('busLineVisible', value);
 
     this.toggleLayer(this.busLineLayer, value);
   }
@@ -158,7 +158,7 @@ export default class MapView extends SuperMapView {
 
     this.toggleLayer(this.stationLayer, !value);
     this.toggleLayer(this.trafficLayer, !value);
-    this.toggleLayer(this.busLineLayer, !value && this.getBusLineVisiable());
+    this.toggleLayer(this.busLineLayer, !value && this.getBusLineVisible());
     this.toggleLayer(this.busLayer, !value);
     this.toggleLayer(this.gopLayer, value);
 
