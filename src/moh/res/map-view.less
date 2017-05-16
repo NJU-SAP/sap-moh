@@ -34,6 +34,14 @@
     transform: scale(1.1);
     background-size: cover;
   }
+
+  @group-container-height: 8px;
+  .group-container {
+    height: @group-container-height;
+    width: @group-container-height;
+    border-radius: @group-container-height / 2;
+    background-color: yellow;
+  }
 }
 
 @maxZoom: 17;

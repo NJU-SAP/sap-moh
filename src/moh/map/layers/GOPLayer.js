@@ -24,8 +24,24 @@ export default class GOPLayer extends Layer {
     this._updateGroup(value);
   }
 
-  _updateGroup(value) {
-    console.log(value);
+  _updateGroup(groups) {
+    this.GOPContainer.clearLayers();
+
+    Object.keys(groups).forEach((groupId) => {
+      const group = groups[groupId];
+      const iconSize = 8;
+      const groupIcon = L.divIcon({
+        html: '<div class="group-container"></div>',
+        iconSize: [iconSize, iconSize],
+        iconAnchor: [iconSize / 2, iconSize / 2],
+        className: 'station'
+      });
+      const groupMarker = L.marker([group.location[1], group.location[0]], {
+        icon: groupIcon,
+        zIndexOffset: 1000
+      });
+      this.GOPContainer.addLayer(groupMarker);
+    });
   }
 
 }
