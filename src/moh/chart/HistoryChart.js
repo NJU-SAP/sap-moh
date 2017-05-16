@@ -5,7 +5,7 @@ import LineSeries from 'nju/chart/series/LineSeries';
 export default class HistoryChart extends XYAxisChart {
   metadata = {
     properties: {
-      padding: { type: 'object', defaultValue: { left: 0, right: 0, top: 0, bottom: 0 } },
+      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 10 } },
       data: { type: 'object' },
     }
   }
@@ -13,6 +13,8 @@ export default class HistoryChart extends XYAxisChart {
   init() {
     super.init();
     this.addStyleClass('moh-history-chart');
+    this.domainY = [0, 50];
+    this.invalidateDomainX();
   }
 
   initChart() {
@@ -48,8 +50,7 @@ export default class HistoryChart extends XYAxisChart {
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
-      yPath: 'value',
-      dashed: true
+      yPath: 'value'
     });
     this.addSeries(this.busLineSeries);
   }
@@ -59,8 +60,7 @@ export default class HistoryChart extends XYAxisChart {
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
-      yPath: 'value',
-      dashed: true
+      yPath: 'value'
     });
     this.addSeries(this.cityLineSeries);
   }
@@ -88,9 +88,10 @@ export default class HistoryChart extends XYAxisChart {
 
   invalidateDomainX() {
     const now = new Date();
-    const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
-    const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
+    const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours() - 8, now.getMinutes());
+    const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes())
     this.domainX = [from, to];
+    console.log(this.domainX);
 
     const value = this.getData();
     if (!value) return;

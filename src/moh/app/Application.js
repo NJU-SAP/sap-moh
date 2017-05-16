@@ -124,7 +124,7 @@ export default class Application extends SuperApplication {
             id: 'historyChart',
             data: '{index>/rt}'
           });
-          historyMenuItem.addSubview(historyChart);
+          historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
         }
       }
