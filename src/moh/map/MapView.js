@@ -30,6 +30,10 @@ export default class MapView extends SuperMapView {
       kaaba: {
         type: 'boolean',
         defaultValue: false
+      },
+      kaabaGroup: {
+        type: 'boolean',
+        defaultValue: false
       }
     },
     events: {
@@ -160,7 +164,6 @@ export default class MapView extends SuperMapView {
     this.toggleLayer(this.trafficLayer, !value);
     this.toggleLayer(this.busLineLayer, !value && this.getBusLineVisible());
     this.toggleLayer(this.busLayer, !value);
-    this.toggleLayer(this.gopLayer, value);
 
     if (value) {
       this.showLayer(this.heatmapLayer);
@@ -169,5 +172,11 @@ export default class MapView extends SuperMapView {
       this.hideLayer(this.heatmapLayer);
       this.map.removeLayer(this.heatmapLayer.heatmap);
     }
+  }
+
+  setKaabaGroup(value) {
+    this.setProperty('kaabaGroup', value);
+
+    this.toggleLayer(this.gopLayer, value);
   }
 }

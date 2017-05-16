@@ -210,6 +210,7 @@ export default class Application extends SuperApplication {
   _initMapView() {
     this.mapView = new MapView('mapView', {
       kaaba: '{state>/kaaba}',
+      kaabaGroup: '{state>/kaaba-group}',
       zoomChanged: () => {
         const zoom = this.mapView.getZoom();
         StateBus.getInstance().setState('map/zoom', zoom);
