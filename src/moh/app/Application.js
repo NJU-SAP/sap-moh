@@ -128,19 +128,23 @@ export default class Application extends SuperApplication {
     });
     historyMenuItem.addSubview(historyChart);
 
-    const futureChart = new FutureChart({
-      id: 'futureChart'
-    });
     const futureMenuItem = new ExpandableMenuItem({
       id: 'futureMenuItem',
       text: 'Future',
       expandDirection: 'right',
       expandWidth: `${this.getEmSize(12)}px`,
       expanding: () => {
-
+      },
+      expanded: () => {
+        if (!this.futureChart) {
+          this.futureChart = new FutureChart({
+            id: 'futureChart'
+          });
+          futureMenuItem.addSubview(this.futureChart);
+        }
+        this.futureChart.invalidateSize();
       }
     });
-    futureMenuItem.addSubview(futureChart);
 
     const kaabaMenuItem = new MenuItem({
       id: 'kaabaMenuItem',
