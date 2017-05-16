@@ -24,7 +24,7 @@ export default class BusLineLayer extends Layer {
       this.linesContainer.clearLayers();
 
       lines.forEach((line) => {
-        const points = line.split(',').map(p => p.split(' ').map(num => parseFloat(num)));
+        const points = line.split(',').map(p => p.split(' ').map(num => parseFloat(num)).reverse());
         this.linesContainer.addLayer(L.polyline(points, { color: 'white', weight: 10 }));
       });
     }
