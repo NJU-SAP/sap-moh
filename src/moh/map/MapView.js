@@ -111,7 +111,9 @@ export default class MapView extends SuperMapView {
       });
     });
 
-    this.busLineLayer = new BusLineLayer('bus-line-layer');
+    this.busLineLayer = new BusLineLayer('bus-line-layer', {
+      lines: '{gis>/lines}'
+    });
     this.addLayer(this.busLineLayer);
     this.hideLayer(this.busLineLayer);
 
