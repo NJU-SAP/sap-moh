@@ -22,7 +22,7 @@ export default class SendMessageDialog extends Dialog {
   _initContainer() { }
 
   _initDialog() {
-    this.$element.append('<div id=line/><div id=plane/>');
+    this.$element.append('<div id=title class=h3>Delay Notification</div><div id=line/><div id=plane/>');
     setTimeout(() => {
       this.$('#line').remove();
       this.$('#plane').remove();
