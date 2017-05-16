@@ -1,5 +1,9 @@
 .bd-tile {
   padding-left: 2em;
+
+  header {
+    padding-left: 0 !important;
+  }
 }
 
 .bd-standard-tile {
@@ -12,7 +16,7 @@
 
     > section {
       height: 100%;
-      width: 50%;
+      width: 47%;
       float: left;
       cursor: pointer;
 
@@ -22,18 +26,24 @@
         }
       }
 
+      &:nth-of-type(2) {
+        margin-left: 6%;
+      }
+
       .title {
         height: @title-height;
-        font-size: 1.2em;
+        font-size: 0.8em;
       }
 
       .value {
+        font-size: 1.4em;
         height: 60%;
         display: inline-block;
       }
 
       > .unit {
         display: inline-block;
+        font-size: 0.8em;
       }
     }
   }
