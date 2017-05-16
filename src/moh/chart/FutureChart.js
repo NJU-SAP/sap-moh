@@ -66,7 +66,6 @@ export default class FutureChart extends XYAxisChart {
         date: new Date(from.getTime() + i * 60 * 1000),
         value: item.overallSpeed
       })).filter(item => item.date >= from && item.date <= to);
-      console.log(transformed);
       this.lineSeries.setData(transformed);
     }
     this.redraw();
