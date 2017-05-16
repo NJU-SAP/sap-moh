@@ -272,7 +272,10 @@ export default class Application extends SuperApplication {
     const panelContainer = new FloatingPanelContainer('floating-panel-container');
     this.addSubview(panelContainer, 'floatingPanel');
 
-    const busPanel = new BusPanel('bus-panel', { icon: 'mf mf-bus h3' });
+    const busPanel = new BusPanel('bus-panel', {
+      icon: 'mf mf-bus h3',
+      stationId: '{state>/selectedStationId}'
+    });
     panelContainer.addPanel(busPanel);
 
     const busTableView = new BusTableView('bus-table-view', {
