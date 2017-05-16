@@ -71,19 +71,7 @@ export default class FutureChart extends XYAxisChart {
     this.setProperty('data', value);
     if (value) {
       this.invalidateDomainX();
-      const [from, to] = this.domainX;
-      const busSpeed = value.map((item, i) => ({
-        date: new Date(from.getTime() + i * 60 * 1000),
-        value: item.busSpeed
-      })).filter(item => item.date >= from && item.date <= to);
-      const overallSpeed = value.map((item, i) => ({
-        date: new Date(from.getTime() + i * 60 * 1000),
-        value: item.overallSpeed
-      })).filter(item => item.date >= from && item.date <= to);
-      this.busLineSeries.setData(busSpeed);
-      this.cityLineSeries.setData(overallSpeed);
     }
-    this.redraw();
   }
 
   redraw() {
@@ -101,5 +89,20 @@ export default class FutureChart extends XYAxisChart {
     const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
     this.domainX = [from, to];
+
+    const value = this.getData();
+    if (!value) return;
+    const busSpeed = value.map((item, i) => ({
+      date: new Date(from.getTime() + i * 60 * 1000),
+      value: item.busSpeed
+    })).filter(item => item.date >= from && item.date <= to);
+    const overallSpeed = value.map((item, i) => ({
+      date: new Date(from.getTime() + i * 60 * 1000),
+      value: item.overallSpeed
+    })).filter(item => item.date >= from && item.date <= to);
+    this.busLineSeries.setData(busSpeed);
+    this.cityLineSeries.setData(overallSpeed);
+
+    this.redraw();
   }
 }

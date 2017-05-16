@@ -6,8 +6,7 @@ export default class HistoryChart extends XYAxisChart {
   metadata = {
     properties: {
       padding: { type: 'object', defaultValue: { left: 0, right: 0, top: 0, bottom: 0 } },
-      rtCount: { type: 'object' },
-      predictCount: { type: 'object' }
+      data: { type: 'object' },
     }
   }
 
