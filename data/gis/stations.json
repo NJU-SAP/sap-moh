@@ -29,4 +29,9 @@
     "name": "Mecca East Airport - Bus Station",
     "location": [39.99566, 21.43611]
   }
+  {
+    "id": 7,
+    "name": "Shamiyah Parking Lot",
+    "location": [39.83012, 21.43046]
+  }
 ]
