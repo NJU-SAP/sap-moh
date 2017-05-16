@@ -13,7 +13,9 @@ import BusPanel from '../panel/BusPanel';
 import BusTableView from '../view/BusTableView';
 import CounterTile from '../tile/CounterTile';
 import FloatingPanelContainer from '../panel/FloatingPanelContainer';
+import FutureChart from '../chart/FutureChart';
 import GisModel from '../model/GisModel';
+import HistoryChart from '../chart/HistoryChart';
 import IndexModel from '../model/IndexModel';
 import MapView from '../map/MapView';
 import MohStateBus from '../state/StateBus';
@@ -111,27 +113,34 @@ export default class Application extends SuperApplication {
       }
     });
 
+
+    const historyChart = new HistoryChart({
+      id: 'historyChart'
+    });
     const historyMenuItem = new ExpandableMenuItem({
       id: 'historyMenuItem',
       text: 'History',
       expandDirection: 'left',
       expandWidth: `${this.getEmSize(28)}px`,
       expanding: () => {
-        // sap.ui.getCore().getModel('index').updateLast8Hour();
-        // sap.ui.getCore().getModel('index').updateLast8HourTrend();
+
       }
     });
-    // historyMenuItem.addSubview(chart);
+    historyMenuItem.addSubview(historyChart);
 
+    const futureChart = new FutureChart({
+      id: 'futureChart'
+    });
     const futureMenuItem = new ExpandableMenuItem({
       id: 'futureMenuItem',
       text: 'Future',
       expandDirection: 'right',
       expandWidth: `${this.getEmSize(12)}px`,
       expanding: () => {
-        //sap.ui.getCore().getModel("index").updateNext20Min();
+
       }
     });
+    futureMenuItem.addSubview(futureChart);
 
     const kaabaMenuItem = new MenuItem({
       id: 'kaabaMenuItem',
