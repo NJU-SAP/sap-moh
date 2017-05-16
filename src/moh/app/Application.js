@@ -196,6 +196,10 @@ export default class Application extends SuperApplication {
     ].forEach((item) => {
       mainMenu.addSubview(item);
     });
+
+    mainMenu.attachReset(() => {
+      this.mapView.setCenterLocation(this.mapView.getDefaultCenterLocation(), this.mapView.getDefaultZoom());
+    });
   }
 
   _initMapView() {
@@ -227,6 +231,7 @@ export default class Application extends SuperApplication {
   }
 
   _initTiles() {
+    this.$('#bd-tile-layer').append($('<div class="shadow bottom-1 right-1">'));
     this._initCounterTile();
     this._initSpeedTile();
   }
@@ -276,9 +281,19 @@ export default class Application extends SuperApplication {
     this._busDetailDialog = new BusDetailDialog('bus-dialog');
     this._busDetailDialog.attachSendMessage(() => {
       const sendMessageDialog = new SendMessageDialog('send-message');
+      sendMessageDialog.attachDialogClosed(() => {
+        this.getBusDetailDialog().popup();
+      });
       this.closePopupDialog(() => {
         this.popupDialog(sendMessageDialog);
       });
+    });
+    this._busDetailDialog.attachPutAside(() => {
+      this._busDetailDialog.putAside();
+      StateBus.getInstance().setState('kaaba', true);
+    });
+    this._busDetailDialog.attachResume(() => {
+      StateBus.getInstance().setState('kaaba', false);
     });
   }
 
@@ -301,6 +316,6 @@ export default class Application extends SuperApplication {
   }
 
   run() {
-    this.getSubview('floating-panel-container').initPanelContainer();
+    //this.getSubview('floating-panel-container').initPanelContainer();
   }
 }

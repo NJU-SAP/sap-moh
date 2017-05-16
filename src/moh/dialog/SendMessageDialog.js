@@ -4,6 +4,12 @@ import Dialog from 'bd/dialog/Dialog';
 
 
 export default class SendMessageDialog extends Dialog {
+  metadata = {
+    events: {
+      dialogClosed: {}
+    }
+  }
+
   init() {
     super.init();
     this.addStyleClass('moh-send-message-dialog col-6 row-5 top-5');
@@ -16,14 +22,16 @@ export default class SendMessageDialog extends Dialog {
   _initContainer() { }
 
   _initDialog() {
-    this.$element.append('<div id=line/><div id=plane/>');
+    this.$element.append('<div id=title class=h3>Delay Notification</div><div id=line/><div id=plane/>');
     setTimeout(() => {
       this.$('#line').remove();
       this.$('#plane').remove();
       this.addStyleClass('sent');
       setTimeout(() => {
-        this.closePopup();
+        this.closePopup(() => {
+          this.fireDialogClosed();
+        });
       }, 1500);
-    }, 2000);
+    }, 2500);
   }
 }

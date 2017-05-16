@@ -7,7 +7,8 @@ import BusDetailTabView from '../view/BusDetailTabView';
 export default class BusDetailDialog extends Dialog {
   metadata = {
     events: {
-      sendMessage: {}
+      sendMessage: {},
+      putAside: {}
     }
   }
 
@@ -21,6 +22,9 @@ export default class BusDetailDialog extends Dialog {
     this.tabView = new BusDetailTabView();
     this.tabView.attachSendMessage(() => {
       this.fireSendMessage();
+    });
+    this.tabView.attachGroupingLocation(() => {
+      this.firePutAside();
     });
     this.addSubview(this.tabView, this.$('>.container >main'));
   }
