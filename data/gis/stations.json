@@ -33,5 +33,10 @@
     "id": 7,
     "name": "Shamiyah Parking Lot",
     "location": [39.83012, 21.43046]
+  },
+  {
+    "id": 8,
+    "name": "Bus Parking Pilgrimage",
+    "location": [39.86157, 21.42618]
   }
 ]
