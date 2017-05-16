@@ -5,7 +5,7 @@ import LineSeries from 'nju/chart/series/LineSeries';
 export default class CounterChart extends XYAxisChart {
   metadata = {
     properties: {
-      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 0, bottom: 20 } },
+      padding: { type: 'object', defaultValue: { left: 0, right: 0, top: 0, bottom: 0 } },
       rtCount: { type: 'object' },
       predictCount: { type: 'object' }
     }
