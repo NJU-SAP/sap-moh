@@ -314,6 +314,7 @@ export default class Application extends SuperApplication {
     });
     this._busDetailDialog.attachResume(() => {
       StateBus.getInstance().setState('kaaba', false);
+      StateBus.getInstance().setState('kaaba-group', false);
     });
   }
 
