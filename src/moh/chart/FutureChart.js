@@ -78,9 +78,13 @@ export default class FutureChart extends XYAxisChart {
     if (!this.contentFrame) {
       return;
     }
+    const newScale = this.busLineSeries.getScaleX().domain(this.domainX);
+
     this.axisY.setInnerTickSize(-this.contentFrame.width);
     this.axisX.setOuterTickSize(-this.contentFrame.height);
-
+    this.axisX.setDomain(this.domainX);
+    this.busLineSeries.setScaleX(newScale);
+    this.cityLineSeries.setScaleX(newScale);
     super.redraw();
   }
 

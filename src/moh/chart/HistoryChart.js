@@ -76,13 +76,13 @@ export default class HistoryChart extends XYAxisChart {
     if (!this.contentFrame) {
       return;
     }
-    const newScale =  this.busLineSeries.getScale().domain(this.domainX);
+    const newScale = this.busLineSeries.getScaleX().domain(this.domainX);
 
     this.axisY.setInnerTickSize(-this.contentFrame.width);
     this.axisX.setOuterTickSize(-this.contentFrame.height);
     this.axisX.setDomain(this.domainX);
-    this.busLineSeries.setScale(newScale);
-    this.cityLineSeries.setScale(newScale);
+    this.busLineSeries.setScaleX(newScale);
+    this.cityLineSeries.setScaleX(newScale);
     super.redraw();
   }
 
