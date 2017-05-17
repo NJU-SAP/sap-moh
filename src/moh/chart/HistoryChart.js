@@ -13,7 +13,7 @@ export default class HistoryChart extends XYAxisChart {
   init() {
     super.init();
     this.addStyleClass('moh-history-chart');
-    this.domainY = [0, 50];
+    this.domainY = [0, 60];
     this.invalidateDomainX();
   }
 
@@ -38,7 +38,7 @@ export default class HistoryChart extends XYAxisChart {
   _initAxisY() {
     super._initAxisY({
       domain: this.domainY,
-      tickValues: [0, 25, 50],
+      tickValues: [0, 20, 40, 60],
       tickFormat: (num) => {
         return num === 0 ? '' : num;
       }

@@ -18,7 +18,7 @@ export default class SpeedChart extends XYAxisChart {
     const from = new Date(now.getYear(), now.getMonth(), now.getDate());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate() + 1);
     this.domainX = [from, to];
-    this.domainY = [0, 50];
+    this.domainY = [0, 60];
   }
 
   initChart() {
@@ -43,7 +43,7 @@ export default class SpeedChart extends XYAxisChart {
   _initAxisY() {
     super._initAxisY({
       domain: this.domainY,
-      tickValues: [0, 25, 50],
+      tickValues: [0, 20, 40, 60],
       tickFormat: (num) => {
         if (num === 0) {
           return '';
