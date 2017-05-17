@@ -20,7 +20,7 @@ export default class StateBus extends SuperStateBus {
       this.timer = null;
     }
     this.setState('timestamp', new Date());
-    this.timer = setTimeout(this._updateTimestamp.bind(this), this.getState('kaaba') ? 5 * 1000 : 30 * 1000);
+    this.timer = setTimeout(this._updateTimestamp.bind(this), this.getState('kaaba') ? 3 * 1000 : 30 * 1000);
   }
 
   getInitialState() {
