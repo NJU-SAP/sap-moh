@@ -1,5 +1,7 @@
 import Layer from 'nju/map/layer/Layer';
 
+import MapUtil from '../MapUtil';
+
 
 export default class DistrictLayer extends Layer {
   metadata = {
@@ -7,7 +9,8 @@ export default class DistrictLayer extends Layer {
       districts: {
         type: 'object',
         default: null
-      }
+      },
+      districtSpeed: { type: 'object', bindable: true }
     }
   }
 
@@ -34,6 +37,20 @@ export default class DistrictLayer extends Layer {
         this.container.addLayer(districtFeature);
         this._districtFeatures[name] = districtFeature;
       });
+    }
+  }
+
+  setDistrictSpeed(districtSpeed) {
+    this.setProperty('districtSpeed', districtSpeed);
+    if (districtSpeed) {
+      for (const key in districtSpeed) {
+        const speed = districtSpeed[key];
+        if (typeof (speed) === 'number') {
+          this._districtFeatures[key].setStyle({
+            fillColor: MapUtil.getInstance().getColorOfSpeed(speed)
+          });
+        }
+      }
     }
   }
 
