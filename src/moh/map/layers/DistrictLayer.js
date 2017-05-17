@@ -16,9 +16,10 @@ export default class DistrictLayer extends Layer {
   }
 
 
-  _districts = { yellow: [], red: [] };
+  _districtFeatures = {};
   setDistricts(districts) {
     this.setProperty('districts', districts);
+    this.container.clearLayers();
     if (districts) {
       districts.features.forEach((districtFeatureRaw) => {
         const name = districtFeatureRaw.properties.ENAME;
@@ -31,32 +32,34 @@ export default class DistrictLayer extends Layer {
         });
         districtFeature.on('click', this._districtFeature_onClick.bind(this, name, districtFeature));
         this.container.addLayer(districtFeature);
+        this._districtFeatures[name] = districtFeature;
       });
     }
   }
 
 
+  _districtColors = { yellow: [], red: [] };
   _districtFeature_onClick(name, districtFeature) {
-    if (this._districts.yellow.includes(name)) {
-      this._districts.yellow.splice(this._districts.yellow.indexOf(name), 1);
-      this._districts.red.push(name);
+    if (this._districtColors.yellow.includes(name)) {
+      this._districtColors.yellow.splice(this._districtColors.yellow.indexOf(name), 1);
+      this._districtColors.red.push(name);
       districtFeature.setStyle({
         fillColor: 'red',
         fillOpacity: 0.3
       });
-    } else if (this._districts.red.includes(name)) {
-      this._districts.red.splice(this._districts.yellow.indexOf(name), 1);
+    } else if (this._districtColors.red.includes(name)) {
+      this._districtColors.red.splice(this._districtColors.yellow.indexOf(name), 1);
       districtFeature.setStyle({
         fillColor: 'green',
         fillOpacity: 0.3
       });
     } else {
-      this._districts.yellow.push(name);
+      this._districtColors.yellow.push(name);
       districtFeature.setStyle({
         fillColor: 'yellow',
         fillOpacity: 0.3
       });
     }
-    console.log(JSON.stringify(this._districts, null, 4));
+    console.log(JSON.stringify(this._districtColors, null, 4));
   }
 }
