@@ -21,6 +21,12 @@ export default class IndexServiceClient extends ServiceClient {
     });
   }
 
+  getDistrictRt(time) {
+    return this.fetch('district/rt', {
+      time
+    });
+  }
+
   getPredict(from, to) {
     return this.fetch('predict', {
       from,

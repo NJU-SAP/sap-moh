@@ -18,7 +18,7 @@ export default class SpeedChart extends XYAxisChart {
     const from = new Date(now.getYear(), now.getMonth(), now.getDate());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate() + 1);
     this.domainX = [from, to];
-    this.domainY = [0, 0];
+    this.domainY = [0, 50];
   }
 
   initChart() {
@@ -43,7 +43,7 @@ export default class SpeedChart extends XYAxisChart {
   _initAxisY() {
     super._initAxisY({
       domain: this.domainY,
-      ticks: 3,
+      tickValues: [0, 25, 50],
       tickFormat: (num) => {
         if (num === 0) {
           return '';
@@ -114,18 +114,10 @@ export default class SpeedChart extends XYAxisChart {
   }
 
   redraw() {
-    if (!this.getRtCount() || !this.getPredictCount()) return;
-
-    const maxCount = this.getRtCount()
-      .concat(this.getPredictCount())
-      .reduce((prev, cur) => Math.max(prev, cur), 0);
-    const newScale = this.rtSeries.getScaleY().domain([0, maxCount]);
-
+    if (!this.getRtCount() || !this.getPredictCount()) {
+      return;
+    }
     this.axisY.setInnerTickSize(-this.contentFrame.width);
-    this.axisY.setDomain([0, maxCount]);
-    this.areaSeries.setScaleY(newScale);
-    this.rtSeries.setScaleY(newScale);
-    this.predictSeries.setScaleY(newScale);
 
     super.redraw();
   }
