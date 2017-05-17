@@ -17,7 +17,8 @@ export default class MapView extends SuperMapView {
   initLayers() {
     super.initLayers();
     this.districtLayer = new DistrictLayer('district-layer', {
-      districts: '{gis>/districts}'
+      districts: '{gis>/districts}',
+      districtSpeed: '{traffic>/district-speed}'
     });
     this.addLayer(this.districtLayer);
   }
