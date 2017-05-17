@@ -1,5 +1,7 @@
 import Layer from 'nju/map/layer/Layer';
 
+import MapUtil from '../MapUtil';
+
 
 export default class TrafficLayer extends Layer {
   metadata = {
@@ -43,27 +45,11 @@ export default class TrafficLayer extends Layer {
 
     this.edgeGeoJSON.eachLayer((edge) => {
       const edgeId = edge.feature.properties.edge_id;
-      const color = this._getColorOfSpeed(value[edgeId]);
+      const color = MapUtil.getInstance()._getColorOfSpeed(value[edgeId]);
       edge.setStyle({
         color,
         opacity: 0.6
       });
     });
-  }
-
-  _getColorOfSpeed(speed) {
-    const speedColorTable = ['red', 'yellow', 'rgba(0, 237, 0, 0.8)'];
-    const speedLevels = [0, 25, 30, 60];
-
-    let colorLevel = 0;
-    while (speedColorTable[colorLevel] !== 'rgba(0, 237, 0, 0.8)') {
-      if (speed > speedLevels[colorLevel + 1]) {
-        colorLevel += 1;
-      } else {
-        break;
-      }
-    }
-
-    return speedColorTable[colorLevel];
   }
 }
