@@ -90,22 +90,20 @@ export default class FutureChart extends XYAxisChart {
 
   invalidateDomainX() {
     const now = new Date();
+    const beginOfDay = new Date(now.getYear(), now.getMonth(), now.getDate());
     const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
     const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
     this.domainX = [from, to];
 
     const value = this.getData();
     if (!value) return;
-    const busSpeed = value.map((item, i) => ({
-      date: new Date(from.getTime() + i * 60 * 1000),
-      value: item.busSpeed
+    const transformed = value.map((item, i) => ({
+      date: new Date(beginOfDay.getTime() + i * 60 * 1000),
+      busSpeed: item.busSpeed,
+      overallSpeed: item.overallSpeed
     })).filter(item => item.date >= from && item.date <= to);
-    const overallSpeed = value.map((item, i) => ({
-      date: new Date(from.getTime() + i * 60 * 1000),
-      value: item.overallSpeed
-    })).filter(item => item.date >= from && item.date <= to);
-    this.busLineSeries.setData(busSpeed);
-    this.cityLineSeries.setData(overallSpeed);
+    this.busLineSeries.setData(transformed.map(item => ({ date: item.date, value: item.busSpeed })));
+    this.cityLineSeries.setData(transformed.map(item => ({ date: item.date, value: item.overallSpeed })));
 
     this.redraw();
   }
