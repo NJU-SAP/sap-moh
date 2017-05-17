@@ -5,7 +5,7 @@ import LineSeries from 'nju/chart/series/LineSeries';
 export default class HistoryChart extends XYAxisChart {
   metadata = {
     properties: {
-      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 10 } },
+      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 5 } },
       data: { type: 'object' },
     }
   }
