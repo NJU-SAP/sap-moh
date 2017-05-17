@@ -61,8 +61,7 @@ export default class FutureChart extends XYAxisChart {
       scaleX: d3.time.scale().domain(this.domainX),
       scaleY: d3.scale.linear().domain(this.domainY),
       xPath: 'date',
-      yPath: 'value',
-      dashed: true
+      yPath: 'value'
     });
     this.addSeries(this.cityLineSeries);
   }

@@ -45,16 +45,6 @@ export default class HistoryChart extends XYAxisChart {
     });
   }
 
-  _initBusLineSeries() {
-    this.busLineSeries = new LineSeries({
-      scaleX: d3.time.scale().domain(this.domainX),
-      scaleY: d3.scale.linear().domain(this.domainY),
-      xPath: 'date',
-      yPath: 'value'
-    });
-    this.addSeries(this.busLineSeries);
-  }
-
   _initCityLineSeries() {
     this.cityLineSeries = new LineSeries({
       scaleX: d3.time.scale().domain(this.domainX),
@@ -63,6 +53,17 @@ export default class HistoryChart extends XYAxisChart {
       yPath: 'value'
     });
     this.addSeries(this.cityLineSeries);
+  }
+
+  _initBusLineSeries() {
+    this.busLineSeries = new LineSeries({
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
+      xPath: 'date',
+      yPath: 'value',
+      dashed: true
+    });
+    this.addSeries(this.busLineSeries);
   }
 
   setData(value) {
