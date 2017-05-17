@@ -5,7 +5,7 @@ import LineSeries from 'nju/chart/series/LineSeries';
 export default class HistoryChart extends XYAxisChart {
   metadata = {
     properties: {
-      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 10 } },
+      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 5 } },
       data: { type: 'object' },
     }
   }
@@ -13,7 +13,7 @@ export default class HistoryChart extends XYAxisChart {
   init() {
     super.init();
     this.addStyleClass('moh-history-chart');
-    this.domainY = [0, 50];
+    this.domainY = [0, 60];
     this.invalidateDomainX();
   }
 
@@ -38,21 +38,11 @@ export default class HistoryChart extends XYAxisChart {
   _initAxisY() {
     super._initAxisY({
       domain: this.domainY,
-      tickValues: [0, 25, 50],
+      tickValues: [0, 20, 40, 60],
       tickFormat: (num) => {
         return num === 0 ? '' : num;
       }
     });
-  }
-
-  _initBusLineSeries() {
-    this.busLineSeries = new LineSeries({
-      scaleX: d3.time.scale().domain(this.domainX),
-      scaleY: d3.scale.linear().domain(this.domainY),
-      xPath: 'date',
-      yPath: 'value'
-    });
-    this.addSeries(this.busLineSeries);
   }
 
   _initCityLineSeries() {
@@ -63,6 +53,17 @@ export default class HistoryChart extends XYAxisChart {
       yPath: 'value'
     });
     this.addSeries(this.cityLineSeries);
+  }
+
+  _initBusLineSeries() {
+    this.busLineSeries = new LineSeries({
+      scaleX: d3.time.scale().domain(this.domainX),
+      scaleY: d3.scale.linear().domain(this.domainY),
+      xPath: 'date',
+      yPath: 'value',
+      dashed: true
+    });
+    this.addSeries(this.busLineSeries);
   }
 
   setData(value) {
