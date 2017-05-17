@@ -134,6 +134,10 @@ export default class Application extends SuperApplication {
           });
           historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
+
+          this.historyChart.attachTimestampSelected(() => {
+            console.log('Timestamp selected:', this.historyChart.getSelectedTimestamp());
+          });
         }
       }
     });
