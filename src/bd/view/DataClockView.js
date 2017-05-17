@@ -6,7 +6,7 @@ export default class DataClockView extends View {
   metadata = {
     properties: {
       time: { type: 'object', bindable: true },
-      rtModel: { type: 'boolean', defaultValue: true }
+      rt: { type: 'boolean', defaultValue: true }
     }
   }
 
@@ -58,9 +58,12 @@ export default class DataClockView extends View {
     this.$element.find('.colon').text(':');
   }
 
-  setRtModel(value) {
+  setRt(value) {
     this.setProperty('rt', value);
-    this.$('.container').toggleClass('rt', !value);
+
+    if (value === undefined) return;
+
+    this.$('.container').toggleClass('rt', value);
     this.$('.colon').toggleClass('active', value);
   }
 }

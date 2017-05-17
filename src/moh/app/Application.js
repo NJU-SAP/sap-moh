@@ -98,7 +98,8 @@ export default class Application extends SuperApplication {
 
   _initDataClockView() {
     const dataClockView = new DataClockView('dataClockView', {
-      time: '{state>/timestamp}'
+      time: '{state>/timestamp}',
+      rt: '{state>/rt}'
     });
     dataClockView.addStyleClass('top-1 left-7');
     this.addSubview(dataClockView, 'control');
