@@ -129,16 +129,17 @@ export default class Application extends SuperApplication {
       expanded: () => {
         if (!this.historyChart) {
           this.historyChart = new HistoryChart({
-            id: 'historyChart',
-            data: '{index>/rt}'
+            id: 'historyChart'
           });
           historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
 
           this.historyChart.attachTimestampSelected(() => {
             console.log('Timestamp selected:', this.historyChart.getSelectedTimestamp());
+            this.setTimestamp(this.historyChart.getSelectedTimestamp());
           });
         }
+        this.historyChart.setData(sap.ui.getCore().getModel('index').getProperty('/rt'));
       }
     });
 
