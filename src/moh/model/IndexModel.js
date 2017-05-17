@@ -44,5 +44,8 @@ export default class IndexModel extends Model {
 
     const rt = await IndexServiceClient.getInstance().getRt(from, to);
     this.setProperty('/rt', rt);
+
+    //const districtRt = await IndexServiceClient.getInstance().getDistrictRt(to);
+    //this.setProperty('/district/rt', districtRt);
   }
 }
