@@ -1,5 +1,6 @@
 import SuperMapView from 'bd/map/MapView';
 
+import DistrictLayer from './layers/DistrictLayer';
 
 export default class MapView extends SuperMapView {
   metadata = {
@@ -13,11 +14,11 @@ export default class MapView extends SuperMapView {
     this.addStyleClass('moh-district-map');
   }
 
-  afterInit() {
-    super.afterInit();
-  }
-
   initLayers() {
     super.initLayers();
+    this.districtLayer = new DistrictLayer('district-layer', {
+      districts: '{gis>/districts}'
+    });
+    this.addLayer(this.districtLayer);
   }
 }

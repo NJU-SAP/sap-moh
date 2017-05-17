@@ -1,5 +1,9 @@
 {
   bus: {
     count: 40
+  },
+  districts: {
+    yellow: [ "SHARAI' AL MUJAHIDIN", "AL KHANSA'" ],
+    red: [ "AL MALIK FAHD DIST.", "AL MA'ABDAH" ]
   }
 }
