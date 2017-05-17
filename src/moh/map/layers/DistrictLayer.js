@@ -26,7 +26,8 @@ export default class DistrictLayer extends Layer {
           weight: 1,
           color: 'white',
           opacity: 0.2,
-          fillColor: 'green'
+          fillColor: 'green',
+          fillOpacity: 0.2
         });
         districtFeature.on('click', () => {
           if (this._districts.yellow.includes(name)) {
