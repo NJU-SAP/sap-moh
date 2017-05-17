@@ -19,4 +19,10 @@ export default class TrafficServiceClient extends ServiceClient {
       time
     });
   }
+
+  getDistrictSpeed(time) {
+    return this.fetch('district-speed', {
+      time
+    });
+  }
 }
