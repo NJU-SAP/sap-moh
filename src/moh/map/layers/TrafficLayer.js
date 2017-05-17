@@ -45,7 +45,7 @@ export default class TrafficLayer extends Layer {
 
     this.edgeGeoJSON.eachLayer((edge) => {
       const edgeId = edge.feature.properties.edge_id;
-      const color = MapUtil.getInstance()._getColorOfSpeed(value[edgeId]);
+      const color = MapUtil.getInstance().getColorOfSpeed(value[edgeId]);
       edge.setStyle({
         color,
         opacity: 0.6

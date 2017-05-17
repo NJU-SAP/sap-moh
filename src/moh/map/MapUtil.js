@@ -9,7 +9,7 @@ export default class MapUtil extends ManagedObject {
     return moh.map.MapUtil._instance;
   }
 
-  _getColorOfSpeed(speed) {
+  getColorOfSpeed(speed) {
     const speedColorTable = ['red', 'yellow', 'rgba(0, 237, 0, 0.8)'];
     const speedLevels = [0, 25, 30, 60];
 
