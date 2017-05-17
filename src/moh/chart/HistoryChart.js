@@ -95,8 +95,8 @@ export default class HistoryChart extends XYAxisChart {
   setSelectedTimestamp(value) {
     this.setProperty('selectedTimestamp', value);
     if (value) {
-      const from = new Date(value.getFullYear(), value.getMonth(), value.getDate(), value.getHours(), value.getMinutes() - 2);
-      const to = new Date(value.getFullYear(), value.getMonth(), value.getDate(), value.getHours(), value.getMinutes() + 2);
+      const from = new Date(value.getFullYear(), value.getMonth(), value.getDate(), value.getHours(), value.getMinutes() - 1);
+      const to = new Date(value.getFullYear(), value.getMonth(), value.getDate(), value.getHours(), value.getMinutes() + 1);
       this.rectSeries.setDomainX([from, to]);
     } else {
       this.rectSeries.setDomainX([0, 0]);
