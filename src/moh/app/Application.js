@@ -275,7 +275,7 @@ export default class Application extends SuperApplication {
       predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-4');
+    tile.addStyleClass('right-1 bottom-1');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
@@ -286,7 +286,7 @@ export default class Application extends SuperApplication {
       predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-1');
+    tile.addStyleClass('right-1 bottom-4');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
