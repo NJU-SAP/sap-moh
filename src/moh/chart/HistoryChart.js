@@ -1,6 +1,7 @@
 import XYAxisChart from 'nju/chart/XYAxisChart';
 import AreaSeries from 'nju/chart/series/AreaSeries';
 import LineSeries from 'nju/chart/series/LineSeries';
+import RectSeries from 'nju/chart/series/RectSeries';
 
 export default class HistoryChart extends XYAxisChart {
   metadata = {
@@ -25,6 +26,7 @@ export default class HistoryChart extends XYAxisChart {
     super.initChart();
     this._initBusLineSeries();
     this._initCityLineSeries();
+    this._initRectSeries();
     const self = this;
     this.contentGroup.on('click', function(d) {
       self.onClick.call(self, this);
@@ -74,11 +76,32 @@ export default class HistoryChart extends XYAxisChart {
     this.addSeries(this.busLineSeries);
   }
 
+  _initRectSeries() {
+    this.rectSeries = new RectSeries({
+      domainX: [0, 0],
+      opacity: 0.8,
+      fill: "#dda5dd"
+    });
+    this.addSeries(this.rectSeries);
+  }
+
   setData(value) {
     this.setProperty('data', value);
     if (value) {
       this.invalidateDomainX();
     }
+  }
+
+  setSelectedTimestamp(value) {
+    this.setProperty('selectedTimestamp', value);
+    if (value) {
+      const from = new Date(value.getFullYear(), value.getMonth(), value.getDate(), value.getHours(), value.getMinutes() - 2);
+      const to = new Date(value.getFullYear(), value.getMonth(), value.getDate(), value.getHours(), value.getMinutes() + 2);
+      this.rectSeries.setDomainX([from, to]);
+    } else {
+      this.rectSeries.setDomainX([0, 0]);
+    }
+    this.redraw();
   }
 
   redraw() {
