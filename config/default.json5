@@ -1,5 +1,5 @@
 {
-  bus: {
+  buses: {
     count: 40
   },
   districts: {
