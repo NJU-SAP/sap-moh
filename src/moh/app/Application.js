@@ -20,6 +20,7 @@ import HistoryChart from '../chart/HistoryChart';
 import IndexModel from '../model/IndexModel';
 import MapView from '../map/MapView';
 import MohStateBus from '../state/StateBus';
+import NowMenuItem from '../menu/NowMenuItem';
 import PilgrimModel from '../model/PilgrimModel';
 import SendMessageDialog from '../dialog/SendMessageDialog';
 import SpeedTile from '../tile/SpeedTile';
@@ -108,11 +109,15 @@ export default class Application extends SuperApplication {
   _initMainMenu() {
     super._initMainMenu();
 
-    const nowMenuItem = new MenuItem({
+    const nowMenuItem = new NowMenuItem({
       id: 'nowMenuItem',
       text: 'Now',
+      rt: '{state>/rt}',
       press: () => {
-
+        const rt = StateBus.getInstance().getState('rt');
+        if (!rt) {
+          this.resumeRt();
+        }
       }
     });
 
