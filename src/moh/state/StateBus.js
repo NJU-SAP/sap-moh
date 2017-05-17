@@ -12,9 +12,22 @@ export default class StateBus extends SuperStateBus {
         this._updateTimestamp();
       }
     });
+
+    this.bindState('rt').attachChange(() => {
+      if (this.getState('rt')) {
+        this._updateTimestamp();
+      } else {
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
+        }
+      }
+    });
   }
 
   _updateTimestamp() {
+    if (!this.getState('rt')) return;
+
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
@@ -27,7 +40,8 @@ export default class StateBus extends SuperStateBus {
     return {
       kaaba: false,
       selectedStationId: null,
-      timestamp: new Date()
+      timestamp: new Date(),
+      rt: true
     };
   }
 }

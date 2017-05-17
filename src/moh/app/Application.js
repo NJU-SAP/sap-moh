@@ -347,4 +347,13 @@ export default class Application extends SuperApplication {
   run() {
     //this.getSubview('floating-panel-container').initPanelContainer();
   }
+
+  setTimestamp(timestamp) {
+    StateBus.getInstance().setState('rt', false);
+    StateBus.getInstance().setState('timestamp', timestamp);
+  }
+
+  resumeRt() {
+    StateBus.getInstance().setState('rt', true);
+  }
 }
