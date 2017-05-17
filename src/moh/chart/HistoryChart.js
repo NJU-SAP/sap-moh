@@ -5,8 +5,12 @@ import LineSeries from 'nju/chart/series/LineSeries';
 export default class HistoryChart extends XYAxisChart {
   metadata = {
     properties: {
+      data: { type: 'object', bindable: true },
       padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 5 } },
-      data: { type: 'object' },
+      selectedTimestamp: { type: 'object', defaultValue: null }
+    },
+    events: {
+      timestampSelected: { }
     }
   }
 
@@ -21,6 +25,10 @@ export default class HistoryChart extends XYAxisChart {
     super.initChart();
     this._initBusLineSeries();
     this._initCityLineSeries();
+    const self = this;
+    this.contentGroup.on('click', function(d) {
+      self.onClick.call(self, this);
+    })
   }
 
   _initAxisX() {
@@ -105,5 +113,12 @@ export default class HistoryChart extends XYAxisChart {
     this.cityLineSeries.setData(transformed.map(item => ({ date: item.date, value: item.overallSpeed })));
 
     this.redraw();
+  }
+
+  onClick(container) {
+    const coordinates = d3.mouse(container);
+    const timestamp = this.busLineSeries.getScaleX().invert(coordinates[0]);
+    this.setSelectedTimestamp(timestamp);
+    this.fireTimestampSelected();
   }
 }
