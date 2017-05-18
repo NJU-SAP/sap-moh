@@ -72,8 +72,34 @@ export default class BusOperationTabPageView extends TabPageView {
     $.when($.get("./api/bus/buspassenger"),$.get("./api/bus/busspeed")).then(function(passager,speed){
       self.c.setData({line1:JSON.parse(speed[0]).map(function(d){d.y=+(d.y)+10*(Math.random()-0.5);d.y=d.y>0?d.y:0;return d}).slice(0,acc),
                         line2:JSON.parse(passager[0]).slice(0,acc),
-                        pie1:[{time:"1:00",value:15},{time:"1:30",value:15},{time:"2:00",value:58},{time:"3:00",value:28},{time:"4:00",value:99},{time:"5:00",value:34},{time:"6:00",value:65},{time:"7:00",value:41},{time:"8:00",value:88},{time:"9:00",value:55},{time:"10:00",value:50},{time:"11:00",value:32},{time:"12:00",value:60}],
-                        pie2:[{time:"1:00",value:15},{time:"1:30",value:15},{time:"2:00",value:58},{time:"3:00",value:28},{time:"4:00",value:99},{time:"5:00",value:34},{time:"6:00",value:65},{time:"7:00",value:41},{time:"8:00",value:88},{time:"9:00",value:55},{time:"10:00",value:50},{time:"11:00",value:32},{time:"12:00",value:60}]
+                        pie1:[
+            {"time":1,"value":[1,2,3,7]},
+            {"time":2,"value":[10,20,30,40]},
+            {"time":3,"value":[1,2,3,4]},
+            //{"time":4,"value":[1,2,3,9]},
+            {"time":9,"value":[1,2,3,10]},
+            {"time":11,"value":[1,2,3,11]},
+            {"time":0,"value":[1,2,3,12]},
+            {"time":8,"value":[1,2,3,4]},
+            {"time":5,"value":[1,2,3,4]},
+            {"time":10,"value":[1,2,3,4]},
+            //{"time":6,"value":[1,2,3,4]},
+            {"time":7,"value":[1,2,3,4]}
+            ],
+                        pie2:[
+            {"time":1,"value":[1,2,3,7]},
+            {"time":2,"value":[10,20,30,40]},
+            {"time":3,"value":[1,2,3,4]},
+            //{"time":4,"value":[1,2,3,9]},
+            {"time":9,"value":[1,2,3,10]},
+            {"time":11,"value":[1,2,3,11]},
+            {"time":0,"value":[1,2,3,12]},
+            {"time":8,"value":[1,2,3,4]},
+            {"time":5,"value":[1,2,3,4]},
+            {"time":10,"value":[1,2,3,4]},
+            //{"time":6,"value":[1,2,3,4]},
+            {"time":7,"value":[1,2,3,4]}
+            ]
                     })
     })
     // this.c.setData({line1:[{x:1,y:10},{x:3,y:18},{x:18,y:18},{x:20,y:18}],
