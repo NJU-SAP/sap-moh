@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js --presets es2015,stage-0"
+    "dev": "babel-node index.js --presets es2015,stage-0",
+    "start": "cross-env PORT=80 babel-node index.js --presets es2015,stage-0"
   },
   "author": "",
   "devDependencies": {
@@ -35,6 +36,7 @@
   "dependencies": {
     "babyparse": "^0.4.6",
     "config": "^1.26.1",
+    "cross-env": "^5.0.0",
     "d3-random": "^1.1.0",
     "express": "^4.14.0",
     "geolib": "^2.0.22",
