@@ -3,6 +3,10 @@ logs
 *.log
 npm-debug.log*
 
+# map
+public/map
+map.tar.gz
+
 # Runtime data
 pids
 *.pid

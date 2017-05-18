@@ -32,5 +32,6 @@ export default class BusDetailDialog extends Dialog {
   activate() {
     super.activate();
     this.setTitle(`Bus ${StateBus.getInstance().getState('selectedBusId')}RUA`);
+    this.tabView.update();
   }
 }

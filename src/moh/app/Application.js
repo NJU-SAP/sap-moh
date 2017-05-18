@@ -129,12 +129,17 @@ export default class Application extends SuperApplication {
       expanded: () => {
         if (!this.historyChart) {
           this.historyChart = new HistoryChart({
-            id: 'historyChart',
-            data: '{index>/rt}'
+            id: 'historyChart'
           });
           historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
+
+          this.historyChart.attachTimestampSelected(() => {
+            console.log('Timestamp selected:', this.historyChart.getSelectedTimestamp());
+            this.setTimestamp(this.historyChart.getSelectedTimestamp());
+          });
         }
+        this.historyChart.setData(sap.ui.getCore().getModel('index').getProperty('/rt'));
       }
     });
 
@@ -254,7 +259,7 @@ export default class Application extends SuperApplication {
   }
 
   _initTiles() {
-    this.$('#bd-tile-layer').append($('<div class="shadow top-1 right-1 col-5 row-12">'));
+    this.$('#bd-tile-layer').append($('<div class="shadow top-1 right-1 row-12">'));
     this._initCounterTile();
     this._initSpeedTile();
   }
@@ -275,7 +280,7 @@ export default class Application extends SuperApplication {
       predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-4');
+    tile.addStyleClass('right-1 bottom-1');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
@@ -286,7 +291,7 @@ export default class Application extends SuperApplication {
       predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-1');
+    tile.addStyleClass('right-1 bottom-4');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
