@@ -14,6 +14,13 @@ export default class GisServiceClient extends ServiceClient {
     return '/api/gis/';
   }
 
+  async getDistricts() {
+    if (!this._districts) {
+      this._districts = await this.fetch('districts');
+    }
+    return this._districts;
+  }
+
   async getEdges() {
     if (!this._edges) {
       this._edges = await this.fetch('edges');

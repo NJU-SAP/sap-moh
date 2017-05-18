@@ -4,10 +4,9 @@ import View from 'nju/view/View';
 
 export default class DataClockView extends View {
   metadata = {
-    properties:
-    {
+    properties: {
       time: { type: 'object', bindable: true },
-      historicalModel: { type: 'boolean', defaultValue: false }
+      rt: { type: 'boolean', defaultValue: true }
     }
   }
 
@@ -59,9 +58,12 @@ export default class DataClockView extends View {
     this.$element.find('.colon').text(':');
   }
 
-  setHistoricalModel(historicalMode) {
-    this.setProperty('historicalMode', historicalMode);
-    this.$('.container').toggleClass('historical', historicalMode);
-    this.$('.colon').toggleClass('active', !historicalMode);
+  setRt(value) {
+    this.setProperty('rt', value);
+
+    if (value === undefined) return;
+
+    this.$('.container').toggleClass('rt', value);
+    this.$('.colon').toggleClass('active', value);
   }
 }

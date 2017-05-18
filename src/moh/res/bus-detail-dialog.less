@@ -1,6 +1,5 @@
 .moh-bus-detail-dialog {
-  > .container
-	{
+  > .container {
     ul {
       padding-left: 0;
 
@@ -8,6 +7,41 @@
         height: 2em;
         line-height: 2em;
       }
+    }
+  }
+}
+
+.moh-bus-operation-tab-page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  > .left-container {
+    width: 50%;
+
+    .speed-container {
+      h2 {
+        line-height: 1em;
+        margin: .3em;
+      }
+
+      .unit,
+      .value {
+        display: inline-block;
+      }
+    }
+
+    .sunburst-chart-container {
+      margin-top: 2em;
+    }
+  }
+
+  > .right-container {
+    width: 50%;
+
+    .speed-container {
+      width: 100%;
+      height: 250px;
     }
   }
 }

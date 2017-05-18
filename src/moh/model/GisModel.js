@@ -5,10 +5,16 @@ import GisServiceClient from '../service/GisServiceClient';
 
 export default class GisModel extends Model {
   async initialLoad() {
+    await this._loadDistricts();
     await this._loadEdges();
     await this._loadBusStations();
     await this._loadBusLines();
     this.fireEvent('initialLoadCompleted');
+  }
+
+  async _loadDistricts() {
+    const districts = await GisServiceClient.getInstance().getDistricts();
+    this.setProperty('/districts', districts);
   }
 
   async _loadEdges() {

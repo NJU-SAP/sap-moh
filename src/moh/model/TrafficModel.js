@@ -21,6 +21,7 @@ export default class TrafficModel extends Model {
   async checkStates() {
     const timestamp = StateBus.getInstance().getState('timestamp');
     await this.updateEdgeSpeed(timestamp);
+    await this.updateDistrictSpeed(timestamp);
     this.fireEvent('initialLoadCompleted');
   }
 
@@ -31,5 +32,10 @@ export default class TrafficModel extends Model {
   async updateEdgeSpeed(timestamp) {
     const edgeSpeed = await TrafficServiceClient.getInstance().getEdgeSpeed(timestamp);
     this.setProperty('/edge-speed', edgeSpeed);
+  }
+
+  async updateDistrictSpeed(timestamp) {
+    const districtSpeed = await TrafficServiceClient.getInstance().getDistrictSpeed(timestamp);
+    this.setProperty('/district-speed', districtSpeed);
   }
 }

@@ -20,6 +20,7 @@ import HistoryChart from '../chart/HistoryChart';
 import IndexModel from '../model/IndexModel';
 import MapView from '../map/MapView';
 import MohStateBus from '../state/StateBus';
+import NowMenuItem from '../menu/NowMenuItem';
 import PilgrimModel from '../model/PilgrimModel';
 import SendMessageDialog from '../dialog/SendMessageDialog';
 import SpeedTile from '../tile/SpeedTile';
@@ -98,7 +99,8 @@ export default class Application extends SuperApplication {
 
   _initDataClockView() {
     const dataClockView = new DataClockView('dataClockView', {
-      time: '{state>/timestamp}'
+      time: '{state>/timestamp}',
+      rt: '{state>/rt}'
     });
     dataClockView.addStyleClass('top-1 left-7');
     this.addSubview(dataClockView, 'control');
@@ -107,11 +109,15 @@ export default class Application extends SuperApplication {
   _initMainMenu() {
     super._initMainMenu();
 
-    const nowMenuItem = new MenuItem({
+    const nowMenuItem = new NowMenuItem({
       id: 'nowMenuItem',
       text: 'Now',
+      rt: '{state>/rt}',
       press: () => {
-
+        const rt = StateBus.getInstance().getState('rt');
+        if (!rt) {
+          this.resumeRt();
+        }
       }
     });
 
@@ -123,12 +129,17 @@ export default class Application extends SuperApplication {
       expanded: () => {
         if (!this.historyChart) {
           this.historyChart = new HistoryChart({
-            id: 'historyChart',
-            data: '{index>/rt}'
+            id: 'historyChart'
           });
           historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
+
+          this.historyChart.attachTimestampSelected(() => {
+            console.log('Timestamp selected:', this.historyChart.getSelectedTimestamp());
+            this.setTimestamp(this.historyChart.getSelectedTimestamp());
+          });
         }
+        this.historyChart.setData(sap.ui.getCore().getModel('index').getProperty('/rt'));
       }
     });
 
@@ -248,7 +259,7 @@ export default class Application extends SuperApplication {
   }
 
   _initTiles() {
-    this.$('#bd-tile-layer').append($('<div class="shadow bottom-1 right-1">'));
+    this.$('#bd-tile-layer').append($('<div class="shadow top-1 right-1 row-12">'));
     this._initCounterTile();
     this._initSpeedTile();
   }
@@ -269,7 +280,7 @@ export default class Application extends SuperApplication {
       predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-4');
+    tile.addStyleClass('right-1 bottom-1');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
@@ -280,7 +291,7 @@ export default class Application extends SuperApplication {
       predict: '{index>/predict}',
       rt: '{index>/rt}'
     });
-    tile.addStyleClass('right-1 bottom-1');
+    tile.addStyleClass('right-1 bottom-4');
     tile.setModel(sap.ui.getCore().getModel('index'), 'index');
     tile.setModel(sap.ui.getCore().getModel('config'), 'config');
     this.addSubview(tile, 'tile');
@@ -346,5 +357,14 @@ export default class Application extends SuperApplication {
 
   run() {
     //this.getSubview('floating-panel-container').initPanelContainer();
+  }
+
+  setTimestamp(timestamp) {
+    StateBus.getInstance().setState('rt', false);
+    StateBus.getInstance().setState('timestamp', timestamp);
+  }
+
+  resumeRt() {
+    StateBus.getInstance().setState('rt', true);
   }
 }
