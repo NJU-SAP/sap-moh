@@ -37,10 +37,10 @@ export default class HistoryChart extends XYAxisChart {
   {
     super._initLegend();
     this.legendColorScale = d3.scale.ordinal()
-      .domain(['City Speed', 'Bus Speed'])
-      .range(['#5ff7ff', 'ea85ff']);
+      .domain(['Buses Speed', 'City Speed'])
+      .range(['ea85ff', '#5ff7ff']);
     this.legendConfig = {
-      itemWidth: 130,
+      itemWidth: 115,
       rectWidth: 30,
       rectHeight: 4
     };
@@ -62,7 +62,7 @@ export default class HistoryChart extends XYAxisChart {
       .attr("opacity", 1);
     this.legendRects.append("text")
       .style("alignment-baseline", "text-before-edge")
-      .attr("dx", this.legendConfig.rectWidth + 10)
+      .attr("dx", this.legendConfig.rectWidth + 4)
       .text(d => d);
     this.legendGroup.style('opacity', 1);
   }
@@ -150,10 +150,10 @@ export default class HistoryChart extends XYAxisChart {
     this.busLineSeries.setScaleX(newScale);
     this.cityLineSeries.setScaleX(newScale);
 
-    this.legendRects
-      .attr("transform", (d, i) => {
-        return `translate(${this.contentFrame.width - this.legendConfig.itemWidth * (i + 1)}, 1)`;
-      });
+    this.legendRects.attr("transform", (d, i) => {
+      const width = this.getPadding().left + this.contentFrame.width;
+      return `translate(${width - this.legendConfig.itemWidth * (i + 1)}, 1)`;
+    });
 
     super.redraw();
   }
