@@ -33,6 +33,40 @@ export default class HistoryChart extends XYAxisChart {
     });
   }
 
+  _initLegend()
+  {
+    super._initLegend();
+    this.legendColorScale = d3.scale.ordinal()
+      .domain(['City Speed', 'Bus Speed'])
+      .range(['#5ff7ff', 'ea85ff']);
+    this.legendConfig = {
+      itemWidth: 130,
+      rectWidth: 30,
+      rectHeight: 4
+    };
+    this.legendRects = this.legendGroup.selectAll(".legend-item")
+      .data(this.legendColorScale.domain())
+      .enter()
+      .append("g")
+      .classed("legend-item", true)
+      .attr("transform", (d, i) => {
+        return `translate(-200, 0)`;
+      });
+    this.legendRects.append("rect")
+      .attr("width", this.legendConfig.rectWidth)
+      .attr("height", (d, i) => this.legendConfig.rectHeight)
+      .style("fill", d => this.legendColorScale(d))
+      .attr("transform", (d, i) => {;
+        return `translate(0, 6)`;
+      })
+      .attr("opacity", 1);
+    this.legendRects.append("text")
+      .style("alignment-baseline", "text-before-edge")
+      .attr("dx", this.legendConfig.rectWidth + 10)
+      .text(d => d);
+    this.legendGroup.style('opacity', 1);
+  }
+
   _initAxisX() {
     const hourFormat = d3.time.format("%H:%M");
     super._initAxisX({
@@ -115,6 +149,12 @@ export default class HistoryChart extends XYAxisChart {
     this.axisX.setDomain(this.domainX);
     this.busLineSeries.setScaleX(newScale);
     this.cityLineSeries.setScaleX(newScale);
+
+    this.legendRects
+      .attr("transform", (d, i) => {
+        return `translate(${this.contentFrame.width - this.legendConfig.itemWidth * (i + 1)}, 1)`;
+      });
+
     super.redraw();
   }
 
