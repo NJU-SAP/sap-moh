@@ -1,8 +1,13 @@
   @fontclolor:white;
   .HajjBusDetail{
+    color:@fontclolor;
     section{
           margin: 40px 0px;
       }
+    .mainTitle{
+            margin: 0px;
+    text-align: center
+    }
     .info-title{
         font-size: 1.5rem
     }
@@ -74,8 +79,26 @@
     }
 
     .doughnutTitle {
-        color: #012;
+        color: @fontclolor;
         font-size: 20px;
     }
+
   }
-  
+      .getStringRect{
+        .toolTip {
+        display: none;
+        position: relative;
+        padding: 5px 15px;
+        border-radius: 1px;
+        background: rgba(0,0,0,.8);
+        color: #ddd;
+        font-size: 17px;
+        text-shadow: 0 1px 0 #000;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        pointer-events: none;
+        z-index: 10;
+    }
+    }

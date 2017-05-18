@@ -70,8 +70,7 @@ export default class BusOperationTabPageView extends TabPageView {
     var self=this
     var acc=Math.floor(new Date().getHours()/0.5)+ (new Date().getMinutes()>=30?1:0)
     $.when($.get("./api/bus/buspassenger"),$.get("./api/bus/busspeed")).then(function(passager,speed){
-      self.c.setData({line1:JSON.parse(passager[0]).map(function(d){d.y=d.y+40*(Math.random()-0.5);return d}).slice(0,acc),
-                        predict:JSON.parse(passager[0]),
+      self.c.setData({line1:JSON.parse(speed[0]).map(function(d){d.y=+(d.y)+10*(Math.random()-0.5);d.y=d.y>0?d.y:0;return d}).slice(0,acc),
                         line2:JSON.parse(passager[0]).slice(0,acc),
                         pie1:[{time:"1:00",value:15},{time:"1:30",value:15},{time:"2:00",value:58},{time:"3:00",value:28},{time:"4:00",value:99},{time:"5:00",value:34},{time:"6:00",value:65},{time:"7:00",value:41},{time:"8:00",value:88},{time:"9:00",value:55},{time:"10:00",value:50},{time:"11:00",value:32},{time:"12:00",value:60}],
                         pie2:[{time:"1:00",value:15},{time:"1:30",value:15},{time:"2:00",value:58},{time:"3:00",value:28},{time:"4:00",value:99},{time:"5:00",value:34},{time:"6:00",value:65},{time:"7:00",value:41},{time:"8:00",value:88},{time:"9:00",value:55},{time:"10:00",value:50},{time:"11:00",value:32},{time:"12:00",value:60}]
