@@ -52,82 +52,74 @@ export default class Dialog extends View {
     this.$title = $("<header><span class='title h2'/></header>");
     this.$container.append(this.$title);
 
-    this.$title.on('mousedown', (e) => {
-      _dialog_onmovestart('mouse', e);
+    this.$title.on('mousedown', this._dialog_onmovestart.bind(this, 'mouse'));
+    this.$title.on('touchstart', this._dialog_onmovestart.bind(this, 'touch'));
+  }
+
+  _dialog_onmovestart(interactionMode, e) {
+    // Prevent answers to click action.
+    if (this._moving) {
+      return;
+    }
+    this._moving = true;
+
+    e.preventDefault();
+    this.$title.css('cursor', 'move');
+    this.$dialog = $(e.currentTarget).parent().parent();
+    this.dragContext.mouseX = interactionMode === 'touch' ? e.touches[0].clientX : e.screenX;
+    this.dragContext.mouseY = interactionMode === 'touch' ? e.touches[0].clientY : e.screenY;
+    this.dragContext.left = this.$dialog.position().left;
+    this.dragContext.top = this.$dialog.position().top;
+
+    const scale = 1.04;
+    // Pick up dialog.
+    this.$dialog.transition({
+      scale,
+      opacity: 0.68
+    }, 100);
+
+    $(document.body).on(`${interactionMode}move`, this._dialog_onmoving.bind(this, interactionMode));
+
+    $(document.body).on(interactionMode === 'touch' ? 'touchend' : 'mouseup', this._dialog_onmoveend.bind(this));
+  }
+
+  _dialog_onmoving(interactionMode, e) {
+    const clientX = interactionMode === 'touch' ? e.touches[0].clientX : e.screenX;
+    const clientY = interactionMode === 'touch' ? e.touches[0].clientY : e.screenY;
+    const mouseOffsetX = clientX - this.dragContext.mouseX;
+    const mouseOffsetY = clientY - this.dragContext.mouseY;
+
+    let newTop = this.dragContext.top + mouseOffsetY;
+    const bodyHeight = $(document.body).height();
+    const titleHeight = this.$title.height();
+
+    // Prevent dialog from dragging out of body-top-margin.
+    if ((newTop) <= 0) {
+      newTop = 0;
+    }
+
+    if ((newTop + titleHeight) > bodyHeight) {
+      newTop = bodyHeight - titleHeight;
+    }
+
+    this.$dialog.css({
+      top: newTop,
+      left: this.dragContext.left + mouseOffsetX
     });
-    this.$title.on('touchstart', (e) => {
-      _dialog_onmovestart('touch', e);
+  }
+
+  _dialog_onmoveend(e) {
+    $(document.body).off('mousemove');
+    $(document.body).off('touchmove');
+    this.$title.css('cursor', 'default');
+    $(document.body).off('mouseup');
+    $(document.body).off('touchend');
+    this.$dialog.transition({
+      scale: 1,
+      opacity: 1
+    }, () => {
+      this._moving = false;
     });
-
-    function _dialog_onmovestart(interactionMode, e) {
-      // Prevent answers to click action.
-      if (this._moving) {
-        return;
-      }
-      this._moving = true;
-
-      e.preventDefault();
-      this.$title.css('cursor', 'move');
-      this.$dialog = $(e.currentTarget).parent().parent();
-      this.dragContext.mouseX = interactionMode === 'touch' ? e.touches[0].clientX : e.screenX;
-      this.dragContext.mouseY = interactionMode === 'touch' ? e.touches[0].clientY : e.screenY;
-      this.dragContext.left = this.$dialog.position().left;
-      this.dragContext.top = this.$dialog.position().top;
-
-      const scale = 1.04;
-      // Pick up dialog.
-      this.$dialog.transition({
-        scale,
-        opacity: 0.68
-      }, 100);
-
-      $(document.body).on(`${interactionMode}move`, (event) => {
-        _dialog_onmoving(interactionMode, event);
-      });
-
-      $(document.body).on(interactionMode === 'touch' ? 'touchend' : 'mouseup', (event) => {
-        _dialog_onmoveend(event);
-      });
-    }
-
-    function _dialog_onmoving(interactionMode, e) {
-      const clientX = interactionMode === 'touch' ? e.touches[0].clientX : e.screenX;
-      const clientY = interactionMode === 'touch' ? e.touches[0].clientY : e.screenY;
-      const mouseOffsetX = clientX - this.dragContext.mouseX;
-      const mouseOffsetY = clientY - this.dragContext.mouseY;
-
-      let newTop = this.dragContext.top + mouseOffsetY;
-      const bodyHeight = $(document.body).height();
-      const titleHeight = this.$title.height();
-
-      // Prevent dialog from dragging out of body-top-margin.
-      if ((newTop) <= 0) {
-        newTop = 0;
-      }
-
-      if ((newTop + titleHeight) > bodyHeight) {
-        newTop = bodyHeight - titleHeight;
-      }
-
-      this.$dialog.css({
-        top: newTop,
-        left: this.dragContext.left + mouseOffsetX
-      });
-    }
-
-    function _dialog_onmoveend(e) {
-      $(document.body).off('mousemove');
-      $(document.body).off('touchmove');
-      this.$title.css('cursor', 'default');
-      $(document.body).off('mouseup');
-      $(document.body).off('touchend');
-      this.$dialog.transition({
-        scale: 1,
-        opacity: 1
-      }, () => {
-        this._moving = false;
-      });
-    }
   }
 
   _initMain() {
