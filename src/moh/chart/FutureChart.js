@@ -6,7 +6,7 @@ import RectSeries from 'nju/chart/series/RectSeries';
 export default class FutureChart extends XYAxisChart {
   metadata = {
     properties: {
-      padding: { type: 'object', defaultValue: { left: 30, right: 20, top: 20, bottom: 5 } },
+      padding: { type: 'object', defaultValue: { left: 30, right: 20, top: 35, bottom: 10 } },
       data: { type: 'object' },
       selectedTimestamp: { type: 'object', defaultValue: null }
     },
@@ -152,7 +152,7 @@ export default class FutureChart extends XYAxisChart {
 
     this.legendRects.attr("transform", (d, i) => {
       const width = this.getPadding().left + this.contentFrame.width;
-      return `translate(${width - this.legendConfig.itemWidth * (i + 1)}, 1)`;
+      return `translate(${width - this.legendConfig.itemWidth * (i + 1)}, 10)`;
     });
 
     super.redraw();
