@@ -7,4 +7,11 @@ export default class BusOperationTabPageView extends TabPageView {
       title: { type: 'string', defaultValue: 'Speed' }
     }
   }
+  init() {
+    super.init();
+    var chart=$("<h1>lal</h1>")
+
+    this.$element.append(chart)
+  }
+
 }
