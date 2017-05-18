@@ -433,7 +433,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
             _this.config = {
                 width: "600px",
                 height: "400px",
-                position: "absolute"
+                position: "absolute",
+                class: ""
             };
             _this.stringRectCache = Util.CacheAble(Util.getStringRect, function (s, cls, fontSize) { return s.toString().length + " " + cls + fontSize; });
             if (!_this.el) {
@@ -524,6 +525,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
             var dom = d3.select(ref);
             if (!dom.empty()) {
                 dom.node().appendChild(this.el);
+                if (this.config.class) {
+                    dom.classed(this.config.class, true);
+                }
             }
             return this;
         };
@@ -763,7 +767,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         function HajjBusDetail() {
             this.el = d3.select(document.createDocumentFragment()).append("xhtml:div").classed("HajjBusDetail", true).node();
             this.lineChart1 = new LineChart_1.LineChart();
-            this.lineChart2 = new LineChart_1.LineChart();
+            this.lineChart2 = new LineChart_1.LineChart({ class: "barChart" });
             this.pieChart1 = new PieChart_1.PieChart();
             this.pieChart2 = new PieChart_1.PieChart();
         }
@@ -801,7 +805,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 });
             }
             if (d.predict) {
-                var m = new Measure_1.Measure(2, d.predict, "line", { "stroke-dasharray": "2,2", "stroke-width": "2px", "color": "white" });
+                var m = new Measure_1.Measure(2, d.predict, "line", { "stroke-dasharray": "2,2", "stroke-width": "2px", "color": "#199bbf" });
                 this.lineChart1.addMeasure(m);
             }
             if (d.line2) {
@@ -885,7 +889,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
                         y1: legendHeight / 2 + 4,
                         x2: xOffset - 5,
                         y2: legendHeight / 2 + 4,
-                        stroke: "black",
+                        stroke: "#199bbf",
                         "stroke-width": "2px",
                         "stroke-dasharray": "1,2" }));
                     legend.append("svg:text").text(text).call(attrs({
@@ -941,7 +945,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
                             width: width_1,
                             fill: d.style.fill || _this.chart.getColorByIndex(i),
                             stroke: d.style.color || "none",
-                            x: xScale(dd.x) - width_1 / 2,
+                            x: xScale(dd.x),
                             y: Util.toPixel(_this.layout.height) - _this.axisLayout.xHidth
                         }));
                         bar.transition().delay(ii * 10).duration(1000).ease(d3.easeBounce)
