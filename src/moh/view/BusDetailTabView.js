@@ -20,7 +20,8 @@ export default class BusDetailTabView extends TabView {
   }
 
   _initPages() {
-    this._operationTabPage = new BusOperationTabPageView('busOperationTabPage');
+    this._operationTabPage = new BusOperationTabPageView('busOperationTabPage', {
+    });
     this.addPage(this._operationTabPage);
     const busGroupingTabPageView = new BusGroupingTabPageView('busGroupingTabPageView');
     busGroupingTabPageView.attachSendMessage(() => {

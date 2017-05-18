@@ -1,10 +1,12 @@
 import TabPageView from 'bd/view/TabPageView';
 
+import SpeedChart from '../chart/SpeedChart';
 
 export default class BusOperationTabPageView extends TabPageView {
   metadata = {
     properties: {
-      title: { type: 'string', defaultValue: 'Speed' }
+      title: { type: 'string', defaultValue: 'Operation' },
+      rt: { type: 'object' }
     }
   }
 
@@ -32,17 +34,32 @@ export default class BusOperationTabPageView extends TabPageView {
       </div>
       <div class="right-container">
         <div class="chart-container">
-          Chart 1
+          Bar Chart
         </div>
-        <div class="chart-container">
-          Chart 2
-        </div>
+        <div class="speed-chart-container"></div>
       </div>
     `);
+    this._initSpeedChart();
+  }
+
+  _initSpeedChart() {
+    this.speedChart = new SpeedChart('speedChart', {
+      rtCount: '{index/}'
+    });
+    this.addSubview(this.speedChart, this.$('.speed-chart-container'));
+  }
+
+  setRt(value) {
+    this.setProperty('rt', value);
+    this.$('.speed-container .value').text(value[value.length - 2].busSpeed);
+    if (this.speedChart) {
+      this.speedChart.invalidateSize();
+      this.speedChart.setRtCount(value.map(item => item.busSpeed));
+    }
   }
 
   update() {
-    const index = sap.ui.getCore().getModel('index').getProperty('/rt');
-    this.$('.speed-container .value').text(index[index.length - 2].busSpeed);
+    const rt = sap.ui.getCore().getModel('index').getProperty('/rt');
+    this.setRt(rt);
   }
 }
