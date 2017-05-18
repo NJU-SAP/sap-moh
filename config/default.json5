@@ -1,6 +1,6 @@
 {
   buses: {
-    count: 40
+    count: 60
   },
   districts: {
     "yellow": [
