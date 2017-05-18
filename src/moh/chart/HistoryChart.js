@@ -29,8 +29,8 @@ export default class HistoryChart extends XYAxisChart {
     this._initRectSeries();
     const self = this;
     this.contentGroup.on('click', function(d) {
-      self.onClick.call(self, this);
-    })
+      self.onContentGroupClick.call(self, this);
+    });
   }
 
   _initAxisX() {
@@ -138,7 +138,7 @@ export default class HistoryChart extends XYAxisChart {
     this.redraw();
   }
 
-  onClick(container) {
+  onContentGroupClick(container) {
     const coordinates = d3.mouse(container);
     const timestamp = this.busLineSeries.getScaleX().invert(coordinates[0]);
     this.setSelectedTimestamp(timestamp);
