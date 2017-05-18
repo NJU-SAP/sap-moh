@@ -51,6 +51,27 @@ export default class Application extends SuperApplication {
         this.getBusDetailDialog().popup();
       }
     });
+
+    StateBus.getInstance().bindState('district').attachChange(() => {
+      const district = StateBus.getInstance().getState('district');
+      const replace = district ? this.districtMapView : this.mapView;
+      const replaced = !district ? this.districtMapView : this.mapView;
+
+      this.removeSubview(replace);
+      this.removeSubview(replaced);
+
+      replace.$element.removeClass('top-2 right-2 row-5 col-6');
+      replace.$element.addClass('row-full col-full');
+      this.addSubview(replace, 'base');
+      replace.invalidateSize();
+      replace.setZoom(replace.getNormalZoom());
+
+      replaced.$element.removeClass('row-full col-full');
+      replaced.$element.addClass('top-2 right-2 row-5 col-6');
+      this.addSubview(replaced, 'tile');
+      replaced.invalidateSize();
+      replaced.setZoom(replaced.getPocketZoom());
+    });
   }
 
   afterInit() {
