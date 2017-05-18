@@ -7,7 +7,7 @@ export default class HistoryChart extends XYAxisChart {
   metadata = {
     properties: {
       data: { type: 'object', bindable: true },
-      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 20, bottom: 5 } },
+      padding: { type: 'object', defaultValue: { left: 20, right: 20, top: 35, bottom: 10 } },
       selectedTimestamp: { type: 'object', defaultValue: null }
     },
     events: {
@@ -31,6 +31,40 @@ export default class HistoryChart extends XYAxisChart {
     this.contentGroup.on('click', function(d) {
       self.onContentGroupClick.call(self, this);
     });
+  }
+
+  _initLegend()
+  {
+    super._initLegend();
+    this.legendColorScale = d3.scale.ordinal()
+      .domain(['Buses Speed', 'City Speed'])
+      .range(['ea85ff', '#5ff7ff']);
+    this.legendConfig = {
+      itemWidth: 115,
+      rectWidth: 30,
+      rectHeight: 4
+    };
+    this.legendRects = this.legendGroup.selectAll(".legend-item")
+      .data(this.legendColorScale.domain())
+      .enter()
+      .append("g")
+      .classed("legend-item", true)
+      .attr("transform", (d, i) => {
+        return `translate(-200, 0)`;
+      });
+    this.legendRects.append("rect")
+      .attr("width", this.legendConfig.rectWidth)
+      .attr("height", (d, i) => this.legendConfig.rectHeight)
+      .style("fill", d => this.legendColorScale(d))
+      .attr("transform", (d, i) => {;
+        return `translate(0, 6)`;
+      })
+      .attr("opacity", 1);
+    this.legendRects.append("text")
+      .style("alignment-baseline", "text-before-edge")
+      .attr("dx", this.legendConfig.rectWidth + 4)
+      .text(d => d);
+    this.legendGroup.style('opacity', 1);
   }
 
   _initAxisX() {
@@ -115,6 +149,12 @@ export default class HistoryChart extends XYAxisChart {
     this.axisX.setDomain(this.domainX);
     this.busLineSeries.setScaleX(newScale);
     this.cityLineSeries.setScaleX(newScale);
+
+    this.legendRects.attr("transform", (d, i) => {
+      const width = this.getPadding().left + this.contentFrame.width;
+      return `translate(${width - this.legendConfig.itemWidth * (i + 1)}, 10)`;
+    });
+
     super.redraw();
   }
 

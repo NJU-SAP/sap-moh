@@ -96,7 +96,7 @@ export default class TabView extends View {
     this.addAggregation('pages', tabPageView);
     this.pageSet[tabPageView.getId()] = tabPageView;
     const title = tabPageView.getTitle();
-    let $li = $('<li/>');
+    const $li = $('<li/>');
     $li.text(title);
     $li.attr('id', tabPageView.getId());
     this._$tabNav.append($li);
