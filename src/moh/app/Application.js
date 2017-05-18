@@ -117,6 +117,12 @@ export default class Application extends SuperApplication {
         const rt = StateBus.getInstance().getState('rt');
         if (!rt) {
           this.resumeRt();
+          if (this.historyChart) {
+            this.historyChart.setSelectedTimestamp(null);
+          }
+          if (this.futureChart) {
+            this.futureChart.setSelectedTimestamp(null);
+          }
         }
       }
     });
@@ -129,15 +135,16 @@ export default class Application extends SuperApplication {
       expanded: () => {
         if (!this.historyChart) {
           this.historyChart = new HistoryChart({
-            id: 'historyChart'
+            id: 'historyChart',
+            timestampSelected: () => {
+              if (this.futureChart) {
+                this.futureChart.setSelectedTimestamp(null);
+              }
+              this.setTimestamp(this.historyChart.getSelectedTimestamp());
+            }
           });
           historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
-
-          this.historyChart.attachTimestampSelected(() => {
-            console.log('Timestamp selected:', this.historyChart.getSelectedTimestamp());
-            this.setTimestamp(this.historyChart.getSelectedTimestamp());
-          });
         }
         this.historyChart.setData(sap.ui.getCore().getModel('index').getProperty('/rt'));
       }
@@ -152,7 +159,13 @@ export default class Application extends SuperApplication {
         if (!this.futureChart) {
           this.futureChart = new FutureChart({
             id: 'futureChart',
-            data: '{index>/predict}'
+            data: '{index>/predict}',
+            timestampSelected: () => {
+              if (this.historyChart) {
+                this.historyChart.setSelectedTimestamp(null);
+              }
+              this.setTimestamp(this.futureChart.getSelectedTimestamp());
+            }
           });
           futureMenuItem.addSubview(this.futureChart);
           this.futureChart.invalidateSize();
@@ -356,7 +369,6 @@ export default class Application extends SuperApplication {
   }
 
   run() {
-    //this.getSubview('floating-panel-container').initPanelContainer();
   }
 
   setTimestamp(timestamp) {
