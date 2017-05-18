@@ -108,7 +108,7 @@ export default class Dialog extends View {
     });
   }
 
-  _dialog_onmoveend(e) {
+  _dialog_onmoveend() {
     $(document.body).off('mousemove');
     $(document.body).off('touchmove');
     this.$title.css('cursor', 'default');
@@ -132,7 +132,7 @@ export default class Dialog extends View {
     this.$title.text(title);
   }
 
-  activate(params) {
+  activate() {
     // Set popup on focus.
     this.$element.attr('tabindex', 0);
     this.$element.focus();
@@ -165,7 +165,6 @@ export default class Dialog extends View {
     if (Application.getInstance() && Application.getInstance().activeDialogPopup === this) {
       Application.getInstance().closePopupDialog(cb);
     }
-
   }
 
   putAside() {
