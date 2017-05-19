@@ -742,7 +742,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
         function PieChart(conf) {
             var _this = _super.call(this, conf) || this;
             //this.mainTitle=new TitleLayer("title",{value:"hehe",className:"mainTitle",textAlign:"center"})
-            _this.pieLayer = new PieLayer_1.PieLayer("pie", { className: "pieChart" });
+            _this.pieLayer = new PieLayer_1.PieLayer("pie", conf);
             _this.addLayer(_this.pieLayer);
             _this.init();
             return _this;
@@ -777,8 +777,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             this.el = d3.select(document.createDocumentFragment()).append("xhtml:div").classed("HajjBusDetail", true).style("width", "100%").style("height", "100%").node();
             this.lineChart1 = new LineChart_1.LineChart({ title: "Speed" });
             this.lineChart2 = new LineChart_1.LineChart({ class: "barChart", title: "Load" });
-            this.pieChart1 = new PieChart_1.PieChart();
-            this.pieChart2 = new PieChart_1.PieChart();
+            this.pieChart1 = new PieChart_1.PieChart({ dataSet: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], class: "day" });
+            this.pieChart2 = new PieChart_1.PieChart({ dataSet: [18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5], class: "night" });
         }
         HajjBusDetail.prototype.toHtml = function () {
             var lineChart1 = d3.select(this.el).append("div").style("position", "absolute").style("left", "450px");
@@ -1156,20 +1156,34 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
             // }
             // let max = _.max(valueset)
             // let min = _.min(valueset)
-            if (dataset.length < 12) {
-                for (var i = 0; i < 12; i++) {
-                    if (dataset[i] == undefined || dataset[i].time != i) {
-                        dataset.splice(i, 0, { "time": i });
+            if (this.config.dataSet) {
+                var nDs_1 = [];
+                _.each(this.config.dataSet, function (d, i) {
+                    var find = _.findWhere(dataset, { time: d });
+                    if (find) {
+                        nDs_1[i] = find;
                     }
-                }
+                    else {
+                        nDs_1[i] = { "time": i };
+                    }
+                });
+                dataset = nDs_1;
             }
+            // let sI=dataset.length==0?0:dataset[0].time
+            // if(dataset.length < 12) {
+            //     for(let i = 0,j=dataset[0].time; i < 12; i++) {
+            //         if(dataset[i]==undefined||dataset[i].time != sI++){
+            //             dataset.splice(i,0,{"time":i})
+            //         }
+            //     }
+            // }
             //toolTip and title dom
             d3.select(root).selectAll(".pietoolTip").remove();
             var toolTip = d3.select(root).append("div").attr("class", "pietoolTip");
             var doughnutTip = d3.select(root).append("div").attr("class", "doughnutTip")
                 .style("width", innerRadius * sqrt(2) + "px").style("height", innerRadius * sqrt(2) + "px")
                 .style("top", centerY - innerRadius * sin(PI / 4) + "px").style("left", centerX - innerRadius * sin(PI / 4) + "px");
-            var doughnutTitle = d3.select(doughnutTip.node()).append("p").text("AM").attr("class", "doughnutTitle").style("line-height", innerRadius * sqrt(2) + "px")
+            var doughnutTitle = d3.select(doughnutTip.node()).append("p").text(this.config.label).attr("class", "doughnutTitle").style("line-height", innerRadius * sqrt(2) + "px")
                 .style("opacity", 0).transition().duration(innerDurationTime + outerDurationTime).styleTween("opacity", function () { return d3.interpolate("0", "1"); });
             //doughnut painting
             var fragment = document.createDocumentFragment();
@@ -1211,9 +1225,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
                         var outerEndAngle = outerStartAngle + outerSegmentAngle;
                         outerDoughnut.append("path")
                             .attr("class", "doughnut doughnut" + i).attr("fill", v == null ? "none" : d3.scaleLinear().domain([-1, 0, 1]).range(["red", "yellow", "green"])(scale(v)))
-                            .attr("d", smartArcGen(outerStartAngle, outerEndAngle, middleRadius, outerRadius))
+                            .attr("d", smartArcGen(outerStartAngle, outerStartAngle, middleRadius, outerRadius))
                             .attr("stroke", v == null ? "none" : d3.scaleLinear().domain([-1, 0, 1]).range(["red", "yellow", "green"])(scale(v)))
-                            .attr("stroke-width", "0.5px")
+                            .attr("stroke-width", "0px")
                             .on("mouseenter", function (e) {
                             svg.selectAll(".doughnut").style("opacity", "0.1");
                             toolTip.html(getToolTipText(d)).style("display", "inline-table");
@@ -1227,7 +1241,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
                             svg.selectAll(".doughnut").style("opacity", "1");
                             toolTip.style("display", "none");
                         })
-                            .style("pointer-events", "none").transition().duration(innerDurationTime + outerDurationTime).style("pointer-events", "auto");
+                            .transition().duration(outerDurationTime / 48).ease(d3.easeLinear).delay(innerDurationTime + outerDurationTime / 48 * n + 4 * outerDurationTime / 48 * i)
+                            .attrTween("d", function (a) {
+                            return function (t) {
+                                var interpolate = d3.interpolate(outerStartAngle, outerEndAngle);
+                                return smartArcGen(outerStartAngle, interpolate(t), middleRadius, outerRadius);
+                            };
+                        })
+                            .style("pointer-events", "none").transition().duration(innerDurationTime + outerDurationTime).style("pointer-events", "auto").attr("stroke-width", "0.6px");
                     });
                 }
             });

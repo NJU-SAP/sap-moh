@@ -9,7 +9,7 @@
     text-align: center
     }
     .info-title{
-        font-size: 1.5rem
+        font-size: 2.5rem
     }
     .info-value{
         font-size:4rem
@@ -36,20 +36,41 @@
         }
         
     }
+  .day {
+    .doughnutTip{
+        background: url(imgs/sun.svg);
+        background-size: 100% 100%;
+    }
+     .innerDoughnut path{
+            fill: #f4ea2a
+        }
+  }
+ 
+    .night 
+    {
+        .doughnutTip{
+            -webkit-mask: url(imgs/moon.svg) no-repeat 100% 100%;
+                mask: url(imgs/moon.svg) no-repeat 100% 100%;
+                -webkit-mask-size: cover;
+                mask-size: cover;
+                background-color: #cec6c6
+        }
+        .innerDoughnut path{
+            fill:rgb(214, 214, 214)
+        }
+    }
   .pietoolTip {
-        .tipItem{
-             
-              p{
-                display: table-cell;
-                font-size: 14px;
-                padding: 0px 5px;
-                }
+  
+        .tipItem p{
+        display: table-cell;
+         border-top: 1px solid rgba(0,0,0,0.8);
+         font-size: 14px;
+          padding: 0px 5px
         }
         display: none;
         position: relative;
-       
         border-radius: 1px;
-        background: rgba(0,0,0,0.9);
+        background: rgba(34,60,93,0.9);
         color: #ddd;
         text-shadow: 0 1px 0 #000;
         box-shadow: 0 1px 3px rgba(0,0,0,0.5);
@@ -57,13 +78,13 @@
         z-index: 1000;
          
       .tipTitle {
-        background: rgba(80,100,255,0.9);
+        background: rgba(80,100,150,0.9);
         width:100%;
         font-weight: bold;
-      
         p{
             margin: 0px;
-            padding:5px 15px;
+            padding: 2px 5px;
+            border-top: "none"
         }
         font-size: 17px;
     }
@@ -73,7 +94,7 @@
         position: relative;
         padding: 5px 15px;
         border-radius: 1px;
-        background: rgba(0,0,0,0.9);
+        background: rgba(34,60,93,0.9);
         color: #ddd;
         font-size: 17px;
         text-shadow: 0 1px 0 #000;
