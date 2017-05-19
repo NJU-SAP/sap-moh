@@ -41,7 +41,7 @@ export default class BusDetailTabView extends TabView {
     this._operationTabPage.update();
   }
 
-  selectTabPage(tabPageView) {
+  selectTabPage(tabPageView, animation = true) {
     let page = null;
     if (!isNaN(tabPageView - 0)) {
       // num or string but can be transform to num
@@ -73,48 +73,59 @@ export default class BusDetailTabView extends TabView {
       // Confirm move out page.
       this.moveInPage = page;
       this.moveOutPage = this.selection;
-
-      this._movePage(this.moveInPage, this.moveOutPage);
+      this._movePage(this.moveInPage, this.moveOutPage, animation);
     }
 
     this.fireOnSelectionChanged();
   }
 
-  _movePageOut(tabPageView, direction) {
-    let x = this.$container.width();
-    if (direction === 'left') {
-      x = -1 * x;
-    }
-    tabPageView.$element.transition({
-      x,
-      opacity: 0
-    }, 300, 'easeOutCubic', () => {
+  _movePageOut(tabPageView, direction, animation = true) {
+    if (animation) {
+      let x = this.$container.width();
+      if (direction === 'left') {
+        x = -1 * x;
+      }
+      tabPageView.$element.transition({
+        x,
+        opacity: 0
+      }, 300, 'easeOutCubic', () => {
+        tabPageView.$element.detach();
+      });
+    } else {
       tabPageView.$element.detach();
-    });
-  }
-
-  _movePageIn(tabPageView, direction) {
-    this.$container.append(tabPageView.$element);
-
-    let x = this.$container.width();
-    if (direction === 'left') {
-      x = -1 * x;
     }
-    tabPageView.$element.css({
-      x: (-1 * x),
-      opacity: 0
-    });
-    tabPageView.$element.transition({
-      x: 0,
-      opacity: 1,
-      delay: 180
-    }, 500, 'easeOutQuart', () => {
-      this.selection = tabPageView;
-      this.animating = false;
-    });
   }
 
-  _movePage(pageIn, pageOut) {
+  _movePageIn(tabPageView, direction, animation = true) {
+    this.$container.append(tabPageView.$element);
+    if (animation) {
+      let x = this.$container.width();
+      if (direction === 'left') {
+        x = -1 * x;
+      }
+      tabPageView.$element.css({
+        x: (-1 * x),
+        opacity: 0
+      });
+      tabPageView.$element.transition({
+        x: 0,
+        opacity: 1,
+        delay: 180
+      }, 500, 'easeOutQuart', () => {
+        this.selection = tabPageView;
+        this.animating = false;
+      });
+    } else {
+      tabPageView.$element.css({
+        x: 0,
+        opacity: 1
+      });
+      this.animating = false;
+      this.selection = tabPageView;
+    }
+  }
+
+  _movePage(pageIn, pageOut, animation = true) {
     this.animating = true;
 
     let $li = null;
@@ -133,8 +144,8 @@ export default class BusDetailTabView extends TabView {
       direction = 'right';
     }
 
-    this._movePageOut(pageOut, direction);
-    this._movePageIn(pageIn, direction);
+    this._movePageOut(pageOut, direction, animation);
+    this._movePageIn(pageIn, direction, animation);
   }
 
   clean() {

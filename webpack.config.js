@@ -32,7 +32,8 @@ module.exports = {
       {
         test: /\.(jpg|png)$/,
         loaders: ['url-loader?name=assets/images/[name].[ext]&limit=10240']
-      }
+      },
+      { test: /\.svg$/, loaders: ['url-loader?name=assets/images/[name].[ext]&limit=10240'] }
     ]
   },
   plugins: [

@@ -69,37 +69,25 @@ export default class BusOperationTabPageView extends TabPageView {
 
     var self=this
     var acc=Math.floor(new Date().getHours()/0.5)+ (new Date().getMinutes()>=30?1:0)
+    function toPieChartData(d){
+      return d.map((dd)=>{
+        let t={}
+        t.time=dd.x
+        t.value=[]
+        for(let i=0;i<4;++i){
+          t.value[i]=dd.y+10*(Math.random()-0.5)
+          if(t.value[i]<0){
+            t.value[i]=1
+          }
+        }
+        return t
+      })
+    }
     $.when($.get("./api/bus/buspassenger"),$.get("./api/bus/busspeed")).then(function(passager,speed){
       self.c.setData({line1:JSON.parse(speed[0]).map(function(d){d.y=+(d.y)+10*(Math.random()-0.5);d.y=d.y>0?d.y:0;return d}).slice(0,acc),
                         line2:JSON.parse(passager[0]).slice(0,acc),
-                        pie1:[
-            {"time":1,"value":[1,2,3,7]},
-            {"time":2,"value":[10,20,30,40]},
-            {"time":3,"value":[1,2,3,4]},
-            //{"time":4,"value":[1,2,3,9]},
-            {"time":9,"value":[1,2,3,10]},
-            {"time":11,"value":[1,2,3,11]},
-            {"time":0,"value":[1,2,3,12]},
-            {"time":8,"value":[1,2,3,4]},
-            {"time":5,"value":[1,2,3,4]},
-            {"time":10,"value":[1,2,3,4]},
-            //{"time":6,"value":[1,2,3,4]},
-            {"time":7,"value":[1,2,3,4]}
-            ],
-                        pie2:[
-            {"time":1,"value":[1,2,3,7]},
-            {"time":2,"value":[10,20,30,40]},
-            {"time":3,"value":[1,2,3,4]},
-            //{"time":4,"value":[1,2,3,9]},
-            {"time":9,"value":[1,2,3,10]},
-            {"time":11,"value":[1,2,3,11]},
-            {"time":0,"value":[1,2,3,12]},
-            {"time":8,"value":[1,2,3,4]},
-            {"time":5,"value":[1,2,3,4]},
-            {"time":10,"value":[1,2,3,4]},
-            //{"time":6,"value":[1,2,3,4]},
-            {"time":7,"value":[1,2,3,4]}
-            ]
+                        pie1:toPieChartData(JSON.parse(speed[0]).map(function(d){d.y=+(d.y)+10*(Math.random()-0.5);d.y=d.y>0?d.y:0;return d}).slice(0,acc)),
+                        pie2:toPieChartData(JSON.parse(speed[0]).map(function(d){d.y=+(d.y)+10*(Math.random()-0.5);d.y=d.y>0?d.y:0;return d}).slice(0,acc))
                     })
     })
     // this.c.setData({line1:[{x:1,y:10},{x:3,y:18},{x:18,y:18},{x:20,y:18}],
