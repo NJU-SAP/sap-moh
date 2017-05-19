@@ -65,6 +65,7 @@ export default class Application extends SuperApplication {
       this.removeSubview(replaced);
 
       replace.$element.removeClass('top-2 right-2 row-5 col-6');
+      replace.$element.removeClass('pocket');
       replace.$element.addClass('row-full col-full');
       this.addSubview(replace, 'base');
       replace.invalidateSize();
@@ -72,6 +73,7 @@ export default class Application extends SuperApplication {
 
       replaced.$element.removeClass('row-full col-full');
       replaced.$element.addClass('top-2 right-2 row-5 col-6');
+      replaced.$element.addClass('pocket');
       this.addSubview(replaced, 'tile');
       replaced.invalidateSize();
       replaced.setZoom(replaced.getPocketZoom());
@@ -292,7 +294,7 @@ export default class Application extends SuperApplication {
 
   _initDistrictMapView() {
     this.districtMapView = new DistrictMapView('districtMapView');
-    this.districtMapView.$element.addClass('top-2 right-2 row-5 col-6');
+    this.districtMapView.$element.addClass('top-2 right-2 row-5 col-6 pocket');
     this.districtMapView.$element.css('position', 'absolute');
     this.addSubview(this.districtMapView, 'tile');
   }
