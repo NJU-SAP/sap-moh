@@ -10,6 +10,7 @@ export default class Dialog extends View {
       }
     },
     events: {
+      activating: {},
       resume: {}
     }
   }

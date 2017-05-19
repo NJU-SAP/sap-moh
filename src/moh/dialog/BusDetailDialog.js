@@ -16,6 +16,10 @@ export default class BusDetailDialog extends Dialog {
     super.init();
     this.addStyleClass('moh-bus-detail-dialog col-9 row-7 top-3');
     this._initTabView();
+
+    this.attachActivating(() => {
+      this.tabView.selectTabPage(0, false);
+    });
   }
 
   _initTabView() {

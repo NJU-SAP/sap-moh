@@ -117,7 +117,7 @@ export default class Application extends SuperApplication {
       return;
     }
     this.animating = true;
-
+    scene.fireActivating();
     this.showOverlay(() => {
       this.addSubview(scene, 'popup');
       scene.$element.css({
@@ -192,7 +192,7 @@ export default class Application extends SuperApplication {
         left: `${(window.innerWidth - dialog.$element.width()) / 2}px`,
         top: `${((window.innerHeight - dataClockHeight - mainMenuHeight - dialog.$element.height()) / 2) + dataClockHeight}px`
       });
-
+      dialog.fireActivating();
       dialog.$element.css({
         opacity: 0,
         scale: 0.5
