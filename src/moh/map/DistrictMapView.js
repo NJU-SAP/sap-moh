@@ -5,7 +5,18 @@ import DistrictLayer from './layers/DistrictLayer';
 export default class MapView extends SuperMapView {
   metadata = {
     properties: {
-
+      defaultZoom: {
+        type: 'int',
+        defaultValue: 12
+      },
+      pocketZoom: {
+        type: 'int',
+        defaultValue: 12
+      },
+      normalZoom: {
+        type: 'int',
+        defaultValue: 15
+      }
     }
   }
 

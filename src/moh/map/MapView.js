@@ -27,6 +27,14 @@ export default class MapView extends SuperMapView {
         type: 'int',
         defaultValue: 15
       },
+      pocketZoom: {
+        type: 'int',
+        defaultValue: 12
+      },
+      normalZoom: {
+        type: 'int',
+        defaultValue: 15
+      },
       kaaba: {
         type: 'boolean',
         defaultValue: false
