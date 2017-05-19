@@ -24,6 +24,7 @@ import NowMenuItem from '../menu/NowMenuItem';
 import PilgrimModel from '../model/PilgrimModel';
 import SendMessageDialog from '../dialog/SendMessageDialog';
 import SpeedTile from '../tile/SpeedTile';
+import SwitchButtonView from '../view/SwitchButtonView';
 import TrafficModel from '../model/TrafficModel';
 
 
@@ -39,6 +40,7 @@ export default class Application extends SuperApplication {
     this._initDataClockView();
     this._initMapView();
     this._initDistrictMapView();
+    //this._initSwitchButtonView();
     this._initTiles();
     this._initMapLayerCheckbox();
     this._initFloatingPanelContainer();
@@ -290,6 +292,14 @@ export default class Application extends SuperApplication {
     this.mapView.$element.css('position', 'absolute');
     this.mapView.addStyleClass('row-full col-full');
     this.addSubview(this.mapView, 'base');
+
+    const mapViewSwitchBtn = new SwitchButtonView('mapViewSwitchBtn', {
+      district: '{state>/district}',
+      btnClick: () => {
+        StateBus.getInstance().setState('district', false);
+      }
+    });
+    this.mapView.addSubview(mapViewSwitchBtn);
   }
 
   _initDistrictMapView() {
@@ -297,6 +307,26 @@ export default class Application extends SuperApplication {
     this.districtMapView.$element.addClass('top-2 right-2 row-5 col-6 pocket');
     this.districtMapView.$element.css('position', 'absolute');
     this.addSubview(this.districtMapView, 'tile');
+
+    const districtSwitchBtn = new SwitchButtonView('districtSwitchBtn', {
+      district: '{state>/district}',
+      btnClick: () => {
+        StateBus.getInstance().setState('district', true);
+      }
+    });
+    this.districtMapView.addSubview(districtSwitchBtn);
+  }
+
+  _initSwitchButtonView() {
+    this.switchButtonView = new SwitchButtonView('switchButtonView', {
+      btnClick: () => {
+        const district = StateBus.getInstance().getState('district');
+        console.log(district, !district);
+        StateBus.getInstance().setState('district', !district);
+      }
+    });
+    this.switchButtonView.$element.addClass('right-2 top-4');
+    this.addSubview(this.switchButtonView, 'tile');
   }
 
   _initTiles() {

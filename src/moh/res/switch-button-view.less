@@ -1,0 +1,22 @@
+.switch-button-view {
+  position: absolute;
+  height: 3em;
+  width: 3em;
+  bottom: 1em;
+  right: 1em;
+  line-height: 3em;
+  text-align: center;
+  border: 1px solid white;
+  background-color: @bd-bg-color;
+  opacity: 0.8;
+  cursor: pointer;
+  z-index: 2000 !important;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.hide {
+    display: none;
+  }
+}
