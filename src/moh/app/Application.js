@@ -84,7 +84,19 @@ export default class Application extends SuperApplication {
 
     StateBus.getInstance().bindState('playing').attachChange(() => {
       const playing = StateBus.getInstance().getState('playing');
-      alert(playing);
+      if (this.playButton) {
+        this.playButton.setPlaying(playing);
+      }
+      if (this.playbackTimer) {
+        clearInterval(this.playbackTimer);
+        this.playbackTimer = null;
+      }
+      if (playing) {
+        if (StateBus.getInstance().getState('rt')) {
+          this.setTimestamp(this.historyChart.axisX.getDomain()[0]);
+        }
+        this.playbackTimer = setInterval(this.playNextFrame.bind(this), 1000);
+      }
     });
   }
 
@@ -151,6 +163,7 @@ export default class Application extends SuperApplication {
       press: () => {
         const rt = StateBus.getInstance().getState('rt');
         if (!rt) {
+          StateBus.getInstance().setState('playing', false);
           this.resumeRt();
           if (this.historyChart) {
             this.historyChart.setSelectedTimestamp(null);
@@ -213,6 +226,7 @@ export default class Application extends SuperApplication {
               if (this.historyChart) {
                 this.historyChart.setSelectedTimestamp(null);
               }
+              StateBus.getInstance().setState('playing', false);
               this.setTimestamp(this.futureChart.getSelectedTimestamp());
             }
           });
@@ -457,5 +471,16 @@ export default class Application extends SuperApplication {
 
   resumeRt() {
     StateBus.getInstance().setState('rt', true);
+  }
+
+  playNextFrame() {
+    let timestamp = StateBus.getInstance().getState('timestamp');
+    timestamp = new Date(timestamp.getTime() + 60 * 1000);
+    if (timestamp.getTime() >= this.historyChart.axisX.getDomain()[1].getTime()) {
+      StateBus.getInstance().setState('playing', false);
+    } else {
+      this.historyChart.setSelectedTimestamp(timestamp);
+      this.setTimestamp(timestamp);
+    }
   }
 }

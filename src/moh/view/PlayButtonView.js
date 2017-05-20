@@ -16,7 +16,7 @@ export default class PlayButtonView extends View {
 
     this.addStyleClass('moh-play-button');
 
-    this.$container.text('Play');
+    this.$container.text('PLAY');
     this.$container.on('click', () => {
       this.fireClick();
     });
@@ -27,10 +27,10 @@ export default class PlayButtonView extends View {
       this.setProperty('playing', value);
       if (value) {
         this.$container.addClass('playing');
-        this.$container.text('Pause');
+        this.$container.text('PAUSE');
       } else {
         this.$container.removeClass('playing');
-        this.$container.text('Play');
+        this.$container.text('PLAY');
       }
     }
   }

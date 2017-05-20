@@ -160,9 +160,9 @@ export default class FutureChart extends XYAxisChart {
 
   invalidateDomainX() {
     const now = new Date();
-    const beginOfDay = new Date(now.getYear(), now.getMonth(), now.getDate());
-    const from = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
-    const to = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
+    const beginOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const from = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
+    const to = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
     this.domainX = [from, to];
 
     const value = this.getData();
