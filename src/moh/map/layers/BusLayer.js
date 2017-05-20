@@ -33,33 +33,37 @@ export default class BusLayer extends Layer {
     this._updateBuses(value);
   }
 
+  _busMakers = {};
   _updateBuses(buses) {
-    this.busesContainer.clearLayers();
-
     Object.keys(buses).forEach((busId) => {
       const bus = buses[busId];
+      if (!this._busMakers[busId]) {
+        const iconSize = 38;
+        const busIcon = L.divIcon({
+          html: `<div class="bus-container ${bus.vacant ? 'vacant' : ''}"><span class="mf mf-bus h1"></div>`,
+          iconSize: [iconSize, iconSize],
+          iconAnchor: [iconSize / 2, iconSize / 2],
+          className: 'bus'
+        });
+        const busMarker = L.marker([bus.location[1], bus.location[0]], {
+          icon: busIcon,
+          zIndexOffset: 500,
+          busId
+        });
 
-      const iconSize = 38;
-      const busIcon = L.divIcon({
-        html: `<div class="bus-container ${bus.vacant ? 'vacant' : ''}"><span class="mf mf-bus h1"></div>`,
-        iconSize: [iconSize, iconSize],
-        iconAnchor: [iconSize / 2, iconSize / 2],
-        className: 'bus'
-      });
-      const busMarker = L.marker([bus.location[1], bus.location[0]], {
-        icon: busIcon,
-        zIndexOffset: 500,
-        busId
-      });
+        busMarker.on('click', (e) => {
+          const id = e.target.options.busId;
+          if (this._selecteBusId !== id) {
+            this.fireBusSelect({ busId: id });
+          }
+        });
 
-      busMarker.on('click', (e) => {
-        const id = e.target.options.busId;
-        if (this._selecteBusId !== id) {
-          this.fireBusSelect({ busId: id });
-        }
-      });
-
-      this.busesContainer.addLayer(busMarker);
+        this.busesContainer.addLayer(busMarker);
+        this._busMakers[busId] = busMarker;
+      } else {
+        const busMarker = this._busMakers[busId];
+        busMarker.setLatLng([bus.location[1], bus.location[0]]);
+      }
     });
   }
 

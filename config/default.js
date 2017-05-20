@@ -1,6 +1,6 @@
 module.exports = {
   general: {
-    updateInterval: 15 * 1000  // Set to 15 seconds, 30 seconds by default.
+    updateInterval: 30 * 1000  // Set to 30 seconds, 30 seconds by default.
   },
   buses: {
     count: 60  // Each bus lines will have 60 vehicles running in the same time.
