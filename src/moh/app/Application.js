@@ -22,6 +22,7 @@ import MapView from '../map/MapView';
 import MohStateBus from '../state/StateBus';
 import NowMenuItem from '../menu/NowMenuItem';
 import PilgrimModel from '../model/PilgrimModel';
+import PlayButtonView from '../view/PlayButtonView';
 import SendMessageDialog from '../dialog/SendMessageDialog';
 import SpeedTile from '../tile/SpeedTile';
 import SwitchButtonView from '../view/SwitchButtonView';
@@ -79,6 +80,11 @@ export default class Application extends SuperApplication {
       this.addSubview(replaced, 'tile');
       replaced.invalidateSize();
       replaced.setZoom(replaced.getPocketZoom());
+    });
+
+    StateBus.getInstance().bindState('playing').attachChange(() => {
+      const playing = StateBus.getInstance().getState('playing');
+      alert(playing);
     });
   }
 
@@ -174,6 +180,20 @@ export default class Application extends SuperApplication {
           });
           historyMenuItem.addSubview(this.historyChart);
           this.historyChart.invalidateSize();
+        }
+        if (!this.playButton) {
+          this.playButton = new PlayButtonView({
+            id: 'playButton',
+            click: () => {
+              if (this.playButton.getPlaying()) {
+                this.playButton.setPlaying(false);
+              } else {
+                this.playButton.setPlaying(true);
+              }
+              StateBus.getInstance().setState('playing', this.playButton.getPlaying());
+            }
+          });
+          historyMenuItem.addSubview(this.playButton);
         }
         this.historyChart.setData(sap.ui.getCore().getModel('index').getProperty('/rt'));
       }
