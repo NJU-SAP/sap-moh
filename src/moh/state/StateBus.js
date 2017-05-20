@@ -1,6 +1,9 @@
 import SuperStateBus from 'nju/state/StateBus';
 
 
+const config = require('../../../config/default');
+
+
 export default class StateBus extends SuperStateBus {
   afterInit() {
     super.afterInit();
@@ -33,7 +36,7 @@ export default class StateBus extends SuperStateBus {
       this.timer = null;
     }
     this.setState('timestamp', new Date());
-    this.timer = setTimeout(this._updateTimestamp.bind(this), this.getState('kaaba') ? 3 * 1000 : 30 * 1000);
+    this.timer = setTimeout(this._updateTimestamp.bind(this), this.getState('kaaba') ? 3 * 1000 : config.general.updateInterval);
   }
 
   getInitialState() {
