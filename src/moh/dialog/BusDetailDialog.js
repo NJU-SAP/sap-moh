@@ -18,7 +18,7 @@ export default class BusDetailDialog extends Dialog {
     this._initTabView();
 
     this.attachActivating(() => {
-      this.tabView.selectTabPage(0, false);
+      this.tabView.selectTabPage(this.tabView._selectedTabPage, false);
     });
   }
 

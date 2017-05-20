@@ -390,6 +390,7 @@ export default class Application extends SuperApplication {
       const sendMessageDialog = new SendMessageDialog('send-message');
       sendMessageDialog.attachDialogClosed(() => {
         this.getBusDetailDialog().popup();
+        this.getBusDetailDialog().tabView.selectTabPage(1);
       });
       this.closePopupDialog(() => {
         this.popupDialog(sendMessageDialog);

@@ -19,6 +19,8 @@ export default class BusDetailTabView extends TabView {
     this.moveOutPage = null;
     this.moveInPage = null;
 
+    this._selectedTabPage = null;
+
     this._initPages();
   }
 
@@ -42,6 +44,7 @@ export default class BusDetailTabView extends TabView {
   }
 
   selectTabPage(tabPageView, animation = true) {
+    this._selectedTabPage = tabPageView;
     let page = null;
     if (!isNaN(tabPageView - 0)) {
       // num or string but can be transform to num

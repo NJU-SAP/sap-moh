@@ -206,6 +206,7 @@ export default class Application extends SuperApplication {
     }, opacity);
     this.activeDialogPopup = dialog;
     this.$overlay.on('click', () => {
+      this.getBusDetailDialog().tabView._selectedTabPage = 0;
       this.closePopupDialog();
     });
   }
