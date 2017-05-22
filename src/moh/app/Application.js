@@ -101,7 +101,7 @@ export default class Application extends SuperApplication {
         ) {
           this.setTimestamp(this.historyChart.axisX.getDomain()[0]);
         }
-        this.playbackTimer = setInterval(this.playNextFrame.bind(this), 1000);
+        this.playbackTimer = setInterval(this.playNextFrame.bind(this), 2000);
       }
     });
   }
