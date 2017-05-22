@@ -96,7 +96,7 @@ export default class Application extends SuperApplication {
           StateBus.getInstance().getState('rt') ||
           (
             !StateBus.getInstance().getState('rt') &&
-            Math.abs(StateBus.getInstance().getState('timestamp') - this.historyChart.axisX.getDomain()[1]) <= 60 * 1000
+            Math.abs(StateBus.getInstance().getState('timestamp') - this.historyChart.axisX.getDomain()[1]) <= 300 * 1000
           )
         ) {
           this.setTimestamp(this.historyChart.axisX.getDomain()[0]);
