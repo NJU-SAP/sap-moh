@@ -3,7 +3,7 @@ module.exports = {
     updateInterval: 20 * 1000  // Set to 30 seconds, 30 seconds by default.
   },
   buses: {
-    count: 60  // Each bus lines will have 60 vehicles running in the same time.
+    count: 80  // Each bus lines will have 60 vehicles running in the same time.
   },
   districts: {
     yellow: [
