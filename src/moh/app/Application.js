@@ -481,7 +481,7 @@ export default class Application extends SuperApplication {
 
   playNextFrame() {
     let timestamp = StateBus.getInstance().getState('timestamp');
-    timestamp = new Date(timestamp.getTime() + 60 * 1000);
+    timestamp = new Date(timestamp.getTime() + 300 * 1000);
     if (timestamp.getTime() >= this.historyChart.axisX.getDomain()[1].getTime()) {
       StateBus.getInstance().setState('playing', false);
     } else {
